@@ -19,6 +19,7 @@ public final class EntitiesClient {
                     context -> new BossRenderer<>(context, "hemophage_matriarch", 1.4f));
             event.registerEntityRenderer(ModEntities.COALESCED_LEGION.get(),
                     context -> new BossRenderer<>(context, "coalesced_legion", 2.0f));
+            event.registerEntityRenderer(ModEntities.BOSS_ORGAN.get(), OrganRenderer::new);
             event.registerEntityRenderer(ModEntities.BIO_PROJECTILE.get(),
                     context -> new ThrownItemRenderer<>(context, 1.4f, true));
         });

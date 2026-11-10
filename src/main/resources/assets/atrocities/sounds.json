@@ -1007,5 +1007,110 @@
         "volume": 0.35
       }
     ]
+  },
+  "entity.boss.cutscene_sting": {
+    "subtitle": "subtitles.atrocities.entity.boss.cutscene_sting",
+    "sounds": [
+      {
+        "name": "minecraft:mob/warden/emerge",
+        "pitch": 0.7,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:ambient/cave/cave1",
+        "pitch": 0.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.boss.phase_shift": {
+    "subtitle": "subtitles.atrocities.entity.boss.phase_shift",
+    "sounds": [
+      {
+        "name": "minecraft:mob/warden/sonic_charge1",
+        "pitch": 0.6,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/warden/sonic_charge2",
+        "pitch": 0.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.boss_organ.spawn": {
+    "subtitle": "subtitles.atrocities.entity.boss_organ.spawn",
+    "sounds": [
+      {
+        "name": "minecraft:block/frogspawn/hatch1",
+        "pitch": 0.6,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block/frogspawn/hatch2",
+        "pitch": 0.6,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block/sculk/break1",
+        "pitch": 0.5,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.boss_organ.pulse": {
+    "subtitle": "subtitles.atrocities.entity.boss_organ.pulse",
+    "sounds": [
+      {
+        "name": "minecraft:mob/warden/heartbeat_1",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/warden/heartbeat_2",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.boss_organ.shatter": {
+    "subtitle": "subtitles.atrocities.entity.boss_organ.shatter",
+    "sounds": [
+      {
+        "name": "minecraft:block/amethyst/break1",
+        "pitch": 0.6,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block/amethyst/break2",
+        "pitch": 0.6,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:random/glass1",
+        "pitch": 0.5,
+        "volume": 0.8
+      },
+      {
+        "name": "minecraft:block/sculk_shrieker/break1",
+        "pitch": 0.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.boss.armor_clang": {
+    "subtitle": "subtitles.atrocities.entity.boss.armor_clang",
+    "sounds": [
+      {
+        "name": "minecraft:random/anvil_land",
+        "pitch": 1.5,
+        "volume": 0.35
+      },
+      {
+        "name": "minecraft:block/amethyst/break3",
+        "pitch": 0.7,
+        "volume": 0.8
+      }
+    ]
   }
 }

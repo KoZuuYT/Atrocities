@@ -33,6 +33,7 @@ public class Atrocities {
         GeneticsRegistries.register(modBus);
         AtrocitiesNetwork.register(modBus);
         ServerVersionGate.register();
+        com.kmod.atrocities.cinematic.ArenaCinematics.register();
         com.kmod.atrocities.item.SanguineCleaverItem.registerEvents();
 
         modBus.addListener(Atrocities::onCommonSetup);

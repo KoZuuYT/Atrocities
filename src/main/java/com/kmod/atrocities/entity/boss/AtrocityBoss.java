@@ -1,6 +1,7 @@
 package com.kmod.atrocities.entity.boss;
 
 import com.kmod.atrocities.Atrocities;
+import com.kmod.atrocities.cinematic.ArenaCinematics;
 import com.kmod.atrocities.combat.DamageMitigation;
 import com.kmod.atrocities.config.AtrocitiesConfig;
 import com.kmod.atrocities.fx.BossFx;
@@ -11,10 +12,13 @@ import com.kmod.atrocities.genetics.Species;
 import com.kmod.atrocities.genetics.Trait;
 import com.kmod.atrocities.genetics.TraitRoll;
 import com.kmod.atrocities.item.GeneticsFx;
+import com.kmod.atrocities.network.CutscenePayload;
+import com.kmod.atrocities.registry.ModEntities;
 import com.kmod.atrocities.registry.ModSounds;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -81,24 +85,31 @@ import software.bernie.geckolib.util.GeckoLibUtil;
  * <ul>
  *   <li><b>Genoma</b>: tier define vida, dano e tamanho; cada traco aplica os {@code boss_attributes} do datapack
  *   e um efeito especial ({@link BossTraits}).</li>
- *   <li><b>Despertar</b>: 3 s emergindo do chao, invulneravel.</li>
+ *   <li><b>Despertar</b>: cutscene de 5,5 s (emerge do chao e ruge) com a arena congelada.</li>
  *   <li><b>Golpes</b>: maquina de estados com telegrafo ({@code windup}), impacto e recarga; cada golpe dispara
  *   a animacao de mesmo nome no controlador "action".</li>
- *   <li><b>Fase 2</b>: a 50% de vida o chefe ruge, repele todos e libera golpes novos, mais rapido.</li>
+ *   <li><b>Fases</b>: a 66% e 33% de vida o chefe entra nas fases 2 e 3 com uma cutscene de transicao; cada
+ *   fase traz uma mecanica propria (orgaos, couraca, divisao...) e golpes novos.</li>
  *   <li><b>Atordoamento</b>: janelas de vulnerabilidade em que o dano ignora o soft cap.</li>
  * </ul>
  */
 public abstract class AtrocityBoss extends Monster implements GeoEntity {
 
     public static final String MINION_TAG = "atrocities.minion";
-    public static final int EMERGE_TICKS = 60;
+    /** Entrada completa (cutscene): 60 ticks emergindo do chao + 50 ticks de rugido. */
+    public static final int EMERGE_TICKS = 110;
+    public static final int EMERGE_ROAR_AT = 50;
     public static final int DEATH_TICKS = 70;
-    public static final int TRANSITION_TICKS = 50;
-    public static final float PHASE_TWO_RATIO = 0.5f;
+    /** Transicao de fase (cutscene); o "climax" (ruptura) acontece 30 ticks antes do fim. */
+    public static final int TRANSITION_TICKS = 70;
+    public static final int TRANSITION_CLIMAX_AT = 30;
+    public static final int MAX_PHASE = 3;
+    /** Vida (fracao) em que o chefe entra nas fases 2 e 3. */
+    public static final float[] PHASE_RATIOS = {0.66f, 0.33f};
 
     private static final int[] TIER_DAMAGE = {11, 14, 17, 21};
     private static final float[] TIER_SCALE = {0.85f, 1.0f, 1.12f, 1.25f};
-    private static final ResourceLocation PHASE_TWO_SPEED =
+    private static final ResourceLocation PHASE_SPEED =
             ResourceLocation.fromNamespaceAndPath(Atrocities.MODID, "phase_two_speed");
 
     protected static final RawAnimation IDLE = RawAnimation.begin().thenLoop("idle");
@@ -138,6 +149,8 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
     private int sporeCooldown;
     private int blinkCooldown;
     private int lastHurtTick = -1000;
+    private int lastHintTick = -1000;
+    private boolean introStarted;
 
     protected AtrocityBoss(EntityType<? extends AtrocityBoss> type, Level level, BossEvent.BossBarColor color) {
         super(type, level);
@@ -174,8 +187,55 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
     /** Distancia que o chefe tenta manter do alvo enquanto nao ataca. */
     protected abstract double preferredRange();
 
-    /** Chamado uma vez ao entrar na fase 2 (durante o rugido). */
-    protected void onPhaseTwo(ServerLevel level) {
+    /** Chamado uma vez ao entrar em uma fase nova (inicio da cutscene de transicao). */
+    protected void onPhaseStart(ServerLevel level, int phase) {
+    }
+
+    /** Cada tick da cutscene de entrada ({@code tick} de 0 a {@link #EMERGE_TICKS} - 1). */
+    protected void onIntroTick(ServerLevel level, int tick) {
+    }
+
+    /** Cada tick da cutscene de transicao ({@code tick} de 0 a {@link #TRANSITION_TICKS} - 1). */
+    protected void onTransitionTick(ServerLevel level, int phase, int tick) {
+    }
+
+    /** Ruptura da transicao: momento em que a mecanica da fase nova aparece (orgaos, carapaca quebrando...). */
+    protected void onPhaseClimax(ServerLevel level, int phase) {
+    }
+
+    /** Mecanicas continuas da fase atual (rodam todo tick fora das cutscenes, mesmo atordoado). */
+    protected void tickPhaseMechanics(ServerLevel level) {
+    }
+
+    /**
+     * Ajusta o dano recebido segundo a mecanica do chefe (antes do soft cap).
+     *
+     * @return dano ajustado
+     */
+    protected float modifyIncomingDamage(ServerLevel level, DamageSource source, float amount) {
+        return amount;
+    }
+
+    /** Chefe imune a dano no momento (ex.: Legiao dividida). O golpe ricocheteia. */
+    public boolean isShielded() {
+        return false;
+    }
+
+    /** Chefe inativo (nao se move nem ataca), ex.: enquanto os nucleos estao soltos. */
+    protected boolean isDormant() {
+        return false;
+    }
+
+    /** Um golpe do chefe acertou um alvo. */
+    protected void onHitLanded(ServerLevel level, LivingEntity target, float damage) {
+    }
+
+    /** Um orgao do chefe foi destruido pelos jogadores. */
+    public void onOrganDestroyed(ServerLevel level, BossOrganEntity organ) {
+    }
+
+    /** Um orgao do chefe chegou ate ele (nucleos da Legiao). */
+    public void onOrganArrived(ServerLevel level, BossOrganEntity organ) {
     }
 
     /** Golpe interrompido (atordoamento, fase 2, morte): desfaca estados temporarios. */
@@ -235,7 +295,7 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
 
     /** Pode se mover e atacar (nao esta emergindo, atordoado, rugindo nem morrendo). */
     public boolean canAct() {
-        return isAlive() && !isEmerging() && !isStunned() && transitionTicks <= 0;
+        return isAlive() && !isEmerging() && !isStunned() && transitionTicks <= 0 && !isDormant();
     }
 
     @Nullable
@@ -383,6 +443,7 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
             tickTransition(level);
             return;
         }
+        tickPhaseMechanics(level);
         if (stunTicks > 0) {
             getNavigation().stop();
             if (tickCount % 5 == 0) {
@@ -393,8 +454,12 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
             }
             return;
         }
-        if (phase() == 1 && getHealth() <= getMaxHealth() * PHASE_TWO_RATIO) {
-            enterPhaseTwo(level);
+        if (phase() < MAX_PHASE && getHealth() <= getMaxHealth() * PHASE_RATIOS[phase() - 1]) {
+            enterPhase(level, phase() + 1);
+            return;
+        }
+        if (isDormant()) {
+            getNavigation().stop();
             return;
         }
 
@@ -447,21 +512,31 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
         currentAttack = attack;
         attackTick = 0;
         getNavigation().stop();
-        triggerAnim("action", attack.id());
+        triggerAnim("action", attack.animation());
+    }
+
+    /** Reinicia a animacao de um golpe (golpes com varias repeticoes, como a Debandada). */
+    protected void replayAnimation(String animation) {
+        stopTriggeredAnim("action", animation);
+        triggerAnim("action", animation);
     }
 
     private void finishAttack(BossAttack attack) {
         currentAttack = null;
         entityData.set(DATA_CHARGE, 0f);
         cooldowns.put(attack.id(), Math.round(attack.cooldown() * cooldownMultiplier()));
-        globalCooldown = phase() >= 2 ? 8 : 16;
+        globalCooldown = switch (phase()) {
+            case 1 -> 16;
+            case 2 -> 10;
+            default -> 7;
+        };
     }
 
     /** Interrompe o golpe atual sem aplicar o restante. */
     protected void cancelAttack() {
         if (currentAttack != null) {
             BossAttack attack = currentAttack;
-            stopTriggeredAnim("action", attack.id());
+            stopTriggeredAnim("action", attack.animation());
             cooldowns.put(attack.id(), Math.round(attack.cooldown() * cooldownMultiplier()));
             currentAttack = null;
             entityData.set(DATA_CHARGE, 0f);
@@ -471,7 +546,11 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
     }
 
     private float cooldownMultiplier() {
-        float multiplier = phase() >= 2 ? 0.75f : 1f;
+        float multiplier = switch (phase()) {
+            case 1 -> 1f;
+            case 2 -> 0.85f;
+            default -> 0.7f;
+        };
         multiplier -= 0.05f * potency(BossTraits.ADRENAL_SURGE);
         return Math.max(0.45f, multiplier);
     }
@@ -605,9 +684,25 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
     // ------------------------------------------------------------------ despertar e fase 2
 
     private void tickEmerging(ServerLevel level) {
+        if (!introStarted) {
+            // Cutscene de entrada: congela a arena e assume a camera de quem esta perto.
+            introStarted = true;
+            ArenaCinematics.start(this, CutscenePayload.INTRO, 1, emergeTicks());
+            playSound(ModSounds.CUTSCENE_STING.get(), 4f, 0.8f);
+        }
         int left = emergeTicks() - 1;
         entityData.set(DATA_EMERGE, left);
         getNavigation().stop();
+        onIntroTick(level, EMERGE_TICKS - 1 - left);
+        if (left == EMERGE_ROAR_AT) {
+            triggerAnim("action", ROAR);
+            playSound(roarSound(), 4f, 0.8f);
+            bossEvent.setVisible(true);
+            BossFx.shake(level, position(), 48, 1.6f, 30);
+            GeneticsFx.burst(level, GeneticsFx.dust(fluidColor(), 3f), position().add(0, getBbHeight() * 0.7, 0), 80,
+                    getBbWidth() * 0.7, 0.25);
+            ring(level, ParticleTypes.CLOUD, position().add(0, 0.3, 0), getBbWidth() + 2, 40);
+        }
         setDeltaMovement(0, Math.min(0, getDeltaMovement().y), 0);
         BlockState ground = level.getBlockState(blockPosition().below());
         double radius = getBbWidth() * 0.8;
@@ -618,48 +713,149 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
             }
             GeneticsFx.burst(level, GeneticsFx.dust(fluidColor(), 2.2f), position().add(0, 0.3, 0), 6, radius, 0.02);
         }
-        if (left % 12 == 0) {
+        if (left > EMERGE_ROAR_AT && left % 12 == 0) {
             playSound(ModSounds.BOSS_EMERGE.get(), 2.5f, 0.6f + random.nextFloat() * 0.2f);
-            BossFx.shake(level, position(), 28, 0.35f + (EMERGE_TICKS - left) / (float) EMERGE_TICKS * 0.5f, 12);
+            BossFx.shake(level, position(), 28, 0.35f + (EMERGE_TICKS - left) / (float) EMERGE_TICKS * 0.6f, 12);
         }
         if (left <= 0) {
+            // Fim da cena: libera os jogadores e os empurra com a onda do rugido.
+            ArenaCinematics.end(this);
             bossEvent.setVisible(true);
-            playSound(roarSound(), 4f, 0.8f);
             shockwave(level, 10, 0f, 1.2, 0.5);
-            BossFx.shake(level, position(), 40, 1.6f, 30);
+            BossFx.shake(level, position(), 40, 1.2f, 20);
         }
     }
 
-    private void enterPhaseTwo(ServerLevel level) {
+    private void enterPhase(ServerLevel level, int phase) {
         cancelAttack();
-        entityData.set(DATA_PHASE, 2);
+        entityData.set(DATA_PHASE, phase);
         transitionTicks = TRANSITION_TICKS;
         triggerAnim("action", ROAR);
-        playSound(roarSound(), 5f, 0.6f);
+        playSound(roarSound(), 5f, phase == MAX_PHASE ? 0.5f : 0.6f);
+        playSound(ModSounds.CUTSCENE_STING.get(), 4f, phase == MAX_PHASE ? 0.6f : 0.75f);
         bossEvent.setDarkenScreen(true);
-        BossFx.shake(level, position(), 48, 1.2f, TRANSITION_TICKS);
-        AttributeInstance speed = getAttribute(Attributes.MOVEMENT_SPEED);
-        if (speed != null) {
-            speed.addOrReplacePermanentModifier(new AttributeModifier(PHASE_TWO_SPEED, 0.15,
-                    AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-        }
+        bossEvent.setCreateWorldFog(phase >= MAX_PHASE);
+        BossFx.shake(level, position(), 48, 0.8f, 20);
+        applyPhaseSpeed();
+        String key = phase >= MAX_PHASE ? "message.atrocities.boss.phase_three" : "message.atrocities.boss.phase_two";
         for (ServerPlayer player : level.getEntitiesOfClass(ServerPlayer.class, getBoundingBox().inflate(48))) {
-            player.displayClientMessage(Component.translatable("message.atrocities.boss.phase_two", getDisplayName())
+            player.displayClientMessage(Component.translatable(key, getDisplayName())
                     .withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD), true);
         }
-        onPhaseTwo(level);
+        ArenaCinematics.start(this, CutscenePayload.PHASE, phase, TRANSITION_TICKS);
+        onPhaseStart(level, phase);
+    }
+
+    private void applyPhaseSpeed() {
+        AttributeInstance speed = getAttribute(Attributes.MOVEMENT_SPEED);
+        if (speed != null) {
+            speed.removeModifier(PHASE_SPEED);
+            if (phase() > 1) {
+                speed.addPermanentModifier(new AttributeModifier(PHASE_SPEED, 0.12 * (phase() - 1),
+                        AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+            }
+        }
     }
 
     private void tickTransition(ServerLevel level) {
         transitionTicks--;
         getNavigation().stop();
-        if (transitionTicks == TRANSITION_TICKS - 22) {
-            shockwave(level, 14, 0.3f, 2.2, 0.7);
-        }
+        onTransitionTick(level, phase(), TRANSITION_TICKS - 1 - transitionTicks);
         if (transitionTicks % 3 == 0) {
             GeneticsFx.burst(level, GeneticsFx.dust(fluidColor(), 2.5f), position().add(0, getBbHeight() * 0.6, 0),
                     10, getBbWidth() * 0.6, 0.05);
         }
+        if (transitionTicks == TRANSITION_CLIMAX_AT) {
+            Vec3 core = position().add(0, getBbHeight() * 0.6, 0);
+            level.sendParticles(ParticleTypes.FLASH, core.x, core.y, core.z, 2, 0.2, 0.2, 0.2, 0);
+            GeneticsFx.burst(level, GeneticsFx.dust(fluidColor(), 3f), core, 100, getBbWidth() * 0.8, 0.3);
+            playSound(ModSounds.PHASE_SHIFT.get(), 4f, phase() >= MAX_PHASE ? 0.6f : 0.8f);
+            BossFx.shake(level, position(), 48, 1.5f, 24);
+            onPhaseClimax(level, phase());
+        }
+        if (transitionTicks <= 0) {
+            ArenaCinematics.end(this);
+            shockwave(level, 14, 0.25f, 2.2, 0.7);
+        }
+    }
+
+    // ------------------------------------------------------------------ apoio as mecanicas
+
+    /** Mensagem de dica na barra de acao para quem esta lutando (no maximo uma a cada 5 s). */
+    protected void hint(ServerLevel level, String key, ChatFormatting color) {
+        if (tickCount - lastHintTick < 100) {
+            return;
+        }
+        lastHintTick = tickCount;
+        for (ServerPlayer player : level.getEntitiesOfClass(ServerPlayer.class, getBoundingBox().inflate(32))) {
+            player.displayClientMessage(Component.translatable("message.atrocities.hint." + key)
+                    .withStyle(color, ChatFormatting.BOLD), true);
+        }
+    }
+
+    /** Golpe amortecido: faiscas no ponto de impacto e som metalico. */
+    protected void deflectFeedback(ServerLevel level, DamageSource source, float volume) {
+        Vec3 at = source.getSourcePosition() != null ? source.getSourcePosition().add(0, 1, 0)
+                : position().add(0, getBbHeight() * 0.5, 0);
+        Vec3 center = position().add(0, getBbHeight() * 0.5, 0);
+        Vec3 surface = center.add(at.subtract(center).multiply(1, 0, 1).normalize().scale(getBbWidth() * 0.5));
+        level.sendParticles(ParticleTypes.ELECTRIC_SPARK, surface.x, surface.y, surface.z, 10, 0.2, 0.3, 0.2, 0.25);
+        level.sendParticles(ParticleTypes.CRIT, surface.x, surface.y, surface.z, 6, 0.2, 0.3, 0.2, 0.2);
+        playSound(ModSounds.BOSS_ARMOR_CLANG.get(), volume, 0.9f + random.nextFloat() * 0.2f);
+    }
+
+    /** Altura do chao perto de (x, z), procurando a partir da altura do chefe; usada para posicionar orgaos. */
+    protected Vec3 groundNear(ServerLevel level, double x, double z) {
+        BlockPos start = BlockPos.containing(x, getY() + 4, z);
+        for (int dy = 0; dy < 12; dy++) {
+            BlockPos pos = start.below(dy);
+            if (!level.getBlockState(pos).getCollisionShape(level, pos).isEmpty()
+                    && level.getBlockState(pos.above()).getCollisionShape(level, pos.above()).isEmpty()) {
+                return new Vec3(x, pos.getY() + 1, z);
+            }
+        }
+        return new Vec3(x, getY(), z);
+    }
+
+    /** Pontos em volta do chefe (angulo inicial = frente dele), ja no chao. */
+    protected List<Vec3> pointsAround(ServerLevel level, int count, double radius, double angleOffset) {
+        List<Vec3> points = new ArrayList<>();
+        double base = (getYRot() + 90) * Mth.DEG_TO_RAD + angleOffset;
+        for (int i = 0; i < count; i++) {
+            double angle = base + i * Mth.TWO_PI / count;
+            points.add(groundNear(level, getX() + Math.cos(angle) * radius, getZ() + Math.sin(angle) * radius));
+        }
+        return points;
+    }
+
+    /** Cria um orgao do chefe com vida proporcional ao tier. */
+    protected BossOrganEntity spawnOrgan(ServerLevel level, BossOrganEntity.Variant variant, Vec3 at, float baseHealth,
+                                        float perTier) {
+        float health = (baseHealth + perTier * tier()) * AtrocitiesConfig.BOSS_HEALTH_MULTIPLIER.get().floatValue();
+        BossOrganEntity organ = BossOrganEntity.create(ModEntities.BOSS_ORGAN.get(), level, this, variant, at, health);
+        level.addFreshEntity(organ);
+        GeneticsFx.burst(level, GeneticsFx.dust(variant.color(), 2.4f), at.add(0, 0.5, 0), 40, 0.8, 0.2);
+        groundCrack(level, at, 1.4, 40);
+        organ.playSound(ModSounds.ORGAN_SPAWN.get(), 2.5f, 0.8f);
+        return organ;
+    }
+
+    /** Orgaos vivos deste chefe (opcionalmente so de uma variante). */
+    public List<BossOrganEntity> organs(@Nullable BossOrganEntity.Variant variant) {
+        return level().getEntitiesOfClass(BossOrganEntity.class, getBoundingBox().inflate(48),
+                organ -> organ.isAlive() && organ.isOwnedBy(this) && (variant == null || organ.variant() == variant));
+    }
+
+    /** Coluna de particulas subindo do chao (aviso de onde algo vai surgir). */
+    protected void eruptionWarning(ServerLevel level, Vec3 at, int color, float progress) {
+        BlockState ground = level.getBlockState(BlockPos.containing(at).below());
+        if (!ground.isAir()) {
+            level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, ground), at.x, at.y + 0.1, at.z,
+                    4 + Math.round(progress * 8), 0.5, 0.05, 0.5, 0.1);
+        }
+        level.sendParticles(GeneticsFx.dust(color, 1.2f + progress), at.x, at.y + 0.3 + progress * 1.5, at.z,
+                3, 0.3, 0.6 * progress + 0.1, 0.3, 0.02);
+        ring(level, GeneticsFx.dust(DANGER, 1.1f), at.add(0, 0.15, 0), 1.2 + progress * 0.6, 12);
     }
 
     /** Onda de choque: dano (fracao do ataque), repulsao e anel de detritos. */
@@ -675,10 +871,14 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
 
     // ------------------------------------------------------------------ combate
 
-    /** Dano de um golpe: atributo de ataque x multiplicador do golpe (+10% na fase 2). */
+    /** Dano de um golpe: atributo de ataque x multiplicador do golpe (+8% na fase 2, +15% na fase 3). */
     protected float attackDamage(float multiplier) {
         float base = (float) getAttributeValue(Attributes.ATTACK_DAMAGE) * multiplier;
-        return phase() >= 2 ? base * 1.10f : base;
+        return switch (phase()) {
+            case 1 -> base;
+            case 2 -> base * 1.08f;
+            default -> base * 1.15f;
+        };
     }
 
     /**
@@ -699,7 +899,8 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
             if (target.position().distanceToSqr(center) > reach * reach || (filter != null && !filter.test(target))) {
                 continue;
             }
-            boolean damaged = multiplier <= 0 || target.hurt(damageSources().mobAttack(this), attackDamage(multiplier));
+            float damage = attackDamage(multiplier);
+            boolean damaged = multiplier <= 0 || target.hurt(damageSources().mobAttack(this), damage);
             if (!damaged) {
                 continue;
             }
@@ -710,6 +911,9 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
             target.hurtMarked = true;
             if (multiplier > 0) {
                 applyHitEffects(target);
+                if (level() instanceof ServerLevel server) {
+                    onHitLanded(server, target, damage);
+                }
             }
             hit.add(target);
         }
@@ -768,13 +972,22 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
             return false;
         }
         boolean bypass = source.is(DamageTypeTags.BYPASSES_INVULNERABILITY);
-        if (!bypass && (isEmerging() || transitionTicks > 0)) {
+        if (!bypass && (isEmerging() || transitionTicks > 0 || isShielded())) {
+            if (isShielded() && level() instanceof ServerLevel server) {
+                onShieldedHit(server, source);
+            }
             if (level() instanceof ServerLevel server) {
                 GeneticsFx.burst(server, ParticleTypes.ENCHANTED_HIT, source.getSourcePosition() != null
                         ? source.getSourcePosition() : position().add(0, getBbHeight() * 0.5, 0), 8, 0.3, 0.2);
             }
             playSound(ModSounds.BOSS_DEFLECT.get(), 1.2f, 1f);
             return false;
+        }
+        if (!bypass && level() instanceof ServerLevel server) {
+            amount = modifyIncomingDamage(server, source, amount);
+            if (amount <= 0) {
+                return false;
+            }
         }
         float mitigated = bypass ? amount : DamageMitigation.apply(amount, isStunned());
         boolean result = super.hurt(source, mitigated);
@@ -784,6 +997,10 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
             hurtFeedback(server, source, mitigated);
         }
         return result;
+    }
+
+    /** Golpe contra o chefe enquanto ele esta protegido ({@link #isShielded()}). */
+    protected void onShieldedHit(ServerLevel level, DamageSource source) {
     }
 
     /** Respingo de fluido no ponto do golpe, som de carne e, se vulneravel, um estalo critico. */
@@ -939,8 +1156,22 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
      * @return quantas surgiram
      */
     protected int spawnMinions(ServerLevel level, int count, int cap) {
-        List<LivingEntity> existing = level.getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(32),
-                entity -> entity.getTags().contains(MINION_TAG));
+        return spawnMinionsAt(level, position(), count, cap);
+    }
+
+    /** Crias que nao sao orgaos, perto do chefe. */
+    public List<LivingEntity> minions(double radius) {
+        return level().getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(radius),
+                entity -> entity.isAlive() && entity.getTags().contains(MINION_TAG) && !(entity instanceof BossOrganEntity));
+    }
+
+    /**
+     * Chama crias perto de um ponto (o chefe ou um Casulo de Sangue).
+     *
+     * @return quantas surgiram
+     */
+    public int spawnMinionsAt(ServerLevel level, Vec3 origin, int count, int cap) {
+        List<LivingEntity> existing = minions(32);
         int allowed = Math.min(count, cap - existing.size());
         List<EntityType<?>> pool = new ArrayList<>();
         if (genome != null) {
@@ -959,8 +1190,9 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
                 continue;
             }
             double angle = random.nextDouble() * Mth.TWO_PI;
-            double distance = getBbWidth() * 0.6 + 1.5;
-            BlockPos pos = BlockPos.containing(getX() + Math.cos(angle) * distance, getY(), getZ() + Math.sin(angle) * distance);
+            double distance = origin.distanceToSqr(position()) < 1 ? getBbWidth() * 0.6 + 1.5 : 1.5;
+            BlockPos pos = BlockPos.containing(origin.x + Math.cos(angle) * distance, origin.y,
+                    origin.z + Math.sin(angle) * distance);
             entity.moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, random.nextFloat() * 360f, 0f);
             entity.addTag(MINION_TAG);
             if (entity instanceof Mob mob) {
@@ -1006,11 +1238,17 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
     @Override
     public void die(DamageSource source) {
         if (currentAttack != null) {
-            stopTriggeredAnim("action", currentAttack.id());
+            stopTriggeredAnim("action", currentAttack.animation());
             currentAttack = null;
         }
         super.die(source);
         if (level() instanceof ServerLevel level && !level.isClientSide) {
+            ArenaCinematics.stop(this);
+            for (BossOrganEntity organ : organs(null)) {
+                GeneticsFx.burst(level, GeneticsFx.dust(organ.variant().color(), 2f), organ.position().add(0, 0.6, 0),
+                        30, 0.6, 0.1);
+                organ.discard();
+            }
             bossEvent.setProgress(0);
             playSound(roarSound(), 4f, 0.45f);
             if (AtrocitiesConfig.BOSS_BROADCAST.get()) {
@@ -1052,6 +1290,14 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
         }
     }
 
+    @Override
+    public void remove(RemovalReason reason) {
+        if (!level().isClientSide && ArenaCinematics.isActive(this)) {
+            ArenaCinematics.stop(this);
+        }
+        super.remove(reason);
+    }
+
     // ------------------------------------------------------------------ barra de chefe
 
     @Override
@@ -1088,11 +1334,11 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
                 applyGenome(!tag.contains("Health"));
             });
         }
-        entityData.set(DATA_PHASE, Mth.clamp(tag.getInt("phase"), 1, 2));
+        entityData.set(DATA_PHASE, Mth.clamp(tag.getInt("phase"), 1, MAX_PHASE));
         entityData.set(DATA_EMERGE, Math.max(0, tag.getInt("emerge")));
-        if (phase() >= 2) {
-            bossEvent.setDarkenScreen(true);
-        }
+        bossEvent.setDarkenScreen(phase() >= 2);
+        bossEvent.setCreateWorldFog(phase() >= MAX_PHASE);
+        applyPhaseSpeed();
         updateBossBarName();
     }
 
@@ -1102,8 +1348,10 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "main", 6, this::mainAnimation));
         AnimationController<AtrocityBoss> action = new AnimationController<>(this, "action", 3, state -> PlayState.STOP);
-        for (BossAttack attack : attacks()) {
-            action.triggerableAnim(attack.id(), RawAnimation.begin().thenPlay(attack.id()));
+        LinkedHashSet<String> animations = new LinkedHashSet<>();
+        attacks().forEach(attack -> animations.add(attack.animation()));
+        for (String animation : animations) {
+            action.triggerableAnim(animation, RawAnimation.begin().thenPlay(animation));
         }
         action.triggerableAnim(ROAR, RawAnimation.begin().thenPlay(ROAR));
         controllers.add(action);

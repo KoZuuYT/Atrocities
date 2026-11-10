@@ -2,6 +2,7 @@ package com.kmod.atrocities.registry;
 
 import com.kmod.atrocities.entity.boss.AtrocityBoss;
 import com.kmod.atrocities.entity.boss.BioProjectile;
+import com.kmod.atrocities.entity.boss.BossOrganEntity;
 import com.kmod.atrocities.entity.boss.ChitinousColossusEntity;
 import com.kmod.atrocities.entity.boss.CoalescedLegionEntity;
 import com.kmod.atrocities.entity.boss.HemophageMatriarchEntity;
@@ -50,6 +51,13 @@ public final class ModEntities {
                     .updateInterval(10)
                     .build("bio_projectile"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<BossOrganEntity>> BOSS_ORGAN =
+            ModRegistries.ENTITY_TYPES.register("boss_organ", () -> EntityType.Builder
+                    .of(BossOrganEntity::new, MobCategory.MISC)
+                    .sized(1.4f, 3.4f)
+                    .clientTrackingRange(10)
+                    .build("boss_organ"));
+
     /** Chefe que nasce de um embriao do arquetipo dado. */
     public static EntityType<? extends AtrocityBoss> bossFor(Archetype archetype) {
         return switch (archetype) {
@@ -64,6 +72,7 @@ public final class ModEntities {
             event.put(CHITINOUS_COLOSSUS.get(), ChitinousColossusEntity.createAttributes().build());
             event.put(HEMOPHAGE_MATRIARCH.get(), HemophageMatriarchEntity.createAttributes().build());
             event.put(COALESCED_LEGION.get(), CoalescedLegionEntity.createAttributes().build());
+            event.put(BOSS_ORGAN.get(), BossOrganEntity.createAttributes().build());
         });
     }
 

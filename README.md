@@ -24,7 +24,7 @@ O mod precisa estar **no servidor e em todos os clientes**. Quem entrar sem ele 
 2. **Biomassa e refino:** triture carne no Extrator de Biomassa para alimentar as máquinas e purifique amostras na Centrífuga Genética.
 3. **Sequenciamento:** combine amostras para formar um Embrião Instável, que define arquétipo, traços e tier do chefe.
 4. **Incubação:** mantenha a Incubadora Biológica alimentada com biomassa enquanto o embrião cresce no vidro. Embriões instáveis podem mutar ou abortar.
-5. **Despertar e combate:** use o Embrião Maduro no chão e enfrente o chefe: Colosso Quitinoso, Matriarca Hemófaga ou Legião Coalescida, conforme o arquétipo. A 50% de vida ele entra em frenesi. Chefes têm de 900 a 3.000 de vida, conforme o tier e os traços. Cada golpe é avisado por um telegrafo no chão; quando o chefe fica atordoado, ele está vulnerável.
+5. **Despertar e combate:** use o Embrião Maduro no chão e enfrente o chefe: Colosso Quitinoso, Matriarca Hemófaga ou Legião Coalescida, conforme o arquétipo. A entrada e cada troca de fase (a 66% e a 33% de vida) são cutscenes que congelam a arena. Cada uma das três fases tem uma mecânica própria para derrotar o chefe. Chefes têm de 900 a 3.000 de vida, conforme o tier e os traços. Cada golpe é avisado por um telegrafo no chão; quando o chefe fica atordoado, ele está vulnerável.
 6. **Loot:** cada chefe deixa Corações Aberrantes (um por tier) e seu troféu. Com eles você faz a Marreta de Carapaça, o Cutelo Sanguíneo ou o Lança-Bile.
 
 ## Roadmap
@@ -37,7 +37,7 @@ O mod precisa estar **no servidor e em todos os clientes**. Quem entrar sem ele 
 | 4. Entidades, IA e animações GeckoLib | 0.4.0 | ✅ |
 | 5. Loot e balanceamento | 1.0.0 | ✅ |
 | 6. Feedback de combate, tooltips customizadas e rebalanceamento | 1.1.0 | ✅ |
-| 7. Chefes cinematográficos: cutscenes de entrada, fases com transição e mecânicas únicas | 1.2.0 | ⏳ |
+| 7. Chefes cinematográficos: cutscenes de entrada, fases com transição e mecânicas únicas | 1.2.0 | ✅ |
 | 8. Códex Atrocitas: livro-guia ilustrado com páginas secretas dos chefes | 1.3.0 | ⏳ |
 | 9. Imbuição genética de armas: terminal, tanques e traços evoluíveis | 1.4.0 | ⏳ |
 | 10. Conteúdo extra: armaduras bioforjadas, surtos de aberrações e simbionte | 1.5.0 | ⏳ |

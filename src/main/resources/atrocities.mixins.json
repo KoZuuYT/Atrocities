@@ -6,6 +6,9 @@
     "NetworkRegistryMixin",
     "RangedAttributeAccessor"
   ],
+  "client": [
+    "CameraMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

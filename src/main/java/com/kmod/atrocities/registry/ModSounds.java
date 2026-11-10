@@ -52,6 +52,12 @@ public final class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_RELEASE = register("entity.boss.release");
     public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_HIT_FLESH = register("entity.boss.hit_flesh");
     public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_CRITICAL = register("entity.boss.critical");
+    public static final DeferredHolder<SoundEvent, SoundEvent> CUTSCENE_STING = register("entity.boss.cutscene_sting");
+    public static final DeferredHolder<SoundEvent, SoundEvent> PHASE_SHIFT = register("entity.boss.phase_shift");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ORGAN_SPAWN = register("entity.boss_organ.spawn");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ORGAN_PULSE = register("entity.boss_organ.pulse");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ORGAN_SHATTER = register("entity.boss_organ.shatter");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_ARMOR_CLANG = register("entity.boss.armor_clang");
     public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_SPINE_SHOT = register("entity.boss.spine_shot");
     public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_SPINE_IMPACT = register("entity.boss.spine_impact");
     public static final DeferredHolder<SoundEvent, SoundEvent> BOSS_BILE_SPLASH = register("entity.boss.bile_splash");

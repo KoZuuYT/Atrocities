@@ -34,6 +34,7 @@ public class AtrocitiesClient {
         ModTooltips.register(modBus);
         CameraShake.register();
         DamageNumbers.register();
+        com.kmod.atrocities.client.cinematic.CinematicDirector.register();
     }
 
     private static void onClientSetup(FMLClientSetupEvent event) {

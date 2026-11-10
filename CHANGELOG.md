@@ -6,6 +6,55 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 
 ## [Não lançado]
 
+## [1.2.0] - 2026-11-10 — Fase 7: Chefes cinematográficos
+
+### Adicionado
+- **Cutscenes com tempo congelado na arena:**
+  - Valem para a entrada do chefe e para cada troca de fase.
+  - Dentro de 40 blocos do chefe, tudo para: crias, projéteis e itens ficam suspensos no ar.
+  - Quem está dentro do raio assiste à cena: fica parado, invulnerável e sem poder atacar.
+  - Jogadores fora do raio continuam jogando normalmente e veem a borda da "bolha de tempo".
+- **Câmera cinematográfica:**
+  - Percorre um trilho em volta do chefe, com colisão contra blocos.
+  - Tem faixas de cinema, vinheta e um clarão no rugido.
+  - O cartão de título mostra o tier, o nome surgindo letra por letra e o epíteto.
+  - Uma dica explica a mecânica da fase.
+  - O HUD e a mão somem durante a cena.
+- **Entrada nova:** 5,5 s. O chefe rompe o chão com efeitos próprios de cada espécie, ruge e empurra todos quando a cena termina.
+- **Três fases por chefe**, com troca a 66% e a 33% de vida. Cada transição tem uma cutscene com uma "ruptura" que revela a mecânica da fase seguinte.
+- **Colosso Quitinoso:**
+  - Fase 1, Couraça Viva: golpes pela frente causam 40% do dano; pelas costas, 115%.
+  - Fase 2, Pilares de Quitina:
+    - três pilares protegem o Colosso, que passa a receber só 60% do dano;
+    - quebre os pilares ou faça o Colosso investir contra eles: o pilar estoura e ele fica atordoado.
+  - Fase 3, Núcleo Exposto:
+    - a carapaça explode e ele perde a armadura;
+    - os atordoamentos duram 50% a mais;
+    - golpe novo, Debandada: três investidas seguidas.
+- **Matriarca Hemófaga:**
+  - Fase 1, Predadora: um projétil que a acerte no meio do Bote a derruba (atordoada, +50% de dano).
+  - Fase 2, Casulos de Sangue: três casulos pulsam curando a Matriarca e chocam crias; destrua-os.
+  - Fase 3, Sangria:
+    - ela perde 0,5% da vida por segundo;
+    - cada golpe que acerta a cura em 1,5%;
+    - golpe novo, Frenesi: três garradas com avanço.
+- **Legião Coalescida:**
+  - Fase 1, Biomassa: cada cria por perto reduz o dano que ela recebe em 12% (até 60%).
+  - Fase 2, Fissão:
+    - ela se parte em três Núcleos e fica imune;
+    - cada núcleo que volta cura 6%;
+    - quando não sobra nenhum, ela fica atordoada por mais tempo quanto mais núcleos foram destruídos.
+  - Fase 3, Supuração:
+    - sem armadura, recebe 25% a mais de dano e solta esporos sem parar;
+    - golpe novo, Ruptura: gêiseres de esporos sob os pés de cada jogador.
+- **Órgãos de chefe** (Pilar de Quitina, Casulo de Sangue e Núcleo da Legião), com modelos animados e partes que brilham.
+- Dicas na barra de ação explicam cada mecânica durante a luta.
+- Sons novos: despertar, transformação, órgãos irrompendo, pulsando e se despedaçando, e couraça desviando golpes.
+
+### Alterado
+- Bônus de dano por fase: +8% na fase 2 e +15% na fase 3 (antes +10% a partir da fase 2).
+- Fases 2 e 3 deixam os golpes mais frequentes. A fase 3 escurece a tela e cria névoa.
+
 ## [1.1.0] - 2026-11-10 — Fase 6: Feedback, tooltips e rebalanceamento
 
 ### Adicionado
@@ -180,7 +229,8 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 - Script `build-and-export.ps1`, que compila o mod e exporta o jar para `libs/`.
 - Script `release.ps1`, que compila, exporta e publica a Release no GitHub com as notas deste changelog.
 
-[Não lançado]: https://github.com/KoZuuYT/Atrocities/compare/v1.1.0...HEAD
+[Não lançado]: https://github.com/KoZuuYT/Atrocities/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/KoZuuYT/Atrocities/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/KoZuuYT/Atrocities/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.4.0...v1.0.0
 [0.4.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.3.0...v0.4.0
