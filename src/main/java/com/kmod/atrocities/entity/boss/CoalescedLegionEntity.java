@@ -45,7 +45,7 @@ public class CoalescedLegionEntity extends AtrocityBoss {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return bossAttributes(0.22D, 4.0D, 0.0D);
+        return bossAttributes(0.22D, 2.0D, 0.0D);
     }
 
     @Override

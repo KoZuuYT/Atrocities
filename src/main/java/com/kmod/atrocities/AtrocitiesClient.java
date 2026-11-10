@@ -1,8 +1,11 @@
 package com.kmod.atrocities;
 
 import com.kmod.atrocities.client.entity.EntitiesClient;
+import com.kmod.atrocities.client.fx.CameraShake;
+import com.kmod.atrocities.client.fx.DamageNumbers;
 import com.kmod.atrocities.client.genetics.GeneticsClient;
 import com.kmod.atrocities.client.machine.MachinesClient;
+import com.kmod.atrocities.client.tooltip.ModTooltips;
 import com.kmod.atrocities.client.versiongate.ClientVersionGate;
 import com.kmod.atrocities.config.AtrocitiesConfig;
 import net.neoforged.api.distmarker.Dist;
@@ -28,6 +31,9 @@ public class AtrocitiesClient {
         GeneticsClient.register(modBus);
         MachinesClient.register(modBus);
         EntitiesClient.register(modBus);
+        ModTooltips.register(modBus);
+        CameraShake.register();
+        DamageNumbers.register();
     }
 
     private static void onClientSetup(FMLClientSetupEvent event) {

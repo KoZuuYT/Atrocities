@@ -47,7 +47,7 @@ public class HemophageMatriarchEntity extends AtrocityBoss {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return bossAttributes(0.32D, 6.0D, 2.0D);
+        return bossAttributes(0.32D, 4.0D, 0.0D);
     }
 
     @Override
@@ -116,7 +116,14 @@ public class HemophageMatriarchEntity extends AtrocityBoss {
             airborne = true;
             playSound(ModSounds.MATRIARCH_LEAP.get(), 2.5f, 1f);
             groundCrack(level, position(), 1.2, 30);
-        } else if (airborne && tick > LUNGE.windup() + 3 && onGround()) {
+        } else if (airborne && !onGround()) {
+            // Rastro de sangue durante o salto.
+            Vec3 body = position().add(0, getBbHeight() * 0.5, 0);
+            level.sendParticles(GeneticsFx.dust(BLOOD, 2f), body.x, body.y, body.z, 6, getBbWidth() * 0.3, 0.2,
+                    getBbWidth() * 0.3, 0.01);
+            level.sendParticles(ParticleTypes.FALLING_DRIPSTONE_LAVA, body.x, body.y, body.z, 1, 0.3, 0.2, 0.3, 0);
+        }
+        if (airborne && tick > LUNGE.windup() + 3 && onGround()) {
             airborne = false;
             strike(position(), getBbWidth() * 0.5 + 2.7, 1.0f, 1.2, 0.5, null);
             groundCrack(level, position(), 2.2, 60);

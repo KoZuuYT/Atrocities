@@ -50,7 +50,7 @@ public class ChitinousColossusEntity extends AtrocityBoss {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return bossAttributes(0.24D, 12.0D, 6.0D);
+        return bossAttributes(0.24D, 8.0D, 3.0D);
     }
 
     @Override

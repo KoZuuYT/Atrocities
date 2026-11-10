@@ -6,7 +6,7 @@ import com.kmod.atrocities.config.AtrocitiesConfig;
  * Formulas de mitigacao dos chefes, pensadas para o meta de ~50 de dano por hit.
  * <p>
  * Soft cap: {@code dano = limiar + (dano - limiar) * fator} para hits acima do limiar.
- * Com os valores padrao (30 / 0.35), um hit de 50 vira 37 e um de 100 vira 54,5.
+ * Com os valores padrao (40 / 0.6), um hit de 50 vira 46 e um de 100 vira 76.
  * Janelas de vulnerabilidade (ex.: nucleo exposto) devem chamar {@link #apply(float, boolean)}
  * com {@code bypassSoftCap = true}.
  */

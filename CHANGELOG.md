@@ -6,6 +6,38 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 
 ## [Não lançado]
 
+## [1.1.0] - 2026-11-10 — Fase 6: Feedback, tooltips e rebalanceamento
+
+### Adicionado
+- **Telegrafo dos golpes:** enquanto um chefe carrega um golpe:
+  - partículas convergem para o corpo dele;
+  - o modelo treme e incha cada vez mais;
+  - um som sobe de tom;
+  - aparece um aviso de perigo no chão: em golpes de área, um anel interno cresce até o externo; em investidas e disparos, uma linha tracejada vai até o alvo.
+- **Golpe liberado:** clarão, estalo e um leve tremor de tela no instante do impacto.
+- **Tremor de câmera** no despertar do chefe, nos impactos que racham o chão, nas ondas de choque, no frenesi e na explosão final.
+- **Feedback de dano no chefe:**
+  - respingo de sangue do lado atingido e som de carne;
+  - o corpo amassa a cada golpe;
+  - números de dano flutuantes (brancos, dourados com "!" quando vulnerável, verdes quando ele se cura).
+- **Atordoamento:** aviso "VULNERÁVEL! Ataque agora!" na tela, anel de faíscas sobre o chefe e som de crítico a cada golpe.
+- Rastro de sangue durante o salto (Bote) da Matriarca.
+- **Tooltips customizadas** para os itens do mod:
+  - moldura na cor da raridade, com cantos ornamentados e linha sob o nome;
+  - selos de raridade (Comum, Incomum, Raro, Épico, Lendário, Artefato), de categoria e de tier (nos embriões);
+  - Lendário: moldura e nome cintilando, com brilhos piscando;
+  - Artefato: moldura e nome pulsando, com sangue escorrendo da borda.
+- Roadmap das próximas fases (7 a 10) no README.
+
+### Alterado
+- **Chefes mais fracos:**
+  - Vida por tier caiu de 1.500 / 2.500 / 3.500 / 4.500 para 900 / 1.400 / 2.000 / 2.700, com teto de 3.000 (antes 5.000).
+  - Dano base caiu de 14 / 18 / 23 / 28 para 11 / 14 / 17 / 21.
+  - Bônus de dano no frenesi caiu de +15% para +10%.
+  - Armadura menor: Colosso 8 (antes 12), Matriarca 4 (antes 6), Legião 2 (antes 4).
+- **Soft cap mais brando:** começa em 40 de dano (antes 30) e deixa passar 60% do excedente (antes 35%). Um golpe de 48 agora causa 44,8 (antes 36,3).
+  - As opções foram renomeadas para `hitSoftCapThreshold` e `hitSoftCapFactor`, então configurações antigas passam a usar os valores novos automaticamente.
+
 ## [1.0.0] - 2026-11-10 — Fase 5: Loot e balanceamento
 
 ### Adicionado
@@ -148,7 +180,8 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 - Script `build-and-export.ps1`, que compila o mod e exporta o jar para `libs/`.
 - Script `release.ps1`, que compila, exporta e publica a Release no GitHub com as notas deste changelog.
 
-[Não lançado]: https://github.com/KoZuuYT/Atrocities/compare/v1.0.0...HEAD
+[Não lançado]: https://github.com/KoZuuYT/Atrocities/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/KoZuuYT/Atrocities/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.4.0...v1.0.0
 [0.4.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.2.0...v0.3.0

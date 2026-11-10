@@ -30,5 +30,9 @@ public final class AtrocitiesNetwork {
                 (payload, context) -> ClientVersionGate.onServerInfo(payload, context));
         versionGate.playToServer(ClientInfoPayload.TYPE, ClientInfoPayload.STREAM_CODEC,
                 ServerVersionGate::onClientInfo);
+
+        PayloadRegistrar effects = event.registrar(PROTOCOL_VERSION).optional();
+        effects.playToClient(ScreenShakePayload.TYPE, ScreenShakePayload.STREAM_CODEC,
+                (payload, context) -> com.kmod.atrocities.client.fx.CameraShake.add(payload.intensity(), payload.duration()));
     }
 }

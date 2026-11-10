@@ -40,19 +40,19 @@ public final class AtrocitiesConfig {
     static {
         COMMON.comment("Atributos globais").push("attributes");
         MAX_HEALTH_CAP = COMMON
-                .comment("Valor maximo do atributo max_health. O vanilla limita em 1024, o que impede chefes de 1.500 a 5.000 HP.")
+                .comment("Valor maximo do atributo max_health. O vanilla limita em 1024, o que impede chefes de 900 a 3.000 HP.")
                 .defineInRange("maxHealthCap", 1_000_000.0D, 1024.0D, Double.MAX_VALUE);
         COMMON.pop();
 
         COMMON.comment("Mitigacao de dano dos chefes (meta de ~50 de dano por hit)").push("bossCombat");
         BOSS_SOFT_CAP_THRESHOLD = COMMON
                 .comment("Hits acima deste valor tem o excedente reduzido.")
-                .defineInRange("softCapThreshold", 30.0D, 0.0D, 10_000.0D);
+                .defineInRange("hitSoftCapThreshold", 40.0D, 0.0D, 10_000.0D);
         BOSS_SOFT_CAP_FACTOR = COMMON
-                .comment("Fracao do excedente que passa. Ex.: limiar 30, fator 0.35 -> hit de 50 vira 37.")
-                .defineInRange("softCapFactor", 0.35D, 0.0D, 1.0D);
+                .comment("Fracao do excedente que passa. Ex.: limiar 40, fator 0.6 -> hit de 50 vira 46.")
+                .defineInRange("hitSoftCapFactor", 0.6D, 0.0D, 1.0D);
         BOSS_HEALTH_MULTIPLIER = COMMON
-                .comment("Multiplica a vida de todos os chefes (base: Tier I 1.500, II 2.500, III 3.500, IV 4.500; teto de 5.000 com os tracos).")
+                .comment("Multiplica a vida de todos os chefes (base: Tier I 900, II 1.400, III 2.000, IV 2.700; teto de 3.000 com os tracos).")
                 .defineInRange("bossHealthMultiplier", 1.0D, 0.01D, 100.0D);
         BOSS_DAMAGE_MULTIPLIER = COMMON
                 .comment("Multiplica o dano de todos os ataques dos chefes.")

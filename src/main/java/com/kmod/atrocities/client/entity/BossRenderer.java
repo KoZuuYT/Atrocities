@@ -2,9 +2,12 @@ package com.kmod.atrocities.client.entity;
 
 import com.kmod.atrocities.Atrocities;
 import com.kmod.atrocities.entity.boss.AtrocityBoss;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
@@ -13,6 +16,9 @@ import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
  * Renderizador GeckoLib dos chefes. Usa {@code geo/entity/<nome>.geo.json},
  * {@code animations/entity/<nome>.animation.json}, {@code textures/entity/<nome>.png} e a mascara
  * {@code <nome>_glowmask.png} para olhos, veias e bolsas que brilham no escuro.
+ * <p>
+ * Feedback dinamico por cima das animacoes: o corpo amassa ao levar dano e treme/incha enquanto carrega
+ * um golpe (quanto mais perto do impacto, mais forte).
  */
 public class BossRenderer<T extends AtrocityBoss> extends GeoEntityRenderer<T> {
 
@@ -20,6 +26,27 @@ public class BossRenderer<T extends AtrocityBoss> extends GeoEntityRenderer<T> {
         super(context, new DefaultedEntityGeoModel<>(ResourceLocation.fromNamespaceAndPath(Atrocities.MODID, name), true));
         addRenderLayer(new AutoGlowingGeoLayer<>(this));
         this.shadowRadius = shadowRadius;
+    }
+
+    @Override
+    public void render(T entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource,
+                       int packedLight) {
+        poseStack.pushPose();
+        if (entity.hurtTime > 0 && !entity.isDeadOrDying()) {
+            float t = Mth.clamp((entity.hurtTime - partialTick) / Math.max(1, entity.hurtDuration), 0f, 1f);
+            float squash = Mth.sin(t * Mth.PI) * (entity.isStunned() ? 0.11f : 0.07f);
+            poseStack.scale(1f + squash, 1f - squash * 0.85f, 1f + squash);
+        }
+        float charge = entity.charge();
+        if (charge > 0f) {
+            float time = entity.tickCount + partialTick;
+            float amplitude = 0.015f + 0.07f * charge * charge;
+            poseStack.translate(Mth.sin(time * 3.3f) * amplitude, 0, Mth.cos(time * 2.9f) * amplitude);
+            float swell = 1f + 0.05f * charge;
+            poseStack.scale(swell, 1f + 0.03f * charge, swell);
+        }
+        super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+        poseStack.popPose();
     }
 
     /** A animacao de morte cuida da queda; sem o tombo lateral vanilla. */

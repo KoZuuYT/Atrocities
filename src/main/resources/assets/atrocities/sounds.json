@@ -917,5 +917,95 @@
         "volume": 1
       }
     ]
+  },
+  "entity.boss.telegraph": {
+    "subtitle": "subtitles.atrocities.entity.boss.telegraph",
+    "sounds": [
+      {
+        "name": "minecraft:block/respawn_anchor/charge1",
+        "pitch": 0.9,
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:block/respawn_anchor/charge2",
+        "pitch": 0.9,
+        "volume": 0.6
+      },
+      {
+        "name": "minecraft:item/crossbow/loading_middle1",
+        "pitch": 0.7,
+        "volume": 0.7
+      }
+    ]
+  },
+  "entity.boss.release": {
+    "subtitle": "subtitles.atrocities.entity.boss.release",
+    "sounds": [
+      {
+        "name": "minecraft:item/trident/riptide1",
+        "pitch": 0.6,
+        "volume": 0.9
+      },
+      {
+        "name": "minecraft:item/trident/riptide2",
+        "pitch": 0.6,
+        "volume": 0.9
+      },
+      {
+        "name": "minecraft:mob/breeze/whirl",
+        "pitch": 0.7,
+        "volume": 0.8
+      }
+    ]
+  },
+  "entity.boss.hit_flesh": {
+    "subtitle": "subtitles.atrocities.entity.boss.hit_flesh",
+    "sounds": [
+      {
+        "name": "minecraft:mob/slime/big1",
+        "pitch": 0.7,
+        "volume": 0.8
+      },
+      {
+        "name": "minecraft:mob/slime/big2",
+        "pitch": 0.7,
+        "volume": 0.8
+      },
+      {
+        "name": "minecraft:mob/slime/big3",
+        "pitch": 0.7,
+        "volume": 0.8
+      },
+      {
+        "name": "minecraft:block/honeyblock/break1",
+        "pitch": 0.6,
+        "volume": 0.9
+      },
+      {
+        "name": "minecraft:block/honeyblock/break2",
+        "pitch": 0.6,
+        "volume": 0.9
+      }
+    ]
+  },
+  "entity.boss.critical": {
+    "subtitle": "subtitles.atrocities.entity.boss.critical",
+    "sounds": [
+      {
+        "name": "minecraft:block/amethyst/shimmer",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/player/attack/crit1",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:random/anvil_land",
+        "pitch": 1.8,
+        "volume": 0.35
+      }
+    ]
   }
 }
