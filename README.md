@@ -31,12 +31,21 @@ O mod precisa estar **no servidor e em todos os clientes**. Quem entrar sem ele 
 | Fase | Versão | Status |
 |---|---|---|
 | 1. Base, registros e VersionGate | 0.1.0 | ✅ |
-| 2. Sistema genético (Data Components, seringa, cápsula) | 0.2.0 | ⏳ |
+| 2. Sistema genético (Data Components, seringa, cápsula) | 0.2.0 | ✅ |
 | 3. Máquinas e incubação | 0.3.0 | ⏳ |
 | 4. Entidades, IA e animações GeckoLib | 0.4.0 | ⏳ |
 | 5. Loot e balanceamento | 1.0.0 | ⏳ |
 
 Veja o [CHANGELOG](CHANGELOG.md) para o histórico completo.
+
+## Genética por datapack
+
+Espécies e traços são JSON e podem ser alterados ou ampliados por datapack, inclusive com criaturas de outros mods:
+
+- `data/<ns>/atrocities/species/<id>.json`: entidade, arquétipo (`chitinous`, `hemophage`, `coalesced`), cor, limites de vida para seringa e cápsula, pureza base e traços doados (peso e faixa de potência).
+- `data/<ns>/atrocities/trait/<id>.json`: categoria, potência máxima, instabilidade por nível, cor e traços incompatíveis.
+
+Exemplo: [`species/ravager.json`](src/main/resources/data/atrocities/atrocities/species/ravager.json).
 
 ## Configuração do servidor
 

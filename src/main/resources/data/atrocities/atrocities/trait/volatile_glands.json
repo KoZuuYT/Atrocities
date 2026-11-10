@@ -1,0 +1,9 @@
+{
+  "category": "offense",
+  "max_potency": 3,
+  "instability": 8.0,
+  "color": "#9ACD32",
+  "incompatible": [
+    "atrocities:hive_mind"
+  ]
+}

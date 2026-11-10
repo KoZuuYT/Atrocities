@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "atrocities:item/stasis_capsule"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "atrocities:filled": 1
+      },
+      "model": "atrocities:item/stasis_capsule_filled"
+    }
+  ]
+}

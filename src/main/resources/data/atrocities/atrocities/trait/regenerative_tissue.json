@@ -1,0 +1,9 @@
+{
+  "category": "defense",
+  "max_potency": 4,
+  "instability": 5.0,
+  "color": "#C2185B",
+  "incompatible": [
+    "atrocities:anticoagulant"
+  ]
+}

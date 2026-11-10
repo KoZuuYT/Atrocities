@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "atrocities:item/stasis_capsule_filled",
+    "layer1": "atrocities:item/stasis_capsule_fluid"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "category": "defense",
+  "max_potency": 5,
+  "instability": 3.0,
+  "color": "#8B7D3A",
+  "incompatible": [
+    "atrocities:void_strands"
+  ]
+}

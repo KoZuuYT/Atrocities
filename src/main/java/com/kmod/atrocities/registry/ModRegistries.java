@@ -22,7 +22,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
  * As classes de conteudo ({@link ModItems}, {@link ModCreativeTabs}, ...) apenas declaram entradas
  * nestes registros; {@link #register(IEventBus)} liga tudo ao barramento do mod.
  * Os registros sem entradas ainda sao preenchidos nas fases seguintes:
- * data components e sons (Fase 2), blocos/BEs/menus/receitas (Fase 3),
+ * blocos/BEs/menus/receitas (Fase 3),
  * entidades/particulas/efeitos (Fase 4).
  */
 public final class ModRegistries {
@@ -58,6 +58,8 @@ public final class ModRegistries {
 
     /** Carrega as classes de conteudo (inicializando seus campos estaticos) e registra tudo no barramento. */
     public static void register(IEventBus modBus) {
+        ModDataComponents.bootstrap();
+        ModSounds.bootstrap();
         ModItems.bootstrap();
         ModCreativeTabs.bootstrap();
 

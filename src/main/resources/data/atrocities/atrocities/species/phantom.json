@@ -1,0 +1,30 @@
+{
+  "entity": "minecraft:phantom",
+  "archetype": "hemophage",
+  "color": "#4A5A8C",
+  "extraction": {
+    "syringe_health_ratio": 0.5,
+    "capture_health_ratio": 0.25,
+    "base_purity": 50
+  },
+  "traits": [
+    {
+      "trait": "atrocities:nocturnal_membranes",
+      "weight": 4,
+      "min_potency": 1,
+      "max_potency": 2
+    },
+    {
+      "trait": "atrocities:hemotoxin",
+      "weight": 3,
+      "min_potency": 1,
+      "max_potency": 2
+    },
+    {
+      "trait": "atrocities:anticoagulant",
+      "weight": 1,
+      "min_potency": 1,
+      "max_potency": 1
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "IPI",
+    "GVG",
+    "IRI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "minecraft:ender_pearl"
+    },
+    "G": {
+      "item": "minecraft:tinted_glass"
+    },
+    "V": {
+      "item": "atrocities:sample_vial"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "id": "atrocities:stasis_capsule",
+    "count": 1
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "atrocities:item/gene_sample",
+    "layer1": "atrocities:item/gene_sample_fluid"
+  }
+}

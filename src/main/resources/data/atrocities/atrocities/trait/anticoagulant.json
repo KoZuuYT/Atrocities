@@ -1,0 +1,9 @@
+{
+  "category": "offense",
+  "max_potency": 3,
+  "instability": 6.0,
+  "color": "#5C0A12",
+  "incompatible": [
+    "atrocities:regenerative_tissue"
+  ]
+}

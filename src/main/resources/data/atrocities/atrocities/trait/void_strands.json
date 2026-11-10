@@ -1,0 +1,9 @@
+{
+  "category": "mobility",
+  "max_potency": 3,
+  "instability": 7.0,
+  "color": "#6A1B9A",
+  "incompatible": [
+    "atrocities:chitin_plating"
+  ]
+}

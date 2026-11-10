@@ -1,6 +1,7 @@
 package com.kmod.atrocities;
 
 import com.kmod.atrocities.config.AtrocitiesConfig;
+import com.kmod.atrocities.genetics.GeneticsRegistries;
 import com.kmod.atrocities.mixin.RangedAttributeAccessor;
 import com.kmod.atrocities.network.AtrocitiesNetwork;
 import com.kmod.atrocities.registry.ModRegistries;
@@ -29,6 +30,7 @@ public class Atrocities {
         container.registerConfig(ModConfig.Type.COMMON, AtrocitiesConfig.COMMON_SPEC);
 
         ModRegistries.register(modBus);
+        GeneticsRegistries.register(modBus);
         AtrocitiesNetwork.register(modBus);
         ServerVersionGate.register();
 

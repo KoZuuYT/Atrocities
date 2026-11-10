@@ -1,5 +1,6 @@
 package com.kmod.atrocities;
 
+import com.kmod.atrocities.client.genetics.GeneticsClient;
 import com.kmod.atrocities.client.versiongate.ClientVersionGate;
 import com.kmod.atrocities.config.AtrocitiesConfig;
 import net.neoforged.api.distmarker.Dist;
@@ -22,6 +23,7 @@ public class AtrocitiesClient {
 
         modBus.addListener(AtrocitiesClient::onClientSetup);
         ClientVersionGate.register();
+        GeneticsClient.register(modBus);
     }
 
     private static void onClientSetup(FMLClientSetupEvent event) {

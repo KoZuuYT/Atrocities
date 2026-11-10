@@ -1,0 +1,30 @@
+{
+  "entity": "minecraft:witch",
+  "archetype": "hemophage",
+  "color": "#4B2D5C",
+  "extraction": {
+    "syringe_health_ratio": 0.45,
+    "capture_health_ratio": 0.2,
+    "base_purity": 55
+  },
+  "traits": [
+    {
+      "trait": "atrocities:toxic_bile",
+      "weight": 4,
+      "min_potency": 1,
+      "max_potency": 2
+    },
+    {
+      "trait": "atrocities:regenerative_tissue",
+      "weight": 3,
+      "min_potency": 1,
+      "max_potency": 2
+    },
+    {
+      "trait": "atrocities:anticoagulant",
+      "weight": 2,
+      "min_potency": 1,
+      "max_potency": 1
+    }
+  ]
+}

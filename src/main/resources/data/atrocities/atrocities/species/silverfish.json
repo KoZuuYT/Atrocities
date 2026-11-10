@@ -1,0 +1,30 @@
+{
+  "entity": "minecraft:silverfish",
+  "archetype": "chitinous",
+  "color": "#8C8C8C",
+  "extraction": {
+    "syringe_health_ratio": 0.6,
+    "capture_health_ratio": 0.35,
+    "base_purity": 30
+  },
+  "traits": [
+    {
+      "trait": "atrocities:chitin_plating",
+      "weight": 3,
+      "min_potency": 1,
+      "max_potency": 1
+    },
+    {
+      "trait": "atrocities:chitin_spines",
+      "weight": 3,
+      "min_potency": 1,
+      "max_potency": 1
+    },
+    {
+      "trait": "atrocities:hive_mind",
+      "weight": 1,
+      "min_potency": 1,
+      "max_potency": 1
+    }
+  ]
+}

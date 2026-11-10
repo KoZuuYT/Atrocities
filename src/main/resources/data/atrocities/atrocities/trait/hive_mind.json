@@ -1,0 +1,9 @@
+{
+  "category": "special",
+  "max_potency": 3,
+  "instability": 6.0,
+  "color": "#4E7D2B",
+  "incompatible": [
+    "atrocities:volatile_glands"
+  ]
+}

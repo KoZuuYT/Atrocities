@@ -6,6 +6,44 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 
 ## [Não lançado]
 
+## [0.2.0] - 2026-11-10 — Fase 2: Sistema Genético
+
+### Adicionado
+- **Registros de datapack** `atrocities:species` e `atrocities:trait`, sincronizados com os clientes. Qualquer criatura, inclusive de outros mods, pode virar espécie com um JSON em `data/<ns>/atrocities/species/`.
+- **14 traços genéticos**: Placas de Quitina, Espinhos de Quitina, Tecido Regenerativo, Hipertrofia, Hemotoxina, Anticoagulante, Bile Tóxica, Glândulas Voláteis, Surto Adrenal, Fios do Vazio, Membranas Noturnas, Bolsas de Esporos, Mente de Colmeia e Órgãos Térmicos. Cada um tem categoria, potência máxima, instabilidade e incompatibilidades.
+- **14 espécies-base** em três arquétipos:
+  - **Quitinoso:** aranha, aranha da caverna, traça e devastador.
+  - **Hemófago:** zumbi, zumbi do deserto, afogado, bruxa e phantom.
+  - **Coalescido:** slime, cubo de magma, endermite, vex e creeper.
+- **Data Components**:
+  - `gene_sample`: espécie, pureza e traços.
+  - `embryo_genome`: arquétipo, tier, estabilidade, traços e linhagem.
+  - `captured_specimen`: a criatura inteira guardada.
+- **Seringa de Extração** (64 usos): numa criatura enfraquecida abaixo do limite da espécie, enche um Frasco de Amostra e gera uma **Amostra Genética**.
+  - Quanto mais ferido o alvo, mais pura a amostra.
+  - A agulha fere o alvo sem matá-lo, então ele revida.
+  - Pureza de 85% ou mais rende uma amostra excepcional.
+- **Cápsula de Estase**: lacra viva uma criatura muito ferida e a libera ao usar num bloco.
+  - O espécime guarda vida, equipamento e nome.
+  - Criaturas liberadas não somem com a distância.
+  - Jogadores e chefes não podem ser capturados.
+- **Embrião Instável** com a lógica de sequenciamento pronta para a Fase 3. O genoma combina amostras:
+  - **Arquétipo:** o dominante, ponderado pela pureza.
+  - **Traços:** potências somadas e limitadas ao máximo de cada traço.
+  - **Estabilidade:** penalizada por conflitos, hibridização e impureza.
+  - **Tier I–IV:** define a vida base do chefe (3.000 / 6.000 / 10.000 / 15.000).
+- **Tooltips** com espécie, arquétipo, barras de pureza e estabilidade, tier, vida estimada do chefe e traços em algarismos romanos. Segurar Shift mostra a categoria e a descrição de cada traço e a linhagem.
+- **Visual e som**:
+  - O fluido das amostras e da cápsula ganha a cor da espécie, e o núcleo do embrião a cor do arquétipo.
+  - Partículas: filete de sangue até a mão, espiral de contenção, flash de captura e liberação.
+  - Seis sons novos com legendas.
+- Receitas da Seringa de Extração e da Cápsula de Estase.
+- Exemplos na aba criativa: uma amostra de referência por espécie e um embrião por arquétipo.
+- Log na inicialização do servidor com o total de espécies e traços carregados, e aviso para traços inexistentes.
+
+### Corrigido
+- Acentuação de três textos da configuração em `pt_br`.
+
 ## [0.1.0] - 2026-11-10 — Fase 1: Base e Registros
 
 ### Adicionado
@@ -25,5 +63,6 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 - Script `build-and-export.ps1`, que compila o mod e exporta o jar para `libs/`.
 - Script `release.ps1`, que compila, exporta e publica a Release no GitHub com as notas deste changelog.
 
-[Não lançado]: https://github.com/KoZuuYT/Atrocities/compare/v0.1.0...HEAD
+[Não lançado]: https://github.com/KoZuuYT/Atrocities/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/KoZuuYT/Atrocities/releases/tag/v0.1.0
