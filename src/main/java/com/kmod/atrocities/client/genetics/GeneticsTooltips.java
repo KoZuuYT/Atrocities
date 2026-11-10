@@ -9,6 +9,10 @@ import com.kmod.atrocities.genetics.Trait;
 import com.kmod.atrocities.genetics.TraitRoll;
 import com.kmod.atrocities.item.ExtractionSyringeItem;
 import com.kmod.atrocities.item.StasisCapsuleItem;
+import com.kmod.atrocities.machine.BiologicalIncubatorBlockEntity;
+import com.kmod.atrocities.machine.MachineBlock;
+import com.kmod.atrocities.machine.MachineKind;
+import com.kmod.atrocities.registry.ModItems;
 import com.kmod.atrocities.registry.ModDataComponents;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +25,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
@@ -57,16 +62,26 @@ final class GeneticsTooltips {
         if (sample != null) {
             describeSample(sample, registries, details, lines);
         } else if (genome != null) {
-            describeGenome(genome, registries, details, lines);
+            describeGenome(genome, stack.is(ModItems.MATURED_EMBRYO.get()), registries, details, lines);
         } else if (stack.getItem() instanceof StasisCapsuleItem) {
             describeCapsule(specimen, registries, lines);
         } else if (stack.getItem() instanceof ExtractionSyringeItem) {
             lines.add(hint("item.atrocities.extraction_syringe.hint"));
             lines.add(hint("item.atrocities.extraction_syringe.hint2"));
-        } else {
-            return;
+        } else if (stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof MachineBlock machine) {
+            lines.add(hint("item.atrocities." + machine.kind().id() + ".hint"));
+        } else if (stack.is(ModItems.BIOMASS.get())) {
+            lines.add(hint("item.atrocities.biomass.hint"));
         }
-        event.getToolTip().addAll(Math.min(1, event.getToolTip().size()), lines);
+        if (!lines.isEmpty()) {
+            event.getToolTip().addAll(Math.min(1, event.getToolTip().size()), lines);
+        }
+
+        int yield = MachineKind.biomassYield(stack);
+        if (yield > 0) {
+            event.getToolTip().add(Component.translatable("tooltip.atrocities.biomass_yield", yield)
+                    .withColor(0x8FB04A));
+        }
     }
 
     // ------------------------------------------------------------------ amostra
@@ -83,8 +98,8 @@ final class GeneticsTooltips {
 
     // ------------------------------------------------------------------ embriao
 
-    private static void describeGenome(EmbryoGenome genome, HolderLookup.Provider registries, boolean details,
-                                       List<Component> lines) {
+    private static void describeGenome(EmbryoGenome genome, boolean matured, HolderLookup.Provider registries,
+                                       boolean details, List<Component> lines) {
         lines.add(labeled("archetype", genome.archetype().displayName()));
         lines.add(labeled("tier", Component.literal(roman(genome.tier())).withColor(tierColor(genome.tier()))
                 .withStyle(ChatFormatting.BOLD)));
@@ -93,6 +108,15 @@ final class GeneticsTooltips {
                 .append(Component.literal(" " + genome.stability() + "%").withColor(stabilityColor))));
         lines.add(labeled("boss_health", Component.literal(String.format("%,d", genome.bossBaseHealth()))
                 .withColor(0xE05050)));
+        if (genome.mutations() > 0) {
+            lines.add(labeled("mutations", Component.literal(String.valueOf(genome.mutations()))
+                    .withColor(0xD070F0)));
+        }
+        if (!matured) {
+            int seconds = BiologicalIncubatorBlockEntity.incubationTicks(genome.tier()) / 20;
+            lines.add(labeled("incubation", Component.literal(String.format("%d:%02d", seconds / 60, seconds % 60))
+                    .withColor(0xA8E060)));
+        }
         traitLines(genome.traits(), registries, details, lines);
         if (details && !genome.lineage().isEmpty()) {
             MutableComponent lineage = Component.empty();
@@ -105,7 +129,10 @@ final class GeneticsTooltips {
             }
             lines.add(labeled("lineage", lineage));
         }
-        if (genome.stability() < 35) {
+        if (matured) {
+            lines.add(Component.translatable("tooltip.atrocities.matured_hint")
+                    .withStyle(ChatFormatting.DARK_PURPLE, ChatFormatting.ITALIC));
+        } else if (genome.stability() < BiologicalIncubatorBlockEntity.ABORT_THRESHOLD) {
             lines.add(Component.translatable("tooltip.atrocities.unstable_warning")
                     .withStyle(ChatFormatting.DARK_RED, ChatFormatting.ITALIC));
         }

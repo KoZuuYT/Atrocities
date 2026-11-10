@@ -55,7 +55,7 @@ public final class GeneticsClient {
         event.register((stack, tintIndex) -> {
             EmbryoGenome genome = stack.get(ModDataComponents.EMBRYO_GENOME.get());
             return tintIndex == 1 ? opaque(genome == null ? FALLBACK_FLUID : genome.archetype().color()) : -1;
-        }, ModItems.UNSTABLE_EMBRYO.get());
+        }, ModItems.UNSTABLE_EMBRYO.get(), ModItems.MATURED_EMBRYO.get());
     }
 
     static int speciesColor(ResourceKey<Species> key) {

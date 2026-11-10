@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "atrocities:block/machine_top",
+    "bottom": "atrocities:block/machine_bottom",
+    "side": "atrocities:block/machine_side",
+    "front": "atrocities:block/gene_sequencer_front"
+  }
+}

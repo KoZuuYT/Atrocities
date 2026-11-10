@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "atrocities:item/matured_embryo",
+    "layer1": "atrocities:item/matured_embryo_core"
+  }
+}

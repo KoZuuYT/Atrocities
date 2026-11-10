@@ -28,7 +28,8 @@ public final class ModCreativeTabs {
                     .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
                     .icon(() -> ModItems.SAMPLE_VIAL.get().getDefaultInstance())
                     .displayItems((parameters, output) -> {
-                        Set<Item> dataDriven = Set.of(ModItems.GENE_SAMPLE.get(), ModItems.UNSTABLE_EMBRYO.get());
+                        Set<Item> dataDriven = Set.of(ModItems.GENE_SAMPLE.get(), ModItems.UNSTABLE_EMBRYO.get(),
+                                ModItems.MATURED_EMBRYO.get());
                         ModRegistries.ITEMS.getEntries().stream()
                                 .map(DeferredHolder::get)
                                 .filter(item -> !dataDriven.contains(item))
@@ -37,7 +38,7 @@ public final class ModCreativeTabs {
                     })
                     .build());
 
-    /** Uma amostra de referencia por especie e um embriao de exemplo por arquetipo. */
+    /** Uma amostra de referencia por especie e um embriao de exemplo (instavel e maduro) por arquetipo. */
     private static void addGeneticExamples(HolderLookup.Provider registries, CreativeModeTab.Output output) {
         GeneticsRegistries.allSpecies(registries)
                 .forEach(species -> output.accept(ModItems.geneSample(GeneSample.reference(species))));
@@ -47,7 +48,10 @@ public final class ModCreativeTabs {
                     .limit(2)
                     .map(GeneSample::reference)
                     .toList();
-            EmbryoGenome.sequence(samples, registries).ifPresent(genome -> output.accept(ModItems.embryo(genome)));
+            EmbryoGenome.sequence(samples, registries).ifPresent(genome -> {
+                output.accept(ModItems.embryo(genome));
+                output.accept(ModItems.maturedEmbryo(genome));
+            });
         }
     }
 

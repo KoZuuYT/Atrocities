@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "atrocities:block/biological_incubator"
+    },
+    "lit=true": {
+      "model": "atrocities:block/biological_incubator_on"
+    }
+  }
+}

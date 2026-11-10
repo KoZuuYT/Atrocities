@@ -6,6 +6,34 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 
 ## [Não lançado]
 
+## [0.3.0] - 2026-11-10 — Fase 3: Máquinas e Incubação
+
+### Adicionado
+- **Quatro máquinas biológicas**, com interface própria, barras animadas, partículas, sons e suporte a funis:
+  - Funis inserem nas entradas e no combustível e retiram só das saídas.
+  - O conteúdo cai no chão quando a máquina é quebrada.
+- **Extrator de Biomassa**: tritura matéria orgânica num acumulador; cada 100 pontos viram 1 **Biomassa**. Não precisa de combustível.
+- **Biomassa**: combustível das outras máquinas. Cada uma vale 100 nutrientes, e a reserva comporta até 2.000.
+- **Data map `atrocities:biomass_yield`** (`data/<ns>/data_maps/item/biomass_yield.json`) define quanto cada item rende.
+  - Vem com 33 itens, de carne podre (25) a catalisador de sculk (200).
+  - O tooltip de cada item mostra quanto ele rende.
+- **Centrífuga Genética**:
+  - **Uma amostra:** ganha de +6 a +12 de pureza, até 90%.
+  - **Duas amostras da mesma espécie:** fundem-se. A pureza fica igual à maior mais 1/3 da menor, até 100%, e os traços ficam com a maior potência. Sobra um frasco vazio.
+  - A tela mostra a pureza que vai resultar.
+- **Sequenciador Genético**: une de 2 a 4 amostras num **Embrião Instável**. A tela mostra antes o tier e a estabilidade que o embrião vai ter.
+- **Incubadora Biológica**: gesta o embrião até virar **Embrião Maduro**, que você vê flutuando no fluido do tanque, pulsando no ritmo do coração.
+  - Tempo por tier: 1, 2, 3 e 5 minutos. Gasta 1 nutriente a cada 2 ticks.
+  - **Fome:** sem nutrientes, o progresso para e o embrião perde 1 de estabilidade a cada 5 segundos.
+  - **Aborto:** com estabilidade abaixo de 35%, há 2% de chance de aborto por ponto abaixo, até 70%. O embrião se perde e até 3 criaturas das espécies que o formaram saem do tanque, hostis.
+  - **Mutação:** chance de (100 − estabilidade)/2 %. A mutação fortalece um traço ou desperta um traço latente da linhagem, e custa 5 de estabilidade. O tier nunca cai.
+- **Embrião Maduro**: guarda o genoma final do chefe, que será despertado na Fase 4.
+- Tooltips do embrião passam a mostrar o tempo de incubação e as mutações.
+- Receitas das quatro máquinas, onze sons novos com legendas e traduções em `pt_br` e `en_us`.
+
+### Alterado
+- O genoma do embrião ganhou o campo `mutations`. Embriões criados na 0.2.0 continuam válidos.
+
 ## [0.2.0] - 2026-11-10 — Fase 2: Sistema Genético
 
 ### Adicionado
@@ -63,6 +91,7 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 - Script `build-and-export.ps1`, que compila o mod e exporta o jar para `libs/`.
 - Script `release.ps1`, que compila, exporta e publica a Release no GitHub com as notas deste changelog.
 
-[Não lançado]: https://github.com/KoZuuYT/Atrocities/compare/v0.2.0...HEAD
+[Não lançado]: https://github.com/KoZuuYT/Atrocities/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/KoZuuYT/Atrocities/releases/tag/v0.1.0

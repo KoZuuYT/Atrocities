@@ -1,0 +1,103 @@
+{
+  "values": {
+    "minecraft:rotten_flesh": {
+      "amount": 25
+    },
+    "minecraft:beef": {
+      "amount": 35
+    },
+    "minecraft:porkchop": {
+      "amount": 35
+    },
+    "minecraft:mutton": {
+      "amount": 30
+    },
+    "minecraft:chicken": {
+      "amount": 30
+    },
+    "minecraft:rabbit": {
+      "amount": 30
+    },
+    "minecraft:cod": {
+      "amount": 20
+    },
+    "minecraft:salmon": {
+      "amount": 25
+    },
+    "minecraft:tropical_fish": {
+      "amount": 20
+    },
+    "minecraft:pufferfish": {
+      "amount": 30
+    },
+    "minecraft:spider_eye": {
+      "amount": 40
+    },
+    "minecraft:fermented_spider_eye": {
+      "amount": 60
+    },
+    "minecraft:slime_ball": {
+      "amount": 50
+    },
+    "minecraft:magma_cream": {
+      "amount": 60
+    },
+    "minecraft:phantom_membrane": {
+      "amount": 80
+    },
+    "minecraft:rabbit_foot": {
+      "amount": 60
+    },
+    "minecraft:leather": {
+      "amount": 15
+    },
+    "minecraft:rabbit_hide": {
+      "amount": 10
+    },
+    "minecraft:egg": {
+      "amount": 15
+    },
+    "minecraft:turtle_egg": {
+      "amount": 50
+    },
+    "minecraft:bone": {
+      "amount": 10
+    },
+    "minecraft:ink_sac": {
+      "amount": 15
+    },
+    "minecraft:glow_ink_sac": {
+      "amount": 25
+    },
+    "minecraft:nether_wart": {
+      "amount": 15
+    },
+    "minecraft:kelp": {
+      "amount": 5
+    },
+    "minecraft:sea_pickle": {
+      "amount": 10
+    },
+    "minecraft:honeycomb": {
+      "amount": 15
+    },
+    "minecraft:turtle_scute": {
+      "amount": 40
+    },
+    "minecraft:armadillo_scute": {
+      "amount": 40
+    },
+    "minecraft:ghast_tear": {
+      "amount": 120
+    },
+    "minecraft:shulker_shell": {
+      "amount": 150
+    },
+    "minecraft:sculk": {
+      "amount": 20
+    },
+    "minecraft:sculk_catalyst": {
+      "amount": 200
+    }
+  }
+}

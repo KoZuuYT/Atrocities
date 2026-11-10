@@ -42,6 +42,15 @@ public final class ModItems {
             ModRegistries.ITEMS.registerSimpleItem("unstable_embryo",
                     new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
 
+    /** Biomassa: polpa organica do Extrator; combustivel (nutrientes) das maquinas biologicas. */
+    public static final DeferredItem<Item> BIOMASS =
+            ModRegistries.ITEMS.registerSimpleItem("biomass", new Item.Properties());
+
+    /** Embriao Maduro: saido da Incubadora, dormente, carrega o genoma final do chefe. */
+    public static final DeferredItem<Item> MATURED_EMBRYO =
+            ModRegistries.ITEMS.registerSimpleItem("matured_embryo",
+                    new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant());
+
     public static ItemStack geneSample(GeneSample sample) {
         ItemStack stack = new ItemStack(GENE_SAMPLE.get());
         stack.set(ModDataComponents.GENE_SAMPLE.get(), sample);
@@ -50,6 +59,12 @@ public final class ModItems {
 
     public static ItemStack embryo(EmbryoGenome genome) {
         ItemStack stack = new ItemStack(UNSTABLE_EMBRYO.get());
+        stack.set(ModDataComponents.EMBRYO_GENOME.get(), genome);
+        return stack;
+    }
+
+    public static ItemStack maturedEmbryo(EmbryoGenome genome) {
+        ItemStack stack = new ItemStack(MATURED_EMBRYO.get());
         stack.set(ModDataComponents.EMBRYO_GENOME.get(), genome);
         return stack;
     }

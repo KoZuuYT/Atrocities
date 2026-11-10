@@ -17,6 +17,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 
 /**
  * Data Component do Embriao Instavel: o genoma que a Incubadora transforma em chefe.
@@ -26,9 +27,10 @@ import net.minecraft.util.Mth;
  * @param stability 0 a 100; embrioes instaveis podem abortar ou mutar durante a incubacao
  * @param traits    tracos combinados, ja limitados a potencia maxima de cada um
  * @param lineage   especies que doaram material, em ordem
+ * @param mutations quantas mutacoes o embriao sofreu na incubacao
  */
 public record EmbryoGenome(Archetype archetype, int tier, int stability, List<TraitRoll> traits,
-                           List<ResourceKey<Species>> lineage) {
+                           List<ResourceKey<Species>> lineage, int mutations) {
 
     public static final int MAX_TIER = 4;
     /** Vida base do chefe por tier (I a IV), pensada para o meta de ~50 de dano por hit. */
@@ -46,7 +48,8 @@ public record EmbryoGenome(Archetype archetype, int tier, int stability, List<Tr
             Codec.intRange(1, MAX_TIER).fieldOf("tier").forGetter(EmbryoGenome::tier),
             Codec.intRange(0, 100).fieldOf("stability").forGetter(EmbryoGenome::stability),
             TraitRoll.CODEC.listOf().fieldOf("traits").forGetter(EmbryoGenome::traits),
-            ResourceKey.codec(GeneticsRegistries.SPECIES).listOf().fieldOf("lineage").forGetter(EmbryoGenome::lineage)
+            ResourceKey.codec(GeneticsRegistries.SPECIES).listOf().fieldOf("lineage").forGetter(EmbryoGenome::lineage),
+            Codec.intRange(0, 64).optionalFieldOf("mutations", 0).forGetter(EmbryoGenome::mutations)
     ).apply(i, EmbryoGenome::new));
 
     public static final StreamCodec<ByteBuf, EmbryoGenome> STREAM_CODEC = StreamCodec.composite(
@@ -55,6 +58,7 @@ public record EmbryoGenome(Archetype archetype, int tier, int stability, List<Tr
             ByteBufCodecs.VAR_INT, EmbryoGenome::stability,
             TraitRoll.STREAM_CODEC.apply(ByteBufCodecs.list()), EmbryoGenome::traits,
             ResourceKey.streamCodec(GeneticsRegistries.SPECIES).apply(ByteBufCodecs.list()), EmbryoGenome::lineage,
+            ByteBufCodecs.VAR_INT, EmbryoGenome::mutations,
             EmbryoGenome::new);
 
     public EmbryoGenome {
@@ -139,9 +143,68 @@ public record EmbryoGenome(Archetype archetype, int tier, int stability, List<Tr
 
         int stability = Mth.clamp(Math.round(100f - instability), 0, 100);
         int power = traits.stream().mapToInt(TraitRoll::potency).sum();
-        int tier = power <= 3 ? 1 : power <= 6 ? 2 : power <= 10 ? 3 : 4;
 
-        return Optional.of(new EmbryoGenome(dominant, tier, stability, traits, List.copyOf(lineage)));
+        return Optional.of(new EmbryoGenome(dominant, tierFor(power), stability, traits, List.copyOf(lineage), 0));
+    }
+
+    /** Tier pela soma das potencias: ate 3 = I, ate 6 = II, ate 10 = III, acima = IV. */
+    public static int tierFor(int power) {
+        return power <= 3 ? 1 : power <= 6 ? 2 : power <= 10 ? 3 : 4;
+    }
+
+    /** Embriao com a estabilidade final da incubacao (fome e mutacoes descontadas). */
+    public EmbryoGenome withStability(int value) {
+        return new EmbryoGenome(archetype, tier, Mth.clamp(value, 0, 100), traits, lineage, mutations);
+    }
+
+    /** Resultado de uma mutacao: o novo genoma e o traco que mudou (vazio se nada pode mudar). */
+    public record Mutation(EmbryoGenome genome, Optional<ResourceKey<Trait>> trait) {
+    }
+
+    /**
+     * Mutacao da incubacao: fortalece um traco existente ou desperta um traco latente de uma das
+     * especies da linhagem. Cada mutacao custa 5 de estabilidade; o tier nunca cai.
+     */
+    public Mutation mutate(HolderLookup.Provider registries, RandomSource random) {
+        List<TraitRoll> next = new ArrayList<>(traits);
+        List<Integer> upgradable = new ArrayList<>();
+        for (int idx = 0; idx < next.size(); idx++) {
+            TraitRoll roll = next.get(idx);
+            int max = GeneticsRegistries.trait(registries, roll.trait()).map(Trait::maxPotency).orElse(roll.potency());
+            if (roll.potency() < max) {
+                upgradable.add(idx);
+            }
+        }
+        Set<ResourceKey<Trait>> present = new LinkedHashSet<>();
+        next.forEach(roll -> present.add(roll.trait()));
+        List<ResourceKey<Trait>> latent = new ArrayList<>();
+        for (ResourceKey<Species> key : lineage) {
+            GeneticsRegistries.species(registries, key).ifPresent(species -> species.traits().forEach(entry -> {
+                if (!present.contains(entry.trait()) && !latent.contains(entry.trait())
+                        && GeneticsRegistries.trait(registries, entry.trait()).isPresent()) {
+                    latent.add(entry.trait());
+                }
+            }));
+        }
+
+        ResourceKey<Trait> changed;
+        if (!upgradable.isEmpty() && (latent.isEmpty() || random.nextBoolean())) {
+            int idx = upgradable.get(random.nextInt(upgradable.size()));
+            TraitRoll roll = next.get(idx);
+            next.set(idx, new TraitRoll(roll.trait(), roll.potency() + 1));
+            changed = roll.trait();
+        } else if (!latent.isEmpty()) {
+            changed = latent.get(random.nextInt(latent.size()));
+            next.add(new TraitRoll(changed, 1));
+        } else {
+            return new Mutation(withStability(stability - 5), Optional.empty());
+        }
+        next.sort(Comparator.comparingInt(TraitRoll::potency).reversed()
+                .thenComparing(roll -> roll.trait().location()));
+        int power = next.stream().mapToInt(TraitRoll::potency).sum();
+        EmbryoGenome mutated = new EmbryoGenome(archetype, Math.max(tier, tierFor(power)),
+                Mth.clamp(stability - 5, 0, 100), next, lineage, mutations + 1);
+        return new Mutation(mutated, Optional.of(changed));
     }
 
     private static boolean conflicts(ResourceKey<Trait> a, ResourceKey<Trait> b, HolderLookup.Provider registries) {
