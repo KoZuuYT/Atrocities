@@ -81,7 +81,8 @@ public record TooltipStyle(Rarity rarity, Category category, int tier) {
         if (stack.getItem() instanceof SwordItem || stack.getItem() instanceof BileLauncherItem) {
             return Category.WEAPON;
         }
-        if (stack.getItem() instanceof ExtractionSyringeItem || stack.getItem() instanceof StasisCapsuleItem) {
+        if (stack.getItem() instanceof ExtractionSyringeItem || stack.getItem() instanceof StasisCapsuleItem
+                || stack.getItem() instanceof com.kmod.atrocities.item.CodexItem) {
             return Category.TOOL;
         }
         if (stack.getItem() instanceof BioThrowableItem) {

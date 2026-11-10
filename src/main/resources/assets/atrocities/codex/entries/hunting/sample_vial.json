@@ -1,0 +1,20 @@
+{
+  "chapter": "atrocities:hunting",
+  "order": 0,
+  "icon": "atrocities:sample_vial",
+  "title": "codex.atrocities.entry.sample_vial",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.sample_vial.p1"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:sample_vial"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.sample_vial.p2"
+    }
+  ]
+}

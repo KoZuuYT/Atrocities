@@ -1,0 +1,93 @@
+{
+  "chapter": "atrocities:bestiary",
+  "order": 2,
+  "icon": "atrocities:matriarch_fang",
+  "title": "entity.atrocities.hemophage_matriarch",
+  "unlock": {
+    "type": "encounter",
+    "target": "atrocities:hemophage_matriarch"
+  },
+  "boss": {
+    "entity": "atrocities:hemophage_matriarch",
+    "epithet": "cutscene.atrocities.hemophage_matriarch.epithet",
+    "color": "#B0141F",
+    "view_scale": 1.0,
+    "lore": [
+      "codex.atrocities.boss.hemophage_matriarch.lore1",
+      "codex.atrocities.boss.hemophage_matriarch.lore2"
+    ],
+    "dissection": "codex.atrocities.boss.hemophage_matriarch.dissection",
+    "phases": [
+      {
+        "name": "codex.atrocities.boss.hemophage_matriarch.phase1",
+        "description": "codex.atrocities.boss.hemophage_matriarch.phase1.desc"
+      },
+      {
+        "name": "cutscene.atrocities.hemophage_matriarch.phase2",
+        "description": "codex.atrocities.boss.hemophage_matriarch.phase2.desc"
+      },
+      {
+        "name": "cutscene.atrocities.hemophage_matriarch.phase3",
+        "description": "codex.atrocities.boss.hemophage_matriarch.phase3.desc"
+      }
+    ],
+    "attacks": [
+      {
+        "name": "codex.atrocities.boss.hemophage_matriarch.attack.rend",
+        "description": "codex.atrocities.boss.hemophage_matriarch.attack.rend.desc",
+        "animation": "rend",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.boss.hemophage_matriarch.attack.lunge",
+        "description": "codex.atrocities.boss.hemophage_matriarch.attack.lunge.desc",
+        "animation": "lunge",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.boss.hemophage_matriarch.attack.blood_spray",
+        "description": "codex.atrocities.boss.hemophage_matriarch.attack.blood_spray.desc",
+        "animation": "blood_spray",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.boss.hemophage_matriarch.attack.brood_call",
+        "description": "codex.atrocities.boss.hemophage_matriarch.attack.brood_call.desc",
+        "animation": "brood_call",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.boss.hemophage_matriarch.attack.hemorrhage",
+        "description": "codex.atrocities.boss.hemophage_matriarch.attack.hemorrhage.desc",
+        "animation": "hemorrhage",
+        "phase": 2
+      },
+      {
+        "name": "codex.atrocities.boss.hemophage_matriarch.attack.frenzy",
+        "description": "codex.atrocities.boss.hemophage_matriarch.attack.frenzy.desc",
+        "animation": "rend",
+        "phase": 3
+      }
+    ],
+    "drops": [
+      {
+        "item": "atrocities:aberrant_heart",
+        "amount": "1–4",
+        "note": "codex.atrocities.drop.heart"
+      },
+      {
+        "item": "atrocities:matriarch_fang",
+        "amount": "1–3",
+        "note": "codex.atrocities.drop.trophy"
+      },
+      {
+        "item": "atrocities:biomass",
+        "amount": "8–16"
+      },
+      {
+        "item": "atrocities:sample_vial",
+        "amount": "2–4"
+      }
+    ]
+  }
+}

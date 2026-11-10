@@ -1,0 +1,16 @@
+{
+  "chapter": "atrocities:genetics",
+  "order": 2,
+  "icon": "atrocities:matured_embryo",
+  "title": "codex.atrocities.entry.tiers",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.tiers.p1"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.tiers.p2"
+    }
+  ]
+}

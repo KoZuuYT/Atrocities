@@ -1,0 +1,34 @@
+{
+  "chapter": "atrocities:intro",
+  "order": 0,
+  "icon": "atrocities:codex_atrocitas",
+  "title": "codex.atrocities.entry.welcome",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.welcome.p1"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.welcome.h1"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.welcome.p2"
+    },
+    {
+      "type": "items",
+      "items": [
+        "atrocities:extraction_syringe",
+        "atrocities:gene_sample",
+        "atrocities:unstable_embryo",
+        "atrocities:matured_embryo",
+        "atrocities:aberrant_heart"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.welcome.p3"
+    }
+  ]
+}

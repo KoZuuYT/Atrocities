@@ -30,6 +30,9 @@ public final class AtrocitiesConfig {
     /** Anuncia no chat do servidor quando um chefe desperta ou morre. */
     public static final ModConfigSpec.BooleanValue BOSS_BROADCAST;
 
+    /** Entrega o Codex Atrocitas a quem entra no mundo pela primeira vez. */
+    public static final ModConfigSpec.BooleanValue GIVE_CODEX_ON_JOIN;
+
     /** Desconecta, com aviso e link de download, quem entra sem o mod. */
     public static final ModConfigSpec.BooleanValue KICK_CLIENTS_WITHOUT_MOD;
     /** Exige que o cliente use exatamente a mesma versao do servidor. */
@@ -60,6 +63,12 @@ public final class AtrocitiesConfig {
         BOSS_BROADCAST = COMMON
                 .comment("Anuncia para todo o servidor quando um chefe desperta ou e abatido.")
                 .define("broadcastBossEvents", true);
+        COMMON.pop();
+
+        COMMON.comment("Codex Atrocitas (livro-guia)").push("codex");
+        GIVE_CODEX_ON_JOIN = COMMON
+                .comment("Entrega o Codex Atrocitas a cada jogador na primeira vez que ele entra no mundo.")
+                .define("giveOnFirstJoin", true);
         COMMON.pop();
 
         COMMON.comment("VersionGate: controle de versao entre servidor e clientes").push("versionGate");

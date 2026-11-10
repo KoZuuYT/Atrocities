@@ -27,6 +27,14 @@ O mod precisa estar **no servidor e em todos os clientes**. Quem entrar sem ele 
 5. **Despertar e combate:** use o Embrião Maduro no chão e enfrente o chefe: Colosso Quitinoso, Matriarca Hemófaga ou Legião Coalescida, conforme o arquétipo. A entrada e cada troca de fase (a 66% e a 33% de vida) são cutscenes que congelam a arena. Cada uma das três fases tem uma mecânica própria para derrotar o chefe. Chefes têm de 900 a 3.000 de vida, conforme o tier e os traços. Cada golpe é avisado por um telegrafo no chão; quando o chefe fica atordoado, ele está vulnerável.
 6. **Loot:** cada chefe deixa Corações Aberrantes (um por tier) e seu troféu. Com eles você faz a Marreta de Carapaça, o Cutelo Sanguíneo ou o Lança-Bile.
 
+## Códex Atrocitas
+
+Todo jogador recebe o **Códex Atrocitas** ao entrar no mundo pela primeira vez. É um livro-guia com receitas, espécies, máquinas, genética e armas.
+
+As fichas dos chefes ficam secretas, só com uma silhueta, até você enfrentar o chefe. Depois mostram o modelo 3D animado, as fases, os golpes (clique para ver cada um), os drops e os registros. Abater o chefe libera as notas de dissecação.
+
+O conteúdo vem de resource packs: `assets/<ns>/codex/chapters/*.json` e `assets/<ns>/codex/entries/<capítulo>/*.json`.
+
 ## Roadmap
 
 | Fase | Versão | Status |
@@ -38,7 +46,7 @@ O mod precisa estar **no servidor e em todos os clientes**. Quem entrar sem ele 
 | 5. Loot e balanceamento | 1.0.0 | ✅ |
 | 6. Feedback de combate, tooltips customizadas e rebalanceamento | 1.1.0 | ✅ |
 | 7. Chefes cinematográficos: cutscenes de entrada, fases com transição e mecânicas únicas | 1.2.0 | ✅ |
-| 8. Códex Atrocitas: livro-guia ilustrado com páginas secretas dos chefes | 1.3.0 | ⏳ |
+| 8. Códex Atrocitas: livro-guia ilustrado com páginas secretas dos chefes | 1.3.0 | ✅ |
 | 9. Imbuição genética de armas: terminal, tanques e traços evoluíveis | 1.4.0 | ⏳ |
 | 10. Conteúdo extra: armaduras bioforjadas, surtos de aberrações e simbionte | 1.5.0 | ⏳ |
 
@@ -72,6 +80,7 @@ Exemplo: [`species/ravager.json`](src/main/resources/data/atrocities/atrocities/
 | `bossCombat.bossHealthMultiplier` | 1.0 | Multiplica a vida dos chefes |
 | `bossCombat.bossDamageMultiplier` | 1.0 | Multiplica o dano dos chefes |
 | `bossCombat.broadcastBossEvents` | true | Anuncia no servidor quando um chefe desperta ou morre |
+| `codex.giveOnFirstJoin` | true | Entrega o Códex Atrocitas na primeira entrada de cada jogador |
 | `versionGate.kickClientsWithoutMod` | true | Desconecta quem não tem o mod, mostrando o link de download |
 | `versionGate.requireExactVersion` | false | Exige a mesma versão do servidor |
 | `versionGate.githubRepo` | KoZuuYT/Atrocities | Repositório usado nos links de download |

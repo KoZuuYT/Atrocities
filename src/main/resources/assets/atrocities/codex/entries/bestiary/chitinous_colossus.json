@@ -1,0 +1,97 @@
+{
+  "chapter": "atrocities:bestiary",
+  "order": 1,
+  "icon": "atrocities:colossus_carapace",
+  "title": "entity.atrocities.chitinous_colossus",
+  "unlock": {
+    "type": "encounter",
+    "target": "atrocities:chitinous_colossus"
+  },
+  "boss": {
+    "entity": "atrocities:chitinous_colossus",
+    "epithet": "cutscene.atrocities.chitinous_colossus.epithet",
+    "color": "#B08A3A",
+    "view_scale": 1.0,
+    "lore": [
+      "codex.atrocities.boss.chitinous_colossus.lore1",
+      "codex.atrocities.boss.chitinous_colossus.lore2"
+    ],
+    "dissection": "codex.atrocities.boss.chitinous_colossus.dissection",
+    "phases": [
+      {
+        "name": "codex.atrocities.boss.chitinous_colossus.phase1",
+        "description": "codex.atrocities.boss.chitinous_colossus.phase1.desc"
+      },
+      {
+        "name": "cutscene.atrocities.chitinous_colossus.phase2",
+        "description": "codex.atrocities.boss.chitinous_colossus.phase2.desc"
+      },
+      {
+        "name": "cutscene.atrocities.chitinous_colossus.phase3",
+        "description": "codex.atrocities.boss.chitinous_colossus.phase3.desc"
+      }
+    ],
+    "attacks": [
+      {
+        "name": "codex.atrocities.boss.chitinous_colossus.attack.slam",
+        "description": "codex.atrocities.boss.chitinous_colossus.attack.slam.desc",
+        "animation": "slam",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.boss.chitinous_colossus.attack.sweep",
+        "description": "codex.atrocities.boss.chitinous_colossus.attack.sweep.desc",
+        "animation": "sweep",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.boss.chitinous_colossus.attack.charge",
+        "description": "codex.atrocities.boss.chitinous_colossus.attack.charge.desc",
+        "animation": "charge",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.boss.chitinous_colossus.attack.spine_volley",
+        "description": "codex.atrocities.boss.chitinous_colossus.attack.spine_volley.desc",
+        "animation": "spine_volley",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.boss.chitinous_colossus.attack.quake",
+        "description": "codex.atrocities.boss.chitinous_colossus.attack.quake.desc",
+        "animation": "quake",
+        "phase": 2
+      },
+      {
+        "name": "codex.atrocities.boss.chitinous_colossus.attack.rampage",
+        "description": "codex.atrocities.boss.chitinous_colossus.attack.rampage.desc",
+        "animation": "charge",
+        "phase": 3
+      }
+    ],
+    "drops": [
+      {
+        "item": "atrocities:aberrant_heart",
+        "amount": "1–4",
+        "note": "codex.atrocities.drop.heart"
+      },
+      {
+        "item": "atrocities:colossus_carapace",
+        "amount": "1–3",
+        "note": "codex.atrocities.drop.trophy"
+      },
+      {
+        "item": "atrocities:chitin_spine",
+        "amount": "6–12"
+      },
+      {
+        "item": "atrocities:biomass",
+        "amount": "8–16"
+      },
+      {
+        "item": "atrocities:sample_vial",
+        "amount": "2–4"
+      }
+    ]
+  }
+}

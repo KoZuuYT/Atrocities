@@ -1,0 +1,20 @@
+{
+  "chapter": "atrocities:arsenal",
+  "order": 3,
+  "icon": "atrocities:bile_launcher",
+  "title": "codex.atrocities.entry.bile_launcher",
+  "unlock": {
+    "type": "defeat",
+    "target": "atrocities:coalesced_legion"
+  },
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.bile_launcher.p1"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:bile_launcher"
+    }
+  ]
+}

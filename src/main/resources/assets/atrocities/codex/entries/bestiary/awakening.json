@@ -1,0 +1,28 @@
+{
+  "chapter": "atrocities:bestiary",
+  "order": 0,
+  "icon": "atrocities:matured_embryo",
+  "title": "codex.atrocities.entry.awakening",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.awakening.p1"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.awakening.h1"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.awakening.p2"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.awakening.h2"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.awakening.p3"
+    }
+  ]
+}

@@ -35,6 +35,7 @@ public class Atrocities {
         ServerVersionGate.register();
         com.kmod.atrocities.cinematic.ArenaCinematics.register();
         com.kmod.atrocities.item.SanguineCleaverItem.registerEvents();
+        com.kmod.atrocities.codex.Codex.register();
 
         modBus.addListener(Atrocities::onCommonSetup);
     }

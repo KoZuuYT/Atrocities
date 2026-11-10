@@ -1,0 +1,97 @@
+{
+  "chapter": "atrocities:bestiary",
+  "order": 3,
+  "icon": "atrocities:legion_core",
+  "title": "entity.atrocities.coalesced_legion",
+  "unlock": {
+    "type": "encounter",
+    "target": "atrocities:coalesced_legion"
+  },
+  "boss": {
+    "entity": "atrocities:coalesced_legion",
+    "epithet": "cutscene.atrocities.coalesced_legion.epithet",
+    "color": "#5E8C31",
+    "view_scale": 1.0,
+    "lore": [
+      "codex.atrocities.boss.coalesced_legion.lore1",
+      "codex.atrocities.boss.coalesced_legion.lore2"
+    ],
+    "dissection": "codex.atrocities.boss.coalesced_legion.dissection",
+    "phases": [
+      {
+        "name": "codex.atrocities.boss.coalesced_legion.phase1",
+        "description": "codex.atrocities.boss.coalesced_legion.phase1.desc"
+      },
+      {
+        "name": "cutscene.atrocities.coalesced_legion.phase2",
+        "description": "codex.atrocities.boss.coalesced_legion.phase2.desc"
+      },
+      {
+        "name": "cutscene.atrocities.coalesced_legion.phase3",
+        "description": "codex.atrocities.boss.coalesced_legion.phase3.desc"
+      }
+    ],
+    "attacks": [
+      {
+        "name": "codex.atrocities.boss.coalesced_legion.attack.engulf",
+        "description": "codex.atrocities.boss.coalesced_legion.attack.engulf.desc",
+        "animation": "engulf",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.boss.coalesced_legion.attack.spore_burst",
+        "description": "codex.atrocities.boss.coalesced_legion.attack.spore_burst.desc",
+        "animation": "spore_burst",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.boss.coalesced_legion.attack.pull",
+        "description": "codex.atrocities.boss.coalesced_legion.attack.pull.desc",
+        "animation": "pull",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.boss.coalesced_legion.attack.bud",
+        "description": "codex.atrocities.boss.coalesced_legion.attack.bud.desc",
+        "animation": "bud",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.boss.coalesced_legion.attack.bile_mortar",
+        "description": "codex.atrocities.boss.coalesced_legion.attack.bile_mortar.desc",
+        "animation": "bile_mortar",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.boss.coalesced_legion.attack.rupture",
+        "description": "codex.atrocities.boss.coalesced_legion.attack.rupture.desc",
+        "animation": "spore_burst",
+        "phase": 3
+      }
+    ],
+    "drops": [
+      {
+        "item": "atrocities:aberrant_heart",
+        "amount": "1–4",
+        "note": "codex.atrocities.drop.heart"
+      },
+      {
+        "item": "atrocities:legion_core",
+        "amount": "1–3",
+        "note": "codex.atrocities.drop.trophy"
+      },
+      {
+        "item": "atrocities:bile_glob",
+        "amount": "6–12"
+      },
+      {
+        "item": "atrocities:biomass",
+        "amount": "8–16"
+      },
+      {
+        "item": "atrocities:sample_vial",
+        "amount": "2–4"
+      }
+    ]
+  }
+}

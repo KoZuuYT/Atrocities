@@ -1,0 +1,36 @@
+{
+  "chapter": "atrocities:genetics",
+  "order": 0,
+  "icon": "atrocities:gene_sample",
+  "title": "codex.atrocities.entry.archetypes",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.archetypes.p1"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.archetypes.h1"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.archetypes.p2"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.archetypes.h2"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.archetypes.p3"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.archetypes.h3"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.archetypes.p4"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "chapter": "atrocities:machines",
+  "order": 0,
+  "icon": "atrocities:biomass_extractor",
+  "title": "codex.atrocities.entry.biomass_extractor",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.biomass_extractor.p1"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:biomass_extractor"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.biomass_extractor.p2"
+    },
+    {
+      "type": "items",
+      "items": [
+        "atrocities:biomass"
+      ]
+    }
+  ]
+}

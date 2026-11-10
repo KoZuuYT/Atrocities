@@ -1,0 +1,11 @@
+{
+  "chapter": "atrocities:genetics",
+  "order": 3,
+  "icon": "atrocities:gene_sample",
+  "title": "codex.atrocities.entry.traits",
+  "pages": [
+    {
+      "type": "traits"
+    }
+  ]
+}

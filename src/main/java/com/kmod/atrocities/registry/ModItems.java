@@ -6,6 +6,7 @@ import com.kmod.atrocities.entity.boss.BioProjectile;
 import com.kmod.atrocities.item.BileLauncherItem;
 import com.kmod.atrocities.item.BioThrowableItem;
 import com.kmod.atrocities.item.CarapaceMaulItem;
+import com.kmod.atrocities.item.CodexItem;
 import com.kmod.atrocities.item.ExtractionSyringeItem;
 import com.kmod.atrocities.item.SanguineCleaverItem;
 import com.kmod.atrocities.item.MaturedEmbryoItem;
@@ -114,6 +115,13 @@ public final class ModItems {
     public static final DeferredItem<BileLauncherItem> BILE_LAUNCHER =
             ModRegistries.ITEMS.registerItem("bile_launcher", BileLauncherItem::new,
                     new Item.Properties().rarity(Rarity.EPIC).fireResistant().durability(640));
+
+    // ------------------------------------------------------------------ Codex (Fase 8)
+
+    /** Codex Atrocitas: livro-guia ilustrado; as paginas dos chefes se revelam ao enfrenta-los. */
+    public static final DeferredItem<CodexItem> CODEX =
+            ModRegistries.ITEMS.registerItem("codex_atrocitas", CodexItem::new,
+                    new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
 
     public static ItemStack geneSample(GeneSample sample) {
         ItemStack stack = new ItemStack(GENE_SAMPLE.get());

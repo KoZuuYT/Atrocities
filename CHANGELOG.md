@@ -6,6 +6,30 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 
 ## [Não lançado]
 
+## [1.3.0] - 2026-11-10 — Fase 8: Códex Atrocitas
+
+### Adicionado
+- **Códex Atrocitas:** livro-guia ilustrado.
+  - Todo jogador o recebe ao entrar no mundo pela primeira vez. A opção `codex.giveOnFirstJoin` desliga isso.
+  - Também pode ser fabricado com livro, Frasco de Amostra e carne podre.
+- **Seis capítulos:** Introdução, Caça e Extração, Máquinas, Genética, Bestiário e Arsenal.
+  - Receitas animadas e itens com dica ao passar o mouse.
+  - Lista de espécies catalogadas e catálogo de traços.
+  - Navegação por fitas, setas e teclado. O livro lembra a última página aberta.
+- **Fichas secretas dos chefes:**
+  - Enquanto o chefe não foi enfrentado, a ficha mostra só uma silhueta, estática vermelha e texto censurado.
+  - Estar na arena do chefe cataloga a ficha. Na primeira leitura, uma cena mostra o chefe rompendo o chão e rugindo, e o nome surge letra por letra.
+  - A ficha tem o modelo 3D animado do chefe: arraste para girar, role para aproximar e use os botões de cena, rugido, andar e atordoado.
+  - **Ficha:** linhagem, abates, maior tier vencido e registros.
+  - **Fases:** a mecânica de cada uma das três fases.
+  - **Golpes:** clique num golpe para vê-lo no modelo.
+  - **Drops:** o loot do chefe.
+  - Abater o chefe libera as notas de dissecação e a página da arma feita com os restos dele.
+- **Catálogo de traços:** traços de amostras e embriões que passam pelo inventário são catalogados. Os ainda desconhecidos aparecem censurados.
+- **Avisos do Códex** no canto da tela para cada chefe catalogado, chefe abatido ou traço novo.
+- O progresso do Códex fica salvo no jogador, não se perde ao morrer e é sincronizado pelo servidor.
+- **Conteúdo por resource pack:** capítulos em `assets/<ns>/codex/chapters/` e verbetes em `assets/<ns>/codex/entries/`, com elementos de texto, título, itens, receita, traços, espécies e fichas de chefe.
+
 ## [1.2.0] - 2026-11-10 — Fase 7: Chefes cinematográficos
 
 ### Adicionado
@@ -229,7 +253,8 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 - Script `build-and-export.ps1`, que compila o mod e exporta o jar para `libs/`.
 - Script `release.ps1`, que compila, exporta e publica a Release no GitHub com as notas deste changelog.
 
-[Não lançado]: https://github.com/KoZuuYT/Atrocities/compare/v1.2.0...HEAD
+[Não lançado]: https://github.com/KoZuuYT/Atrocities/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/KoZuuYT/Atrocities/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/KoZuuYT/Atrocities/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/KoZuuYT/Atrocities/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.4.0...v1.0.0

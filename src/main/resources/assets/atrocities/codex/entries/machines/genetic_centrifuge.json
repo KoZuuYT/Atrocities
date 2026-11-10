@@ -1,0 +1,20 @@
+{
+  "chapter": "atrocities:machines",
+  "order": 1,
+  "icon": "atrocities:genetic_centrifuge",
+  "title": "codex.atrocities.entry.genetic_centrifuge",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.genetic_centrifuge.p1"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:genetic_centrifuge"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.genetic_centrifuge.p2"
+    }
+  ]
+}

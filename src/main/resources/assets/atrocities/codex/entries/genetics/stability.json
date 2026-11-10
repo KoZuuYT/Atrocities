@@ -1,0 +1,16 @@
+{
+  "chapter": "atrocities:genetics",
+  "order": 1,
+  "icon": "atrocities:unstable_embryo",
+  "title": "codex.atrocities.entry.stability",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.stability.p1"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.stability.p2"
+    }
+  ]
+}

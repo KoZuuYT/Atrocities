@@ -1,0 +1,19 @@
+{
+  "chapter": "atrocities:arsenal",
+  "order": 4,
+  "icon": "atrocities:chitin_spine",
+  "title": "codex.atrocities.entry.throwables",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.throwables.p1"
+    },
+    {
+      "type": "items",
+      "items": [
+        "atrocities:chitin_spine",
+        "atrocities:bile_glob"
+      ]
+    }
+  ]
+}

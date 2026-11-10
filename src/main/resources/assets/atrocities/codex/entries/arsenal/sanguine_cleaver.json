@@ -1,0 +1,20 @@
+{
+  "chapter": "atrocities:arsenal",
+  "order": 2,
+  "icon": "atrocities:sanguine_cleaver",
+  "title": "codex.atrocities.entry.sanguine_cleaver",
+  "unlock": {
+    "type": "defeat",
+    "target": "atrocities:hemophage_matriarch"
+  },
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.sanguine_cleaver.p1"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:sanguine_cleaver"
+    }
+  ]
+}

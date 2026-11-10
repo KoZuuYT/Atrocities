@@ -1,0 +1,20 @@
+{
+  "chapter": "atrocities:hunting",
+  "order": 2,
+  "icon": "atrocities:stasis_capsule",
+  "title": "codex.atrocities.entry.stasis_capsule",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.stasis_capsule.p1"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:stasis_capsule"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.stasis_capsule.p2"
+    }
+  ]
+}

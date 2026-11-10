@@ -1,0 +1,20 @@
+{
+  "chapter": "atrocities:machines",
+  "order": 2,
+  "icon": "atrocities:gene_sequencer",
+  "title": "codex.atrocities.entry.gene_sequencer",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.gene_sequencer.p1"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:gene_sequencer"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.gene_sequencer.p2"
+    }
+  ]
+}

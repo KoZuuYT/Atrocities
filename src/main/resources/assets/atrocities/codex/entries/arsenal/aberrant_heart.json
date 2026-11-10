@@ -1,0 +1,22 @@
+{
+  "chapter": "atrocities:arsenal",
+  "order": 0,
+  "icon": "atrocities:aberrant_heart",
+  "title": "codex.atrocities.entry.aberrant_heart",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.aberrant_heart.p1"
+    },
+    {
+      "type": "items",
+      "items": [
+        "atrocities:aberrant_heart"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.aberrant_heart.p2"
+    }
+  ]
+}

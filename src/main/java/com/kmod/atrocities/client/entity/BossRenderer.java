@@ -11,6 +11,11 @@ import net.minecraft.util.Mth;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
+import software.bernie.geckolib.util.Color;
+import com.kmod.atrocities.client.codex.BossViewer;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.RenderType;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
 
 /**
  * Renderizador GeckoLib dos chefes. Usa {@code geo/entity/<nome>.geo.json},
@@ -24,7 +29,17 @@ public class BossRenderer<T extends AtrocityBoss> extends GeoEntityRenderer<T> {
 
     public BossRenderer(EntityRendererProvider.Context context, String name, float shadowRadius) {
         super(context, new DefaultedEntityGeoModel<>(ResourceLocation.fromNamespaceAndPath(Atrocities.MODID, name), true));
-        addRenderLayer(new AutoGlowingGeoLayer<>(this));
+        addRenderLayer(new AutoGlowingGeoLayer<>(this) {
+            @Override
+            public void render(PoseStack poseStack, T animatable, BakedGeoModel bakedModel, RenderType renderType,
+                               MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick,
+                               int packedLight, int packedOverlay) {
+                if (!BossViewer.silhouette) {
+                    super.render(poseStack, animatable, bakedModel, renderType, bufferSource, buffer, partialTick,
+                            packedLight, packedOverlay);
+                }
+            }
+        });
         this.shadowRadius = shadowRadius;
     }
 
@@ -48,6 +63,14 @@ public class BossRenderer<T extends AtrocityBoss> extends GeoEntityRenderer<T> {
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
         poseStack.popPose();
     }
+
+    /** Silhueta negra no Codex enquanto a ficha do chefe e secreta. */
+    @Override
+    public Color getRenderColor(T animatable, float partialTick, int packedLight) {
+        return BossViewer.silhouette ? SILHOUETTE : super.getRenderColor(animatable, partialTick, packedLight);
+    }
+
+    private static final Color SILHOUETTE = Color.ofARGB(255, 14, 8, 10);
 
     /** A animacao de morte cuida da queda; sem o tombo lateral vanilla. */
     @Override

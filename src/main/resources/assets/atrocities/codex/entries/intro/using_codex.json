@@ -1,0 +1,36 @@
+{
+  "chapter": "atrocities:intro",
+  "order": 1,
+  "icon": "atrocities:codex_atrocitas",
+  "title": "codex.atrocities.entry.using_codex",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.using_codex.p1"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.using_codex.h1"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.using_codex.p2"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.using_codex.h2"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.using_codex.p3"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:codex_atrocitas"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.using_codex.p4"
+    }
+  ]
+}

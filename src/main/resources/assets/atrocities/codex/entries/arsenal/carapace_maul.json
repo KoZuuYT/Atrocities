@@ -1,0 +1,20 @@
+{
+  "chapter": "atrocities:arsenal",
+  "order": 1,
+  "icon": "atrocities:carapace_maul",
+  "title": "codex.atrocities.entry.carapace_maul",
+  "unlock": {
+    "type": "defeat",
+    "target": "atrocities:chitinous_colossus"
+  },
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.carapace_maul.p1"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:carapace_maul"
+    }
+  ]
+}

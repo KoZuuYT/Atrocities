@@ -427,6 +427,9 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
         super.customServerAiStep();
         ServerLevel level = (ServerLevel) level();
         bossEvent.setProgress(getHealth() / getMaxHealth());
+        if (tickCount % 20 == 0) {
+            catalogWitnesses(level);
+        }
 
         if (isEmerging()) {
             tickEmerging(level);
@@ -1233,6 +1236,30 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
         }
     }
 
+    // ------------------------------------------------------------------ Codex
+
+    /** Raio em que os jogadores "enfrentam" o chefe e tem a pagina dele revelada no Codex. */
+    private static final double CODEX_RADIUS = 40;
+
+    /** Quem esta na arena passa a conhecer o chefe (pagina secreta do Codex). */
+    private void catalogWitnesses(ServerLevel level) {
+        for (ServerPlayer player : level.getEntitiesOfClass(ServerPlayer.class, getBoundingBox().inflate(CODEX_RADIUS),
+                p -> p.isAlive() && !p.isSpectator())) {
+            com.kmod.atrocities.codex.Codex.encounter(player, getType());
+        }
+    }
+
+    /** Usado so no cliente pelo visualizador do Codex: substitui a animacao principal. */
+    @Nullable
+    public RawAnimation codexPose;
+    /** Instancia de vitrine do Codex (anima mesmo com o jogo pausado). */
+    public boolean codexDummy;
+
+    @Override
+    public boolean shouldPlayAnimsWhileGamePaused() {
+        return codexDummy;
+    }
+
     // ------------------------------------------------------------------ morte
 
     @Override
@@ -1244,6 +1271,12 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
         super.die(source);
         if (level() instanceof ServerLevel level && !level.isClientSide) {
             ArenaCinematics.stop(this);
+            java.util.Set<ServerPlayer> slayers = new java.util.HashSet<>(level.getEntitiesOfClass(ServerPlayer.class,
+                    getBoundingBox().inflate(CODEX_RADIUS + 8), p -> !p.isSpectator()));
+            if (source.getEntity() instanceof ServerPlayer killer) {
+                slayers.add(killer);
+            }
+            slayers.forEach(player -> com.kmod.atrocities.codex.Codex.defeat(player, getType(), tier()));
             for (BossOrganEntity organ : organs(null)) {
                 GeneticsFx.burst(level, GeneticsFx.dust(organ.variant().color(), 2f), organ.position().add(0, 0.6, 0),
                         30, 0.6, 0.1);
@@ -1358,6 +1391,9 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
     }
 
     private PlayState mainAnimation(AnimationState<AtrocityBoss> state) {
+        if (codexPose != null) {
+            return state.setAndContinue(codexPose);
+        }
         if (isDeadOrDying()) {
             return state.setAndContinue(DEATH);
         }

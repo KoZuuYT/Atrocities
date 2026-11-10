@@ -1,0 +1,20 @@
+{
+  "chapter": "atrocities:machines",
+  "order": 3,
+  "icon": "atrocities:biological_incubator",
+  "title": "codex.atrocities.entry.biological_incubator",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.biological_incubator.p1"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:biological_incubator"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.biological_incubator.p2"
+    }
+  ]
+}

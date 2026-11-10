@@ -1,0 +1,20 @@
+{
+  "chapter": "atrocities:hunting",
+  "order": 1,
+  "icon": "atrocities:extraction_syringe",
+  "title": "codex.atrocities.entry.extraction_syringe",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.extraction_syringe.p1"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:extraction_syringe"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.extraction_syringe.p2"
+    }
+  ]
+}

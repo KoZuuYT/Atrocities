@@ -1,0 +1,15 @@
+{
+  "chapter": "atrocities:hunting",
+  "order": 3,
+  "icon": "atrocities:gene_sample",
+  "title": "codex.atrocities.entry.species",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.species.p1"
+    },
+    {
+      "type": "species"
+    }
+  ]
+}

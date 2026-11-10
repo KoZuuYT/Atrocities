@@ -73,6 +73,8 @@ final class GeneticsTooltips {
             lines.add(hint("item.atrocities." + machine.kind().id() + ".hint"));
         } else if (stack.is(ModItems.BIOMASS.get())) {
             lines.add(hint("item.atrocities.biomass.hint"));
+        } else if (stack.is(ModItems.CODEX.get())) {
+            lines.add(hint("item.atrocities.codex_atrocitas.hint"));
         }
         if (!lines.isEmpty()) {
             event.getToolTip().addAll(Math.min(1, event.getToolTip().size()), lines);
