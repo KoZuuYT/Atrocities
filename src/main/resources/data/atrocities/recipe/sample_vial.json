@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " C ",
+    "GIG",
+    " G "
+  ],
+  "key": {
+    "C": { "item": "minecraft:copper_ingot" },
+    "G": { "item": "minecraft:glass" },
+    "I": { "item": "minecraft:iron_nugget" }
+  },
+  "result": {
+    "id": "atrocities:sample_vial",
+    "count": 3
+  }
+}

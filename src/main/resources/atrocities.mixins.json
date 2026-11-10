@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.kmod.atrocities.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "NetworkRegistryMixin",
+    "RangedAttributeAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
