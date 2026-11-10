@@ -196,5 +196,18 @@
   "message.atrocities.boss.unknown_killer": "the unknown",
   "message.atrocities.boss.phase_two": "%s enters a frenzy!",
   "message.atrocities.embryo.peaceful": "The embryo will not awaken in Peaceful difficulty.",
-  "message.atrocities.embryo.no_space": "Not enough room for the creature to emerge here."
+  "message.atrocities.embryo.no_space": "Not enough room for the creature to emerge here.",
+  "item.atrocities.aberrant_heart": "Aberrant Heart",
+  "item.atrocities.colossus_carapace": "Colossus Carapace",
+  "item.atrocities.matriarch_fang": "Matriarch Fang",
+  "item.atrocities.legion_core": "Legion Core",
+  "item.atrocities.carapace_maul": "Carapace Maul",
+  "item.atrocities.sanguine_cleaver": "Sanguine Cleaver",
+  "item.atrocities.bile_launcher": "Bile Launcher",
+  "tooltip.atrocities.carapace_maul": "Right-click on the ground: Seismic Impact (%s damage around you, %ss cooldown).",
+  "tooltip.atrocities.sanguine_cleaver": "Heals %s%% of the damage dealt (up to %s health per hit).",
+  "tooltip.atrocities.bile_launcher": "Fires Bile Globs (%s damage + toxic cloud). Uses Bile Globs as ammo.",
+  "tooltip.atrocities.chitin_spine": "Throwable: %s damage.",
+  "tooltip.atrocities.bile_glob": "Throwable: %s damage + toxic cloud.",
+  "message.atrocities.bile_launcher.no_ammo": "You need Bile Globs to fire."
 }

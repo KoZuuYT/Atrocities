@@ -95,7 +95,7 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
     public static final int TRANSITION_TICKS = 50;
     public static final float PHASE_TWO_RATIO = 0.5f;
 
-    private static final int[] TIER_DAMAGE = {18, 24, 32, 42};
+    private static final int[] TIER_DAMAGE = {14, 18, 23, 28};
     private static final float[] TIER_SCALE = {0.85f, 1.0f, 1.12f, 1.25f};
     private static final ResourceLocation PHASE_TWO_SPEED =
             ResourceLocation.fromNamespaceAndPath(Atrocities.MODID, "phase_two_speed");
@@ -145,7 +145,7 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
     /** Atributos base de todo chefe; cada especie ajusta armadura e velocidade. */
     protected static AttributeSupplier.Builder bossAttributes(double speed, double armor, double toughness) {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 3_000.0D)
+                .add(Attributes.MAX_HEALTH, 1_500.0D)
                 .add(Attributes.ATTACK_DAMAGE, TIER_DAMAGE[0])
                 .add(Attributes.MOVEMENT_SPEED, speed)
                 .add(Attributes.FOLLOW_RANGE, 64.0D)
@@ -279,6 +279,7 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
                         new AttributeModifier(id, modifier.perLevel() * potency, modifier.operation()));
             }
         }));
+        capMaxHealth();
         if (resetHealth) {
             setHealth(getMaxHealth());
         } else {
@@ -286,6 +287,19 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
         }
         refreshDimensions();
         updateBossBarName();
+    }
+
+    /** Garante o teto de vida: se os tracos passarem do limite, a vida base e reduzida para compensar. */
+    private void capMaxHealth() {
+        AttributeInstance health = getAttribute(Attributes.MAX_HEALTH);
+        if (health == null) {
+            return;
+        }
+        double cap = EmbryoGenome.MAX_BOSS_HEALTH * AtrocitiesConfig.BOSS_HEALTH_MULTIPLIER.get();
+        double value = health.getValue();
+        if (value > cap) {
+            health.setBaseValue(health.getBaseValue() * cap / value);
+        }
     }
 
     private void setBase(net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute> attribute,
@@ -928,7 +942,8 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
         if (tag.contains("genome")) {
             EmbryoGenome.CODEC.parse(NbtOps.INSTANCE, tag.get("genome")).result().ifPresent(value -> {
                 genome = value;
-                applyGenome(false);
+                // Sem "Health" na NBT (ex.: /summon com genoma) o chefe nasce com a vida cheia.
+                applyGenome(!tag.contains("Health"));
             });
         }
         entityData.set(DATA_PHASE, Mth.clamp(tag.getInt("phase"), 1, 2));

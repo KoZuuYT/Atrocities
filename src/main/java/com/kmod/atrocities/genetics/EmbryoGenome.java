@@ -34,7 +34,9 @@ public record EmbryoGenome(Archetype archetype, int tier, int stability, List<Tr
 
     public static final int MAX_TIER = 4;
     /** Vida base do chefe por tier (I a IV), pensada para o meta de ~50 de dano por hit. */
-    private static final int[] TIER_HEALTH = {3_000, 6_000, 10_000, 15_000};
+    private static final int[] TIER_HEALTH = {1_500, 2_500, 3_500, 4_500};
+    /** Teto de vida do chefe ja com os bonus dos tracos (antes do multiplicador da configuracao). */
+    public static final int MAX_BOSS_HEALTH = 5_000;
 
     /** Instabilidade extra por par de tracos incompativeis. */
     private static final float CONFLICT_PENALTY = 15f;

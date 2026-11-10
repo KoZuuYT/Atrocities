@@ -6,6 +6,36 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 
 ## [Não lançado]
 
+## [1.0.0] - 2026-11-10 — Fase 5: Loot e balanceamento
+
+### Adicionado
+- **Loot dos chefes**, em tabelas de loot por datapack (`data/atrocities/loot_table/entities/<chefe>.json`):
+  - **Coração Aberrante**: 1 por tier (I = 1, IV = 4).
+  - Troféu do chefe: 2 a 3, mais 1 a 2 a partir do tier III.
+    - **Placa de Carapaça** (Colosso).
+    - **Presa da Matriarca** (Matriarca).
+    - **Núcleo da Legião** (Legião).
+  - Biomassa, Espinhos Quitinosos (Colosso) e Bolotas de Bile (Legião).
+  - Frascos de Amostra a partir do tier II.
+- Condição de loot `atrocities:boss_tier` (`min`/`max`), para datapacks darem loot conforme o tier do chefe.
+- **Coração Aberrante** comestível: Absorção IV (2 min), Regeneração II (10 s), Força I (1 min) e Náusea (8 s). Também conserta as armas novas na bigorna.
+- **Armas feitas dos troféus**, mais duráveis que netherite e encantáveis:
+  - **Marreta de Carapaça**: 48 de dano, lenta. Botão direito no chão: Impacto Sísmico, 30 de dano ao redor e empurrão, com recarga de 8 s.
+  - **Cutelo Sanguíneo**: 40 de dano, rápido. Cura 15% do dano causado, até 8 de vida por golpe.
+  - **Lança-Bile**: dispara Bolotas de Bile (16 de dano e nuvem tóxica), gastando uma Bolota por tiro.
+- Espinhos Quitinosos (12 de dano) e Bolotas de Bile (6 de dano e nuvem tóxica) agora podem ser arremessados.
+- Receitas das três armas, texturas, traduções e tags de encantamento.
+
+### Alterado
+- **Chefes mais fracos**:
+  - Vida por tier caiu de 3.000 / 6.000 / 10.000 / 15.000 para 1.500 / 2.500 / 3.500 / 4.500.
+  - Teto de 5.000 de vida mesmo com os traços (antes do `bossHealthMultiplier`).
+  - Dano base caiu de 18 / 24 / 32 / 42 para 14 / 18 / 23 / 28.
+- Projéteis dos jogadores acertam chefes e crias; os dos chefes continuam sem acertar o próprio chefe.
+
+### Corrigido
+- Chefe invocado por `/summon` com genoma na NBT agora nasce com a vida cheia.
+
 ## [0.4.0] - 2026-11-10 — Fase 4: Entidades, IA e GeckoLib
 
 ### Adicionado
@@ -118,7 +148,8 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 - Script `build-and-export.ps1`, que compila o mod e exporta o jar para `libs/`.
 - Script `release.ps1`, que compila, exporta e publica a Release no GitHub com as notas deste changelog.
 
-[Não lançado]: https://github.com/KoZuuYT/Atrocities/compare/v0.4.0...HEAD
+[Não lançado]: https://github.com/KoZuuYT/Atrocities/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.4.0...v1.0.0
 [0.4.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.1.0...v0.2.0

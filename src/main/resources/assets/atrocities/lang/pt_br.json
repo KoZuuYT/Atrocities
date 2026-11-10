@@ -196,5 +196,18 @@
   "message.atrocities.boss.unknown_killer": "o desconhecido",
   "message.atrocities.boss.phase_two": "%s entra em frenesi!",
   "message.atrocities.embryo.peaceful": "O embrião não desperta na dificuldade Pacífica.",
-  "message.atrocities.embryo.no_space": "Não há espaço para a criatura emergir aqui."
+  "message.atrocities.embryo.no_space": "Não há espaço para a criatura emergir aqui.",
+  "item.atrocities.aberrant_heart": "Coração Aberrante",
+  "item.atrocities.colossus_carapace": "Placa de Carapaça",
+  "item.atrocities.matriarch_fang": "Presa da Matriarca",
+  "item.atrocities.legion_core": "Núcleo da Legião",
+  "item.atrocities.carapace_maul": "Marreta de Carapaça",
+  "item.atrocities.sanguine_cleaver": "Cutelo Sanguíneo",
+  "item.atrocities.bile_launcher": "Lança-Bile",
+  "tooltip.atrocities.carapace_maul": "Botão direito no chão: Impacto Sísmico (%s de dano ao redor, recarga de %ss).",
+  "tooltip.atrocities.sanguine_cleaver": "Cura %s%% do dano causado (até %s de vida por golpe).",
+  "tooltip.atrocities.bile_launcher": "Dispara Bolotas de Bile (%s de dano + nuvem tóxica). Usa Bolotas de Bile como munição.",
+  "tooltip.atrocities.chitin_spine": "Arremessável: %s de dano.",
+  "tooltip.atrocities.bile_glob": "Arremessável: %s de dano + nuvem tóxica.",
+  "message.atrocities.bile_launcher.no_ammo": "Você precisa de Bolotas de Bile para disparar."
 }

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "CHC",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "C": {
+      "item": "atrocities:colossus_carapace"
+    },
+    "H": {
+      "item": "atrocities:aberrant_heart"
+    },
+    "S": {
+      "item": "atrocities:chitin_spine"
+    }
+  },
+  "result": {
+    "id": "atrocities:carapace_maul",
+    "count": 1
+  }
+}

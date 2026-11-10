@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "L L",
+    "GHG",
+    " G "
+  ],
+  "key": {
+    "L": {
+      "item": "atrocities:legion_core"
+    },
+    "H": {
+      "item": "atrocities:aberrant_heart"
+    },
+    "G": {
+      "item": "atrocities:bile_glob"
+    }
+  },
+  "result": {
+    "id": "atrocities:bile_launcher",
+    "count": 1
+  }
+}

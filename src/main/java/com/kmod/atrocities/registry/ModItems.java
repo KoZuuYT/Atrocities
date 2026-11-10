@@ -2,9 +2,17 @@ package com.kmod.atrocities.registry;
 
 import com.kmod.atrocities.genetics.EmbryoGenome;
 import com.kmod.atrocities.genetics.GeneSample;
+import com.kmod.atrocities.entity.boss.BioProjectile;
+import com.kmod.atrocities.item.BileLauncherItem;
+import com.kmod.atrocities.item.BioThrowableItem;
+import com.kmod.atrocities.item.CarapaceMaulItem;
 import com.kmod.atrocities.item.ExtractionSyringeItem;
+import com.kmod.atrocities.item.SanguineCleaverItem;
 import com.kmod.atrocities.item.MaturedEmbryoItem;
 import com.kmod.atrocities.item.StasisCapsuleItem;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -52,13 +60,60 @@ public final class ModItems {
             ModRegistries.ITEMS.registerItem("matured_embryo", MaturedEmbryoItem::new,
                     new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant());
 
-    /** Espinho Quitinoso: projetil do Colosso Quitinoso. */
-    public static final DeferredItem<Item> CHITIN_SPINE =
-            ModRegistries.ITEMS.registerSimpleItem("chitin_spine", new Item.Properties());
+    /** Espinho Quitinoso: projetil do Colosso Quitinoso; tambem pode ser arremessado. */
+    public static final DeferredItem<BioThrowableItem> CHITIN_SPINE =
+            ModRegistries.ITEMS.registerItem("chitin_spine",
+                    props -> new BioThrowableItem(props, BioProjectile.Kind.SPINE, 12f, 2.2f, 12),
+                    new Item.Properties().stacksTo(16));
 
-    /** Bolota de Bile: projetil da Legiao Coalescida. */
-    public static final DeferredItem<Item> BILE_GLOB =
-            ModRegistries.ITEMS.registerSimpleItem("bile_glob", new Item.Properties());
+    /** Bolota de Bile: projetil da Legiao Coalescida; arremessada, vira nuvem toxica. Municao do Lanca-Bile. */
+    public static final DeferredItem<BioThrowableItem> BILE_GLOB =
+            ModRegistries.ITEMS.registerItem("bile_glob",
+                    props -> new BioThrowableItem(props, BioProjectile.Kind.BILE, 6f, 1.3f, 20),
+                    new Item.Properties().stacksTo(16));
+
+    // ------------------------------------------------------------------ loot dos chefes (Fase 5)
+
+    /** Coracao Aberrante: cai de todo chefe (mais quanto maior o tier). Comida poderosa e base das armas. */
+    public static final DeferredItem<Item> ABERRANT_HEART =
+            ModRegistries.ITEMS.registerSimpleItem("aberrant_heart", new Item.Properties()
+                    .rarity(Rarity.RARE).stacksTo(16)
+                    .food(new FoodProperties.Builder().nutrition(6).saturationModifier(1.2f).alwaysEdible()
+                            .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 2400, 3), 1f)
+                            .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 200, 1), 1f)
+                            .effect(() -> new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1200, 0), 1f)
+                            .effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 160, 0), 1f)
+                            .build()));
+
+    /** Placa de Carapaca: trofeu do Colosso Quitinoso. */
+    public static final DeferredItem<Item> COLOSSUS_CARAPACE =
+            ModRegistries.ITEMS.registerSimpleItem("colossus_carapace",
+                    new Item.Properties().rarity(Rarity.RARE).fireResistant());
+
+    /** Presa da Matriarca: trofeu da Matriarca Hemofaga. */
+    public static final DeferredItem<Item> MATRIARCH_FANG =
+            ModRegistries.ITEMS.registerSimpleItem("matriarch_fang",
+                    new Item.Properties().rarity(Rarity.RARE).fireResistant());
+
+    /** Nucleo da Legiao: trofeu da Legiao Coalescida. */
+    public static final DeferredItem<Item> LEGION_CORE =
+            ModRegistries.ITEMS.registerSimpleItem("legion_core",
+                    new Item.Properties().rarity(Rarity.RARE).fireResistant());
+
+    /** Marreta de Carapaca: arma pesada com Impacto Sismico. */
+    public static final DeferredItem<CarapaceMaulItem> CARAPACE_MAUL =
+            ModRegistries.ITEMS.registerItem("carapace_maul", CarapaceMaulItem::new,
+                    new Item.Properties().rarity(Rarity.EPIC).fireResistant());
+
+    /** Cutelo Sanguineo: arma rapida com roubo de vida. */
+    public static final DeferredItem<SanguineCleaverItem> SANGUINE_CLEAVER =
+            ModRegistries.ITEMS.registerItem("sanguine_cleaver", SanguineCleaverItem::new,
+                    new Item.Properties().rarity(Rarity.EPIC).fireResistant());
+
+    /** Lanca-Bile: dispara Bolotas de Bile. */
+    public static final DeferredItem<BileLauncherItem> BILE_LAUNCHER =
+            ModRegistries.ITEMS.registerItem("bile_launcher", BileLauncherItem::new,
+                    new Item.Properties().rarity(Rarity.EPIC).fireResistant().durability(640));
 
     public static ItemStack geneSample(GeneSample sample) {
         ItemStack stack = new ItemStack(GENE_SAMPLE.get());

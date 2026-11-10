@@ -16,6 +16,10 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.AreaEffectCloud;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -41,6 +45,14 @@ public class BioProjectile extends ThrowableItemProjectile {
 
     public BioProjectile(EntityType<? extends BioProjectile> type, Level level) {
         super(type, level);
+    }
+
+    /** Projetil disparado por um jogador (itens arremessaveis e o Lanca-Bile). */
+    public BioProjectile(Level level, LivingEntity owner, Kind kind, float damage, ItemStack display) {
+        super(ModEntities.BIO_PROJECTILE.get(), owner, level);
+        this.damage = damage;
+        entityData.set(DATA_KIND, kind.ordinal());
+        setItem(display.copyWithCount(1));
     }
 
     public BioProjectile(Level level, AtrocityBoss owner, Kind kind, float damage) {
@@ -77,8 +89,12 @@ public class BioProjectile extends ThrowableItemProjectile {
 
     @Override
     protected boolean canHitEntity(Entity target) {
-        return super.canHitEntity(target) && !(target instanceof AtrocityBoss)
-                && !target.getTags().contains(AtrocityBoss.MINION_TAG);
+        if (!super.canHitEntity(target)) {
+            return false;
+        }
+        // Projeteis de chefe nao acertam o proprio chefe nem as crias; os dos jogadores acertam tudo.
+        return !(getOwner() instanceof AtrocityBoss)
+                || (!(target instanceof AtrocityBoss) && !target.getTags().contains(AtrocityBoss.MINION_TAG));
     }
 
     @Override
@@ -107,8 +123,8 @@ public class BioProjectile extends ThrowableItemProjectile {
             return;
         }
         Entity owner = getOwner();
-        boolean hurt = target.hurt(owner instanceof LivingEntity living
-                ? damageSources().mobProjectile(this, living) : damageSources().thrown(this, owner), damage);
+        boolean hurt = target.hurt(owner instanceof AtrocityBoss boss
+                ? damageSources().mobProjectile(this, boss) : damageSources().thrown(this, owner), damage);
         if (hurt && owner instanceof AtrocityBoss boss) {
             boss.applyHitEffects(target);
         }
@@ -126,6 +142,8 @@ public class BioProjectile extends ThrowableItemProjectile {
             GeneticsFx.burst(level, ParticleTypes.ITEM_SLIME, at, 16, 0.4, 0.1);
             if (getOwner() instanceof AtrocityBoss boss) {
                 boss.sporeCloud(level, at, 2.5f, 80);
+            } else {
+                toxicCloud(level, at, getOwner() instanceof LivingEntity living ? living : null);
             }
             level.playSound(null, at.x, at.y, at.z, ModSounds.BOSS_BILE_SPLASH.get(), getSoundSource(), 1.4f,
                     0.8f + random.nextFloat() * 0.3f);
@@ -135,6 +153,21 @@ public class BioProjectile extends ThrowableItemProjectile {
                     0.9f + random.nextFloat() * 0.3f);
         }
         discard();
+    }
+
+    /** Nuvem de bile dos jogadores: mais fraca e curta que a dos chefes. */
+    public static void toxicCloud(ServerLevel level, Vec3 at, @javax.annotation.Nullable LivingEntity owner) {
+        AreaEffectCloud cloud = new AreaEffectCloud(level, at.x, at.y, at.z);
+        cloud.setOwner(owner);
+        cloud.setRadius(2.2f);
+        cloud.setRadiusOnUse(-0.3f);
+        cloud.setWaitTime(5);
+        cloud.setDuration(60);
+        cloud.setRadiusPerTick(-2.2f / 90f);
+        cloud.setParticle(GeneticsFx.dust(0x7FA02A, 1.2f));
+        cloud.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 1));
+        cloud.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 0));
+        level.addFreshEntity(cloud);
     }
 
     @Override
