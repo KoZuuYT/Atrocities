@@ -3,6 +3,7 @@ package com.kmod.atrocities.registry;
 import com.kmod.atrocities.genetics.EmbryoGenome;
 import com.kmod.atrocities.genetics.GeneSample;
 import com.kmod.atrocities.item.ExtractionSyringeItem;
+import com.kmod.atrocities.item.MaturedEmbryoItem;
 import com.kmod.atrocities.item.StasisCapsuleItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -46,10 +47,18 @@ public final class ModItems {
     public static final DeferredItem<Item> BIOMASS =
             ModRegistries.ITEMS.registerSimpleItem("biomass", new Item.Properties());
 
-    /** Embriao Maduro: saido da Incubadora, dormente, carrega o genoma final do chefe. */
-    public static final DeferredItem<Item> MATURED_EMBRYO =
-            ModRegistries.ITEMS.registerSimpleItem("matured_embryo",
+    /** Embriao Maduro: saido da Incubadora; usado no chao, desperta o chefe do seu genoma. */
+    public static final DeferredItem<MaturedEmbryoItem> MATURED_EMBRYO =
+            ModRegistries.ITEMS.registerItem("matured_embryo", MaturedEmbryoItem::new,
                     new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant());
+
+    /** Espinho Quitinoso: projetil do Colosso Quitinoso. */
+    public static final DeferredItem<Item> CHITIN_SPINE =
+            ModRegistries.ITEMS.registerSimpleItem("chitin_spine", new Item.Properties());
+
+    /** Bolota de Bile: projetil da Legiao Coalescida. */
+    public static final DeferredItem<Item> BILE_GLOB =
+            ModRegistries.ITEMS.registerSimpleItem("bile_glob", new Item.Properties());
 
     public static ItemStack geneSample(GeneSample sample) {
         ItemStack stack = new ItemStack(GENE_SAMPLE.get());

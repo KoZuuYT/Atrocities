@@ -23,6 +23,12 @@ public final class AtrocitiesConfig {
     public static final ModConfigSpec.DoubleValue BOSS_SOFT_CAP_THRESHOLD;
     /** Fracao do dano excedente que passa pelo soft cap (0.35 = 35%). */
     public static final ModConfigSpec.DoubleValue BOSS_SOFT_CAP_FACTOR;
+    /** Multiplicador da vida dos chefes. */
+    public static final ModConfigSpec.DoubleValue BOSS_HEALTH_MULTIPLIER;
+    /** Multiplicador do dano dos chefes. */
+    public static final ModConfigSpec.DoubleValue BOSS_DAMAGE_MULTIPLIER;
+    /** Anuncia no chat do servidor quando um chefe desperta ou morre. */
+    public static final ModConfigSpec.BooleanValue BOSS_BROADCAST;
 
     /** Desconecta, com aviso e link de download, quem entra sem o mod. */
     public static final ModConfigSpec.BooleanValue KICK_CLIENTS_WITHOUT_MOD;
@@ -45,6 +51,15 @@ public final class AtrocitiesConfig {
         BOSS_SOFT_CAP_FACTOR = COMMON
                 .comment("Fracao do excedente que passa. Ex.: limiar 30, fator 0.35 -> hit de 50 vira 37.")
                 .defineInRange("softCapFactor", 0.35D, 0.0D, 1.0D);
+        BOSS_HEALTH_MULTIPLIER = COMMON
+                .comment("Multiplica a vida de todos os chefes (base: Tier I 3.000, II 6.000, III 10.000, IV 15.000).")
+                .defineInRange("bossHealthMultiplier", 1.0D, 0.01D, 100.0D);
+        BOSS_DAMAGE_MULTIPLIER = COMMON
+                .comment("Multiplica o dano de todos os ataques dos chefes.")
+                .defineInRange("bossDamageMultiplier", 1.0D, 0.0D, 100.0D);
+        BOSS_BROADCAST = COMMON
+                .comment("Anuncia para todo o servidor quando um chefe desperta ou e abatido.")
+                .define("broadcastBossEvents", true);
         COMMON.pop();
 
         COMMON.comment("VersionGate: controle de versao entre servidor e clientes").push("versionGate");

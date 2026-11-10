@@ -1,5 +1,6 @@
 package com.kmod.atrocities;
 
+import com.kmod.atrocities.client.entity.EntitiesClient;
 import com.kmod.atrocities.client.genetics.GeneticsClient;
 import com.kmod.atrocities.client.machine.MachinesClient;
 import com.kmod.atrocities.client.versiongate.ClientVersionGate;
@@ -26,6 +27,7 @@ public class AtrocitiesClient {
         ClientVersionGate.register();
         GeneticsClient.register(modBus);
         MachinesClient.register(modBus);
+        EntitiesClient.register(modBus);
     }
 
     private static void onClientSetup(FMLClientSetupEvent event) {

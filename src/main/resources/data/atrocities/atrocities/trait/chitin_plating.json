@@ -5,5 +5,17 @@
   "color": "#8B7D3A",
   "incompatible": [
     "atrocities:void_strands"
+  ],
+  "boss_attributes": [
+    {
+      "attribute": "minecraft:generic.armor",
+      "per_level": 4.0,
+      "operation": "add_value"
+    },
+    {
+      "attribute": "minecraft:generic.armor_toughness",
+      "per_level": 2.0,
+      "operation": "add_value"
+    }
   ]
 }

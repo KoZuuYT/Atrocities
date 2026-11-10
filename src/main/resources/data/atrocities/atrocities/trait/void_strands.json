@@ -5,5 +5,12 @@
   "color": "#6A1B9A",
   "incompatible": [
     "atrocities:chitin_plating"
+  ],
+  "boss_attributes": [
+    {
+      "attribute": "minecraft:generic.movement_speed",
+      "per_level": 0.03,
+      "operation": "add_multiplied_base"
+    }
   ]
 }

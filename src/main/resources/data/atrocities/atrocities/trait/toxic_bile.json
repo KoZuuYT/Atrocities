@@ -2,5 +2,12 @@
   "category": "offense",
   "max_potency": 4,
   "instability": 4.0,
-  "color": "#6B8E23"
+  "color": "#6B8E23",
+  "boss_attributes": [
+    {
+      "attribute": "minecraft:generic.attack_damage",
+      "per_level": 0.04,
+      "operation": "add_multiplied_base"
+    }
+  ]
 }

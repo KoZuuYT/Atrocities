@@ -24,7 +24,7 @@ O mod precisa estar **no servidor e em todos os clientes**. Quem entrar sem ele 
 2. **Biomassa e refino:** triture carne no Extrator de Biomassa para alimentar as máquinas e purifique amostras na Centrífuga Genética.
 3. **Sequenciamento:** combine amostras para formar um Embrião Instável, que define arquétipo, traços e tier do chefe.
 4. **Incubação:** mantenha a Incubadora Biológica alimentada com biomassa enquanto o embrião cresce no vidro. Embriões instáveis podem mutar ou abortar.
-5. **Eclosão e combate:** liberte a aberração e enfrente-a.
+5. **Despertar e combate:** use o Embrião Maduro no chão e enfrente o chefe: Colosso Quitinoso, Matriarca Hemófaga ou Legião Coalescida, conforme o arquétipo. A 50% de vida ele entra em frenesi.
 
 ## Roadmap
 
@@ -33,7 +33,7 @@ O mod precisa estar **no servidor e em todos os clientes**. Quem entrar sem ele 
 | 1. Base, registros e VersionGate | 0.1.0 | ✅ |
 | 2. Sistema genético (Data Components, seringa, cápsula) | 0.2.0 | ✅ |
 | 3. Máquinas e incubação | 0.3.0 | ✅ |
-| 4. Entidades, IA e animações GeckoLib | 0.4.0 | ⏳ |
+| 4. Entidades, IA e animações GeckoLib | 0.4.0 | ✅ |
 | 5. Loot e balanceamento | 1.0.0 | ⏳ |
 
 Veja o [CHANGELOG](CHANGELOG.md) para o histórico completo.
@@ -43,7 +43,7 @@ Veja o [CHANGELOG](CHANGELOG.md) para o histórico completo.
 Espécies e traços são JSON e podem ser alterados ou ampliados por datapack, inclusive com criaturas de outros mods:
 
 - `data/<ns>/atrocities/species/<id>.json`: entidade, arquétipo (`chitinous`, `hemophage`, `coalesced`), cor, limites de vida para seringa e cápsula, pureza base e traços doados (peso e faixa de potência).
-- `data/<ns>/atrocities/trait/<id>.json`: categoria, potência máxima, instabilidade por nível, cor e traços incompatíveis.
+- `data/<ns>/atrocities/trait/<id>.json`: categoria, potência máxima, instabilidade por nível, cor, traços incompatíveis e `boss_attributes` (bônus de atributo do chefe por nível).
 
 - `data/<ns>/data_maps/item/biomass_yield.json`: quanto cada item rende no Extrator de Biomassa (100 = 1 Biomassa).
 
@@ -58,6 +58,9 @@ Exemplo: [`species/ravager.json`](src/main/resources/data/atrocities/atrocities/
 | `attributes.maxHealthCap` | 1000000 | Teto do atributo de vida máxima (vanilla = 1024) |
 | `bossCombat.softCapThreshold` | 30 | Dano por hit a partir do qual o soft cap atua |
 | `bossCombat.softCapFactor` | 0.35 | Fração do excedente que passa pelo soft cap |
+| `bossCombat.bossHealthMultiplier` | 1.0 | Multiplica a vida dos chefes |
+| `bossCombat.bossDamageMultiplier` | 1.0 | Multiplica o dano dos chefes |
+| `bossCombat.broadcastBossEvents` | true | Anuncia no servidor quando um chefe desperta ou morre |
 | `versionGate.kickClientsWithoutMod` | true | Desconecta quem não tem o mod, mostrando o link de download |
 | `versionGate.requireExactVersion` | false | Exige a mesma versão do servidor |
 | `versionGate.githubRepo` | KoZuuYT/Atrocities | Repositório usado nos links de download |
@@ -65,7 +68,7 @@ Exemplo: [`species/ravager.json`](src/main/resources/data/atrocities/atrocities/
 ## Compilar
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\build-and-export.ps1   # jar em libs/
+powershell -ExecutionPolicy Bypass -File .\build-and-export.ps1   # jar em libs/ (e no perfil do jogo, se houver local.properties)
 powershell -ExecutionPolicy Bypass -File .\release.ps1            # publica a Release no GitHub
 ```
 

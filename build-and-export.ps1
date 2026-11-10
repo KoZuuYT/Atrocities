@@ -36,3 +36,16 @@ if (-not (Test-Path $jar)) { throw "Jar nao encontrado: $jar" }
 New-Item -ItemType Directory -Force $exportDir | Out-Null
 Copy-Item $jar $exportDir -Force
 Write-Host "Exportado: $exportDir\$modId-$version.jar"
+
+# Atualiza o perfil local do jogo (opcional): local.properties -> instance_mods_dir=<pasta mods>
+# Remove versoes antigas do Atrocities dessa pasta e copia o jar novo.
+if (Test-Path 'local.properties') {
+    $modsDir = (Get-Content 'local.properties' -Encoding UTF8 | Where-Object { $_ -match '^instance_mods_dir=' }) -replace '^instance_mods_dir=', ''
+    if ($modsDir -and (Test-Path $modsDir)) {
+        Get-ChildItem $modsDir -Filter "$modId-*.jar" | Where-Object { $_.Name -match "^$modId-\d" } | Remove-Item -Force
+        Copy-Item $jar $modsDir -Force
+        Write-Host "Perfil atualizado: $modsDir\$modId-$version.jar"
+    } elseif ($modsDir) {
+        Write-Warning "instance_mods_dir nao existe: $modsDir"
+    }
+}

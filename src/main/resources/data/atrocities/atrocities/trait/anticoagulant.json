@@ -5,5 +5,12 @@
   "color": "#5C0A12",
   "incompatible": [
     "atrocities:regenerative_tissue"
+  ],
+  "boss_attributes": [
+    {
+      "attribute": "minecraft:generic.attack_damage",
+      "per_level": 0.04,
+      "operation": "add_multiplied_base"
+    }
   ]
 }

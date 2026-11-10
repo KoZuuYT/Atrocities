@@ -12,6 +12,7 @@ import com.kmod.atrocities.item.StasisCapsuleItem;
 import com.kmod.atrocities.machine.BiologicalIncubatorBlockEntity;
 import com.kmod.atrocities.machine.MachineBlock;
 import com.kmod.atrocities.machine.MachineKind;
+import com.kmod.atrocities.registry.ModEntities;
 import com.kmod.atrocities.registry.ModItems;
 import com.kmod.atrocities.registry.ModDataComponents;
 import java.util.ArrayList;
@@ -101,6 +102,8 @@ final class GeneticsTooltips {
     private static void describeGenome(EmbryoGenome genome, boolean matured, HolderLookup.Provider registries,
                                        boolean details, List<Component> lines) {
         lines.add(labeled("archetype", genome.archetype().displayName()));
+        lines.add(labeled("boss", ModEntities.bossFor(genome.archetype()).getDescription().copy()
+                .withColor(genome.archetype().color())));
         lines.add(labeled("tier", Component.literal(roman(genome.tier())).withColor(tierColor(genome.tier()))
                 .withStyle(ChatFormatting.BOLD)));
         int stabilityColor = stabilityColor(genome.stability());

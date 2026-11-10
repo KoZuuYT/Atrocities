@@ -5,5 +5,12 @@
   "color": "#9ACD32",
   "incompatible": [
     "atrocities:hive_mind"
+  ],
+  "boss_attributes": [
+    {
+      "attribute": "minecraft:generic.attack_damage",
+      "per_level": 0.06,
+      "operation": "add_multiplied_base"
+    }
   ]
 }

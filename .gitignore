@@ -42,3 +42,5 @@ repo/
 ### Atrocities ###
 # Jars exportados (publicados nas Releases do GitHub)
 libs/
+# Configuracao local da maquina (pasta mods do perfil do jogo)
+local.properties

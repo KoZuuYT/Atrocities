@@ -5,5 +5,12 @@
   "color": "#C2185B",
   "incompatible": [
     "atrocities:anticoagulant"
+  ],
+  "boss_attributes": [
+    {
+      "attribute": "minecraft:generic.max_health",
+      "per_level": 0.04,
+      "operation": "add_multiplied_base"
+    }
   ]
 }

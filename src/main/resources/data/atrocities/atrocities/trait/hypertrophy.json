@@ -2,5 +2,17 @@
   "category": "offense",
   "max_potency": 5,
   "instability": 4.0,
-  "color": "#B23A1E"
+  "color": "#B23A1E",
+  "boss_attributes": [
+    {
+      "attribute": "minecraft:generic.attack_damage",
+      "per_level": 0.08,
+      "operation": "add_multiplied_base"
+    },
+    {
+      "attribute": "minecraft:generic.max_health",
+      "per_level": 0.05,
+      "operation": "add_multiplied_base"
+    }
+  ]
 }

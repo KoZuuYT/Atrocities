@@ -6,6 +6,33 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 
 ## [Não lançado]
 
+## [0.4.0] - 2026-11-10 — Fase 4: Entidades, IA e GeckoLib
+
+### Adicionado
+- **Três chefes animados com GeckoLib**, um por arquétipo. Cada um tem modelo próprio, textura com partes que brilham no escuro e 11 animações (parado, andando, emergindo, morrendo, atordoado, rugido e um golpe por animação).
+  - **Colosso Quitinoso** (quitinoso): Esmagamento, Varredura, Investida, Saraivada de Espinhos e, na fase 2, Terremoto. Se a Investida bater numa parede, ele fica atordoado.
+  - **Matriarca Hemófaga** (hemófago): Dilacerar (cura com cada vítima), Bote, Jato de Sangue, Chamado da Ninhada e, na fase 2, Hemorragia, que drena todos ao redor e a deixa saciada (atordoada) depois.
+  - **Legião Coalescida** (coalescido): Engolfar, Explosão de Esporos, Atração, Brotamento (fica exposta depois), Morteiro de Bile e, na fase 2, Fissão em várias crias.
+- **Despertar**: o **Embrião Maduro**, usado no chão, faz o chefe do seu genoma emergir da terra em 3 segundos, invulnerável. Não funciona no Pacífico nem sem espaço livre.
+- **O genoma define o chefe**:
+  - Tier I a IV: vida de 3.000 / 6.000 / 10.000 / 15.000, dano base de 18 / 24 / 32 / 42 e tamanho de 85% a 125%.
+  - Os traços aplicam bônus de atributo vindos do novo campo `boss_attributes` dos JSONs de traço, ajustável por datapack.
+  - Os traços também têm efeitos próprios: veneno, sangramento, náusea, fogo, cegueira e aura de Escuridão nos golpes; regeneração; espinhos que devolvem dano; nuvens de esporos; crias periódicas; teletransporte; e explosão ao morrer.
+- **Combate de chefe**:
+  - Golpes com aviso antes do impacto e tempo de recarga.
+  - **Fase 2** a 50% de vida: rugido com onda de choque, mais velocidade, mais dano, golpes novos e tela escurecida.
+  - **Janelas de vulnerabilidade** (atordoado): o dano ignora o soft cap.
+  - Barra de chefe na cor do arquétipo com o tier, imunidade a queda, sufocamento, veneno e Wither, e crias da linhagem que não atacam o chefe.
+  - Animação de morte de 3,5 s, explosão de carne e anúncio no servidor quando o chefe desperta ou morre.
+- Projéteis orgânicos: Espinho Quitinoso e Bolota de Bile (vira nuvem tóxica).
+- Tooltip do embrião mostra qual chefe ele desperta.
+- 39 sons novos com legendas, traduções em `pt_br` e `en_us` e a tag `c:bosses`.
+- Configuração: `bossCombat.bossHealthMultiplier`, `bossCombat.bossDamageMultiplier` e `bossCombat.broadcastBossEvents`.
+- `build-and-export.ps1` também copia o jar para o perfil do jogo indicado em `local.properties` (`instance_mods_dir=...`, arquivo local fora do Git) e apaga as versões antigas do Atrocities de lá.
+
+### Alterado
+- Traços aceitam o campo opcional `boss_attributes`. Datapacks antigos continuam válidos.
+
 ## [0.3.0] - 2026-11-10 — Fase 3: Máquinas e Incubação
 
 ### Adicionado
@@ -91,7 +118,8 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 - Script `build-and-export.ps1`, que compila o mod e exporta o jar para `libs/`.
 - Script `release.ps1`, que compila, exporta e publica a Release no GitHub com as notas deste changelog.
 
-[Não lançado]: https://github.com/KoZuuYT/Atrocities/compare/v0.3.0...HEAD
+[Não lançado]: https://github.com/KoZuuYT/Atrocities/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/KoZuuYT/Atrocities/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/KoZuuYT/Atrocities/releases/tag/v0.1.0

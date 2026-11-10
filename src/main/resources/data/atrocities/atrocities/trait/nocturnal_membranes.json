@@ -2,5 +2,12 @@
   "category": "mobility",
   "max_potency": 3,
   "instability": 4.0,
-  "color": "#3F51B5"
+  "color": "#3F51B5",
+  "boss_attributes": [
+    {
+      "attribute": "minecraft:generic.movement_speed",
+      "per_level": 0.04,
+      "operation": "add_multiplied_base"
+    }
+  ]
 }

@@ -2,5 +2,12 @@
   "category": "defense",
   "max_potency": 4,
   "instability": 4.0,
-  "color": "#A0893E"
+  "color": "#A0893E",
+  "boss_attributes": [
+    {
+      "attribute": "minecraft:generic.armor",
+      "per_level": 2.0,
+      "operation": "add_value"
+    }
+  ]
 }

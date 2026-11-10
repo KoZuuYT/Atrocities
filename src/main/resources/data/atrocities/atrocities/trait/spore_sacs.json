@@ -2,5 +2,12 @@
   "category": "special",
   "max_potency": 4,
   "instability": 5.0,
-  "color": "#7C9A3B"
+  "color": "#7C9A3B",
+  "boss_attributes": [
+    {
+      "attribute": "minecraft:generic.max_health",
+      "per_level": 0.03,
+      "operation": "add_multiplied_base"
+    }
+  ]
 }

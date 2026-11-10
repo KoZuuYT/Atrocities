@@ -21,8 +21,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
  * <p>
  * As classes de conteudo ({@link ModItems}, {@link ModCreativeTabs}, ...) apenas declaram entradas
  * nestes registros; {@link #register(IEventBus)} liga tudo ao barramento do mod.
- * Os registros sem entradas ainda sao preenchidos nas fases seguintes:
- * entidades/particulas/efeitos (Fase 4).
+ * Particulas, efeitos e receitas customizadas ficam reservados para a Fase 5.
  */
 public final class ModRegistries {
 
@@ -63,6 +62,7 @@ public final class ModRegistries {
         ModItems.bootstrap();
         ModBlockEntities.bootstrap();
         ModMenus.bootstrap();
+        ModEntities.bootstrap();
         ModCreativeTabs.bootstrap();
 
         BLOCKS.register(modBus);
@@ -81,5 +81,6 @@ public final class ModRegistries {
 
         ModDataMaps.register(modBus);
         ModBlockEntities.registerCapabilities(modBus);
+        ModEntities.registerAttributes(modBus);
     }
 }

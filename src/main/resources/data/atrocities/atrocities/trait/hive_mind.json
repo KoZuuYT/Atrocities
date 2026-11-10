@@ -5,5 +5,12 @@
   "color": "#4E7D2B",
   "incompatible": [
     "atrocities:volatile_glands"
+  ],
+  "boss_attributes": [
+    {
+      "attribute": "minecraft:generic.max_health",
+      "per_level": 0.03,
+      "operation": "add_multiplied_base"
+    }
   ]
 }
