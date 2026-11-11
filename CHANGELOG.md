@@ -6,6 +6,31 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 
 ## [Não lançado]
 
+## [1.6.0] - 2026-11-11 — Fase 11: Novos Mutantes, Carapaça e Surtos
+
+### Adicionado
+- **Enderman Fendedor** (de endermen, 540 de vida): braços-lâmina, Golpe Fantasma pelas costas, Estilhaços da Fenda que teleportam quem acertam, Vórtice que suga e implode e, na Fúria, a Tempestade de Fendas.
+  - Desvia de 35% dos projéteis com um teleporte.
+  - Água (balde ou poção de água) o deixa atordoado.
+  - Relíquia: **Olho da Fenda**, que teleporta até onde você olha e causa dano ao chegar.
+- **Slime Devorador** (de slimes, 640 de vida): cubo de gelatina translúcido com núcleo brilhante. Tem Esmagada, Quicada Tripla, Cuspe Grudento, Divisão e **Engolir**, que prende um jogador.
+  - Para soltar a vítima, cause 8% da vida dele, e ele fica atordoado.
+  - Ao morrer, se desfaz em quatro slimes.
+  - Relíquia: **Gel Elástico**, um salto sem dano de queda com pancada no pouso.
+- **Bruxa Caldeirão** (de bruxas, 500 de vida): caldeirão de cobre nas costas. Tem Concha, Saraivada de Poções, Nuvem Fervente, Feitiço de levitação e, na Fúria, Transbordar (chuva de poções nas marcas).
+  - Abaixo de 70% da vida, bebe um elixir que cura. Interrompa com 8% da vida dela em dano.
+  - Relíquia: **Caldeirão de Bolso**, um elixir com dois efeitos bons aleatórios.
+- **Carapaça Mutante:** armadura de Escamas Mutantes sobre uma base de diamante. Tem defesa de diamante, firmeza 3 e é imbuível.
+  - Bônus do conjunto: -20% de dano de mutantes e Aberrações, e imunidade a veneno e náusea.
+- **Escama Mutante:** todo mutante solta de 2 a 4 (Alfas soltam mais).
+- **Surtos mutagênicos:** às vezes, no começo da noite, um foco de soro aparece perto de um jogador. Vêm três ondas de mobs infectados (brilhando, mais fortes e rápidos) e, por fim, nasce um mutante, com 25% de chance de ser Alfa.
+  - Derrotar o mutante contém o surto e deixa Escamas e soros extras.
+  - Uma barra de surto mostra a onda atual.
+  - Se todos se afastarem por um minuto, o surto se dissipa.
+- Comandos `/atrocities outbreak start [jogador] [tipo]` e `/atrocities outbreak stop`.
+- Configuração `outbreaks.enabled` e `outbreaks.nightlyChance` (padrão 0,2).
+- Códex: fichas dos três mutantes e as entradas **Surtos mutagênicos** e **Carapaça Mutante**.
+
 ## [1.5.0] - 2026-11-11 — Fase 10: Imbuição Genética
 
 ### Adicionado

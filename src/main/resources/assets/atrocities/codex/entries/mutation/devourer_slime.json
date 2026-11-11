@@ -1,0 +1,87 @@
+{
+  "chapter": "atrocities:mutation",
+  "order": 9,
+  "icon": "atrocities:elastic_gel",
+  "title": "entity.atrocities.devourer_slime",
+  "unlock": {
+    "type": "encounter",
+    "target": "atrocities:devourer_slime"
+  },
+  "boss": {
+    "entity": "atrocities:devourer_slime",
+    "epithet": "codex.atrocities.mutant.devourer_slime.epithet",
+    "color": "#2EE6A8",
+    "view_scale": 0.8,
+    "lore": [
+      "codex.atrocities.mutant.devourer_slime.lore1",
+      "codex.atrocities.mutant.devourer_slime.lore2"
+    ],
+    "dissection": "codex.atrocities.mutant.devourer_slime.dissection",
+    "phases": [
+      {
+        "name": "codex.atrocities.mutant.devourer_slime.phase1",
+        "description": "codex.atrocities.mutant.devourer_slime.phase1.desc"
+      },
+      {
+        "name": "codex.atrocities.mutant.devourer_slime.phase2",
+        "description": "codex.atrocities.mutant.devourer_slime.phase2.desc"
+      }
+    ],
+    "attacks": [
+      {
+        "name": "codex.atrocities.mutant.devourer_slime.attack.slam",
+        "description": "codex.atrocities.mutant.devourer_slime.attack.slam.desc",
+        "animation": "slam",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.devourer_slime.attack.bounce",
+        "description": "codex.atrocities.mutant.devourer_slime.attack.bounce.desc",
+        "animation": "bounce",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.devourer_slime.attack.spit",
+        "description": "codex.atrocities.mutant.devourer_slime.attack.spit.desc",
+        "animation": "spit",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.devourer_slime.attack.engulf",
+        "description": "codex.atrocities.mutant.devourer_slime.attack.engulf.desc",
+        "animation": "engulf",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.devourer_slime.attack.split",
+        "description": "codex.atrocities.mutant.devourer_slime.attack.split.desc",
+        "animation": "split",
+        "phase": 1
+      }
+    ],
+    "drops": [
+      {
+        "item": "atrocities:elastic_gel",
+        "amount": "1",
+        "note": "codex.atrocities.drop.relic"
+      },
+      {
+        "item": "atrocities:biomass",
+        "amount": "4–8"
+      },
+      {
+        "item": "atrocities:mutant_scale",
+        "amount": "2–4"
+      },
+      {
+        "item": "atrocities:mutagen_serum",
+        "amount": "0–1"
+      },
+      {
+        "item": "atrocities:aberrant_heart",
+        "amount": "1",
+        "note": "codex.atrocities.drop.alpha"
+      }
+    ]
+  }
+}

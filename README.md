@@ -1,7 +1,7 @@
 # ☣ Atrocities
 
 **Mutantes de bioengenharia para Minecraft 1.21.1 (NeoForge).**
-Injete Soro Mutagênico em zumbis, esqueletos, creepers, aranhas e phantoms e veja cada um virar um mutante gigante, cheio de golpes animados. No fim de jogo, incube embriões e desperte as Aberrações Primordiais.
+Injete Soro Mutagênico em zumbis, esqueletos, creepers, aranhas, phantoms, endermen, slimes e bruxas e veja cada um virar um mutante gigante, cheio de golpes animados. No fim de jogo, incube embriões e desperte as Aberrações Primordiais.
 
 Feito para servidores PvP/Guerra com armamento pesado (~50 de dano por hit): mutantes e chefes com centenas a milhares de HP, ataques telegrafados e relíquias que valem o risco.
 
@@ -32,9 +32,23 @@ O mod precisa estar **no servidor e em todos os clientes**. Quem entrar sem ele 
 | Creeper | Creeper Detonador | 520 | Núcleo Detonador |
 | Aranha, aranha-das-cavernas | Aranha Tecelã | 600 | Glândula Tecelã |
 | Phantom | Arraia-Fantasma | 480 | Membrana Etérea |
+| Enderman | Enderman Fendedor | 540 | Olho da Fenda |
+| Slime | Slime Devorador | 640 | Gel Elástico |
+| Bruxa | Bruxa Caldeirão | 500 | Caldeirão de Bolso |
 
 Todo mutante entra em **Fúria** na metade da vida. Alfas têm +50% de vida e +30% de dano.
 Operadores podem usar `/atrocities mutate <alvos> [volátil]`.
+
+Cada mutante tem uma mecânica para virar a luta. O Enderman Fendedor fica atordoado com água. Quem for engolido pelo Slime Devorador sai quando os outros causam 8% da vida dele. A Bruxa Caldeirão para de beber o elixir se levar dano suficiente.
+
+### Carapaça Mutante
+
+Todo mutante solta **Escamas Mutantes**. Escamas em volta de uma peça de diamante viram a Carapaça Mutante. O conjunto completo dá 20% menos dano de mutantes e Aberrações, e imunidade a veneno e náusea.
+
+### Surtos mutagênicos
+
+Às vezes, no começo da noite, um surto começa perto de um jogador. Primeiro vêm três ondas de mobs infectados. Depois, o foco entra em metamorfose e nasce um mutante (25% de chance de Alfa). Vencê-lo dá Escamas e soros extras.
+Operadores podem usar `/atrocities outbreak start [jogador] [tipo]` e `/atrocities outbreak stop`.
 
 ## Imbuição genética
 
@@ -82,7 +96,7 @@ O conteúdo vem de resource packs: `assets/<ns>/codex/chapters/*.json` e `assets
 | 8. Códex Atrocitas: livro-guia ilustrado com páginas secretas dos chefes | 1.3.0 | ✅ |
 | 9. Mutantes: soros, mutação em estágios, cinco mutantes e relíquias | 1.4.0 | ✅ |
 | 10. Imbuição genética de armas: terminal, tanques e traços evoluíveis | 1.5.0 | ✅ |
-| 11. Mais mutantes (Enderman, Slime, Bruxa...), armaduras mutantes e surtos | 1.6.0 | ⏳ |
+| 11. Mais mutantes (Enderman, Slime, Bruxa), Carapaça Mutante e surtos | 1.6.0 | ✅ |
 
 Veja o [CHANGELOG](CHANGELOG.md) para o histórico completo.
 
@@ -117,6 +131,8 @@ Exemplo: [`species/ravager.json`](src/main/resources/data/atrocities/atrocities/
 | `bossCombat.bossDamageMultiplier` | 1.0 | Multiplica o dano dos chefes |
 | `bossCombat.broadcastBossEvents` | true | Anuncia no servidor quando um chefe desperta ou morre |
 | `codex.giveOnFirstJoin` | true | Entrega o Códex Atrocitas na primeira entrada de cada jogador |
+| `outbreaks.enabled` | true | Liga os surtos mutagênicos noturnos |
+| `outbreaks.nightlyChance` | 0.2 | Chance de um surto por noite |
 | `versionGate.kickClientsWithoutMod` | true | Desconecta quem não tem o mod, mostrando o link de download |
 | `versionGate.requireExactVersion` | false | Exige a mesma versão do servidor |
 | `versionGate.githubRepo` | KoZuuYT/Atrocities | Repositório usado nos links de download |

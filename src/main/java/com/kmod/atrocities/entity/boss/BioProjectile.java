@@ -40,7 +40,7 @@ import org.jetbrains.annotations.Nullable;
 public class BioProjectile extends ThrowableItemProjectile {
 
     public enum Kind {
-        SPINE, BILE, WEB, BLAST, ORB, SERUM, SERUM_VOLATILE;
+        SPINE, BILE, WEB, BLAST, ORB, SERUM, SERUM_VOLATILE, SHARD, GOO;
 
         public boolean isSerum() {
             return this == SERUM || this == SERUM_VOLATILE;
@@ -82,6 +82,8 @@ public class BioProjectile extends ThrowableItemProjectile {
             case ORB -> ModItems.ETHER_ORB.get();
             case SERUM -> ModItems.MUTAGEN_SERUM.get();
             case SERUM_VOLATILE -> ModItems.VOLATILE_SERUM.get();
+            case SHARD -> ModItems.RIFT_SHARD.get();
+            case GOO -> ModItems.GOO_GLOB.get();
         };
     }
 
@@ -113,6 +115,7 @@ public class BioProjectile extends ThrowableItemProjectile {
             case SPINE -> 0.008;
             case ORB -> 0.0;
             case WEB -> 0.02;
+            case SHARD -> 0.01;
             default -> 0.05;
         };
     }
@@ -152,6 +155,12 @@ public class BioProjectile extends ThrowableItemProjectile {
                             -motion.z * 0.1);
                     level().addParticle(GeneticsFx.dust(0x5AF0FF, 1.6f), getX(), getY(), getZ(), 0, 0, 0);
                 }
+                case SHARD -> {
+                    level().addParticle(ParticleTypes.PORTAL, getX(), getY(), getZ(), -motion.x * 0.2, -motion.y * 0.2,
+                            -motion.z * 0.2);
+                    level().addParticle(GeneticsFx.dust(0xFF4FD8, 1.2f), getX(), getY(), getZ(), 0, 0, 0);
+                }
+                case GOO -> level().addParticle(ParticleTypes.ITEM_SLIME, getX(), getY(), getZ(), 0, 0, 0);
                 case SERUM -> level().addParticle(GeneticsFx.dust(0x8CFF4F, 0.9f), getX(), getY(), getZ(), 0, 0, 0);
                 case SERUM_VOLATILE -> level().addParticle(GeneticsFx.dust(0xFF7A2E, 0.9f), getX(), getY(), getZ(), 0, 0, 0);
                 default -> level().addParticle(ParticleTypes.CRIT, getX() - motion.x * 0.5, getY() - motion.y * 0.5,
@@ -196,10 +205,25 @@ public class BioProjectile extends ThrowableItemProjectile {
             target.setDeltaMovement(target.getDeltaMovement().multiply(0.1, 0.5, 0.1));
             target.hurtMarked = true;
         }
+        if (kind() == Kind.GOO) {
+            target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 2), owner);
+        }
         boolean hurt = target.hurt(owner instanceof AtrocityBoss boss
                 ? damageSources().mobProjectile(this, boss) : damageSources().thrown(this, owner), damage);
         if (hurt && owner instanceof AtrocityBoss boss) {
             boss.applyHitEffects(target);
+        }
+        if (hurt && kind() == Kind.SHARD && !(target instanceof AtrocityBoss)) {
+            // O estilhaco abre uma fenda: quem e atingido some e reaparece perto dali.
+            Vec3 from = target.position();
+            for (int attempt = 0; attempt < 16; attempt++) {
+                double x = from.x + (random.nextDouble() - 0.5) * 10;
+                double y = from.y + random.nextInt(5) - 2;
+                double z = from.z + (random.nextDouble() - 0.5) * 10;
+                if (target.randomTeleport(x, y, z, true)) {
+                    break;
+                }
+            }
         }
     }
 
@@ -228,6 +252,15 @@ public class BioProjectile extends ThrowableItemProjectile {
             GeneticsFx.burst(level, ParticleTypes.END_ROD, at, 16, 0.2, 0.15);
             GeneticsFx.burst(level, GeneticsFx.dust(0x5AF0FF, 2f), at, 20, 0.4, 0.05);
             level.playSound(null, at.x, at.y, at.z, ModSounds.BOSS_SPINE_IMPACT.get(), getSoundSource(), 1f, 1.6f);
+        } else if (kind() == Kind.SHARD) {
+            GeneticsFx.burst(level, ParticleTypes.REVERSE_PORTAL, at, 30, 0.3, 0.3);
+            GeneticsFx.burst(level, GeneticsFx.dust(0xFF4FD8, 1.6f), at, 16, 0.3, 0.05);
+            level.playSound(null, at.x, at.y, at.z, ModSounds.RIFT_BLINK.get(), getSoundSource(), 0.8f, 1.6f);
+        } else if (kind() == Kind.GOO) {
+            GeneticsFx.burst(level, ParticleTypes.ITEM_SLIME, at, 30, 0.5, 0.15);
+            com.kmod.atrocities.entity.mutant.DevourerSlimeEntity.gooPuddle(level,
+                    getOwner() instanceof LivingEntity living ? living : null, at, 2.0f, 70);
+            level.playSound(null, at.x, at.y, at.z, ModSounds.SLIME_SQUISH.get(), getSoundSource(), 1.4f, 1.0f);
         } else if (kind() == Kind.BILE) {
             GeneticsFx.burst(level, GeneticsFx.dust(0x7FA02A, 2f), at, 30, 0.6, 0.05);
             GeneticsFx.burst(level, ParticleTypes.ITEM_SLIME, at, 16, 0.4, 0.1);

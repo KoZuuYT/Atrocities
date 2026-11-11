@@ -1,0 +1,87 @@
+{
+  "chapter": "atrocities:mutation",
+  "order": 8,
+  "icon": "atrocities:rift_eye",
+  "title": "entity.atrocities.rift_enderman",
+  "unlock": {
+    "type": "encounter",
+    "target": "atrocities:rift_enderman"
+  },
+  "boss": {
+    "entity": "atrocities:rift_enderman",
+    "epithet": "codex.atrocities.mutant.rift_enderman.epithet",
+    "color": "#FF4FD8",
+    "view_scale": 1.0,
+    "lore": [
+      "codex.atrocities.mutant.rift_enderman.lore1",
+      "codex.atrocities.mutant.rift_enderman.lore2"
+    ],
+    "dissection": "codex.atrocities.mutant.rift_enderman.dissection",
+    "phases": [
+      {
+        "name": "codex.atrocities.mutant.rift_enderman.phase1",
+        "description": "codex.atrocities.mutant.rift_enderman.phase1.desc"
+      },
+      {
+        "name": "codex.atrocities.mutant.rift_enderman.phase2",
+        "description": "codex.atrocities.mutant.rift_enderman.phase2.desc"
+      }
+    ],
+    "attacks": [
+      {
+        "name": "codex.atrocities.mutant.rift_enderman.attack.claw",
+        "description": "codex.atrocities.mutant.rift_enderman.attack.claw.desc",
+        "animation": "claw",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.rift_enderman.attack.blink_strike",
+        "description": "codex.atrocities.mutant.rift_enderman.attack.blink_strike.desc",
+        "animation": "blink_strike",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.rift_enderman.attack.shards",
+        "description": "codex.atrocities.mutant.rift_enderman.attack.shards.desc",
+        "animation": "shards",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.rift_enderman.attack.vortex",
+        "description": "codex.atrocities.mutant.rift_enderman.attack.vortex.desc",
+        "animation": "vortex",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.rift_enderman.attack.rift_storm",
+        "description": "codex.atrocities.mutant.rift_enderman.attack.rift_storm.desc",
+        "animation": "rift_storm",
+        "phase": 2
+      }
+    ],
+    "drops": [
+      {
+        "item": "atrocities:rift_eye",
+        "amount": "1",
+        "note": "codex.atrocities.drop.relic"
+      },
+      {
+        "item": "atrocities:biomass",
+        "amount": "4–8"
+      },
+      {
+        "item": "atrocities:mutant_scale",
+        "amount": "2–4"
+      },
+      {
+        "item": "atrocities:mutagen_serum",
+        "amount": "0–1"
+      },
+      {
+        "item": "atrocities:aberrant_heart",
+        "amount": "1",
+        "note": "codex.atrocities.drop.alpha"
+      }
+    ]
+  }
+}

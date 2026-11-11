@@ -33,6 +33,9 @@ public final class AtrocitiesConfig {
     /** Entrega o Codex Atrocitas a quem entra no mundo pela primeira vez. */
     public static final ModConfigSpec.BooleanValue GIVE_CODEX_ON_JOIN;
 
+    public static final ModConfigSpec.BooleanValue OUTBREAKS_ENABLED;
+    public static final ModConfigSpec.DoubleValue OUTBREAK_CHANCE;
+
     /** Desconecta, com aviso e link de download, quem entra sem o mod. */
     public static final ModConfigSpec.BooleanValue KICK_CLIENTS_WITHOUT_MOD;
     /** Exige que o cliente use exatamente a mesma versao do servidor. */
@@ -69,6 +72,15 @@ public final class AtrocitiesConfig {
         GIVE_CODEX_ON_JOIN = COMMON
                 .comment("Entrega o Codex Atrocitas a cada jogador na primeira vez que ele entra no mundo.")
                 .define("giveOnFirstJoin", true);
+        COMMON.pop();
+
+        COMMON.comment("Surtos mutagenicos: ondas de mobs infectados que terminam num mutante").push("outbreaks");
+        OUTBREAKS_ENABLED = COMMON
+                .comment("Liga os surtos noturnos.")
+                .define("enabled", true);
+        OUTBREAK_CHANCE = COMMON
+                .comment("Chance de um surto comecar perto de um jogador a cada noite (0 a 1).")
+                .defineInRange("nightlyChance", 0.2D, 0.0D, 1.0D);
         COMMON.pop();
 
         COMMON.comment("VersionGate: controle de versao entre servidor e clientes").push("versionGate");

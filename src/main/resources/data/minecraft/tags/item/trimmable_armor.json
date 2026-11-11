@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "atrocities:mutant_helmet",
+    "atrocities:mutant_chestplate",
+    "atrocities:mutant_leggings",
+    "atrocities:mutant_boots"
+  ]
+}

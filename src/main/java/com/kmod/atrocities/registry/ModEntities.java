@@ -100,6 +100,30 @@ public final class ModEntities {
                     .clientTrackingRange(12)
                     .build("phantom_ray"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<com.kmod.atrocities.entity.mutant.RiftEndermanEntity>> RIFT_ENDERMAN =
+            ModRegistries.ENTITY_TYPES.register("rift_enderman", () -> EntityType.Builder
+                    .of(com.kmod.atrocities.entity.mutant.RiftEndermanEntity::new, MobCategory.MONSTER)
+                    .sized(1.2f, 4.2f)
+                    .eyeHeight(3.7f)
+                    .clientTrackingRange(12)
+                    .build("rift_enderman"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<com.kmod.atrocities.entity.mutant.DevourerSlimeEntity>> DEVOURER_SLIME =
+            ModRegistries.ENTITY_TYPES.register("devourer_slime", () -> EntityType.Builder
+                    .of(com.kmod.atrocities.entity.mutant.DevourerSlimeEntity::new, MobCategory.MONSTER)
+                    .sized(3.2f, 3.0f)
+                    .eyeHeight(2.0f)
+                    .clientTrackingRange(12)
+                    .build("devourer_slime"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<com.kmod.atrocities.entity.mutant.CauldronWitchEntity>> CAULDRON_WITCH =
+            ModRegistries.ENTITY_TYPES.register("cauldron_witch", () -> EntityType.Builder
+                    .of(com.kmod.atrocities.entity.mutant.CauldronWitchEntity::new, MobCategory.MONSTER)
+                    .sized(1.6f, 3.4f)
+                    .eyeHeight(2.9f)
+                    .clientTrackingRange(12)
+                    .build("cauldron_witch"));
+
     /** Chefe que nasce de um embriao do arquetipo dado. */
     public static EntityType<? extends AtrocityBoss> bossFor(Archetype archetype) {
         return switch (archetype) {
@@ -120,6 +144,9 @@ public final class ModEntities {
             event.put(CREEPER_DETONATOR.get(), com.kmod.atrocities.entity.mutant.CreeperDetonatorEntity.createAttributes().build());
             event.put(WEAVER_SPIDER.get(), com.kmod.atrocities.entity.mutant.WeaverSpiderEntity.createAttributes().build());
             event.put(PHANTOM_RAY.get(), com.kmod.atrocities.entity.mutant.PhantomRayEntity.createAttributes().build());
+            event.put(RIFT_ENDERMAN.get(), com.kmod.atrocities.entity.mutant.RiftEndermanEntity.createAttributes().build());
+            event.put(DEVOURER_SLIME.get(), com.kmod.atrocities.entity.mutant.DevourerSlimeEntity.createAttributes().build());
+            event.put(CAULDRON_WITCH.get(), com.kmod.atrocities.entity.mutant.CauldronWitchEntity.createAttributes().build());
         });
     }
 

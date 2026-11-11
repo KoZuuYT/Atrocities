@@ -119,6 +119,21 @@ public final class ModSounds {
     public static final com.kmod.atrocities.entity.mutant.MutantSounds WEAVER_SPIDER = voices("weaver_spider");
     public static final com.kmod.atrocities.entity.mutant.MutantSounds PHANTOM_RAY = voices("phantom_ray");
 
+    // ------------------------------------------------------------------ Fase 11
+    public static final DeferredHolder<SoundEvent, SoundEvent> RIFT_BLINK = register("entity.rift_enderman.blink");
+    public static final DeferredHolder<SoundEvent, SoundEvent> RIFT_VORTEX = register("entity.rift_enderman.vortex");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SLIME_SQUISH = register("entity.devourer_slime.squish");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SLIME_ENGULF = register("entity.devourer_slime.engulf");
+    public static final DeferredHolder<SoundEvent, SoundEvent> WITCH_BREW = register("entity.cauldron_witch.brew");
+    public static final DeferredHolder<SoundEvent, SoundEvent> WITCH_DRINK = register("entity.cauldron_witch.drink");
+    public static final DeferredHolder<SoundEvent, SoundEvent> WITCH_THROW = register("entity.cauldron_witch.throw");
+    public static final DeferredHolder<SoundEvent, SoundEvent> OUTBREAK_START = register("event.outbreak.start");
+    public static final DeferredHolder<SoundEvent, SoundEvent> OUTBREAK_WAVE = register("event.outbreak.wave");
+    public static final DeferredHolder<SoundEvent, SoundEvent> OUTBREAK_CLEARED = register("event.outbreak.cleared");
+    public static final com.kmod.atrocities.entity.mutant.MutantSounds RIFT_ENDERMAN = voices("rift_enderman");
+    public static final com.kmod.atrocities.entity.mutant.MutantSounds DEVOURER_SLIME = voices("devourer_slime");
+    public static final com.kmod.atrocities.entity.mutant.MutantSounds CAULDRON_WITCH = voices("cauldron_witch");
+
     private static com.kmod.atrocities.entity.mutant.MutantSounds voices(String mob) {
         return new com.kmod.atrocities.entity.mutant.MutantSounds(register("entity." + mob + ".ambient"),
                 register("entity." + mob + ".hurt"), register("entity." + mob + ".death"), register("entity." + mob + ".roar"));

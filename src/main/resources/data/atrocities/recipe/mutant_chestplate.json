@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "SDS",
+    "SSS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "atrocities:mutant_scale"
+    },
+    "D": {
+      "item": "minecraft:diamond_chestplate"
+    }
+  },
+  "result": {
+    "id": "atrocities:mutant_chestplate",
+    "count": 1
+  }
+}

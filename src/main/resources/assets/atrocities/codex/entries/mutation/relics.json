@@ -15,12 +15,19 @@
         "atrocities:ballista_bow",
         "atrocities:detonator_core",
         "atrocities:weaver_gland",
-        "atrocities:ethereal_membrane"
+        "atrocities:ethereal_membrane",
+        "atrocities:rift_eye",
+        "atrocities:elastic_gel",
+        "atrocities:pocket_cauldron"
       ]
     },
     {
       "type": "text",
       "text": "codex.atrocities.entry.relics.p2"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.relics.p3"
     }
   ]
 }

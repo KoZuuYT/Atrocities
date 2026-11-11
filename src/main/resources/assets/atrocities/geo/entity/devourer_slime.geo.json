@@ -1,0 +1,244 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.atrocities.devourer_slime",
+    "texture_width": 256,
+    "texture_height": 256,
+    "visible_bounds_width": 11,
+    "visible_bounds_height": 5,
+    "visible_bounds_offset": [
+     0,
+     1.4375,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "root",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "body",
+     "pivot": [
+      0,
+      0,
+      0
+     ],
+     "parent": "root",
+     "cubes": [
+      {
+       "origin": [
+        -24,
+        0,
+        -24
+       ],
+       "size": [
+        48,
+        46,
+        48
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "core",
+     "pivot": [
+      0,
+      22,
+      0
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -8,
+        14,
+        -8
+       ],
+       "size": [
+        16,
+        16,
+        16
+       ],
+       "uv": [
+        192,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "face",
+     "pivot": [
+      0,
+      26,
+      -20
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -13,
+        27,
+        -23
+       ],
+       "size": [
+        6,
+        7,
+        2
+       ],
+       "uv": [
+        32,
+        94
+       ]
+      },
+      {
+       "origin": [
+        7,
+        27,
+        -23
+       ],
+       "size": [
+        6,
+        7,
+        2
+       ],
+       "uv": [
+        48,
+        94
+       ]
+      }
+     ]
+    },
+    {
+     "name": "mouth",
+     "pivot": [
+      0,
+      20,
+      -20
+     ],
+     "parent": "face",
+     "cubes": [
+      {
+       "origin": [
+        -6,
+        17,
+        -23
+       ],
+       "size": [
+        12,
+        4,
+        2
+       ],
+       "uv": [
+        80,
+        94
+       ]
+      }
+     ]
+    },
+    {
+     "name": "debris",
+     "pivot": [
+      0,
+      10,
+      0
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -18,
+        6,
+        8
+       ],
+       "size": [
+        6,
+        5,
+        6
+       ],
+       "uv": [
+        8,
+        94
+       ]
+      },
+      {
+       "origin": [
+        10,
+        34,
+        10
+       ],
+       "size": [
+        4,
+        4,
+        4
+       ],
+       "uv": [
+        64,
+        94
+       ]
+      },
+      {
+       "origin": [
+        12,
+        8,
+        -6
+       ],
+       "size": [
+        2,
+        10,
+        2
+       ],
+       "uv": [
+        0,
+        94
+       ]
+      },
+      {
+       "origin": [
+        -16,
+        30,
+        -4
+       ],
+       "size": [
+        3,
+        3,
+        3
+       ],
+       "uv": [
+        108,
+        94
+       ]
+      },
+      {
+       "origin": [
+        14,
+        22,
+        14
+       ],
+       "size": [
+        3,
+        3,
+        3
+       ],
+       "uv": [
+        120,
+        94
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

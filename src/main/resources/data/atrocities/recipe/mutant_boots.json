@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "S S",
+    "SDS"
+  ],
+  "key": {
+    "S": {
+      "item": "atrocities:mutant_scale"
+    },
+    "D": {
+      "item": "minecraft:diamond_boots"
+    }
+  },
+  "result": {
+    "id": "atrocities:mutant_boots",
+    "count": 1
+  }
+}

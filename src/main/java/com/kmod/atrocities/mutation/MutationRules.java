@@ -62,6 +62,11 @@ public final class MutationRules extends SimpleJsonResourceReloadListener {
         Atrocities.LOGGER.info("Carregadas {} regras de mutacao ({} mobs mutaveis)", files.size(), map.size());
     }
 
+    /** Todas as regras carregadas (sem repeticao). */
+    public static java.util.List<Rule> all() {
+        return INSTANCE.bySource.values().stream().distinct().toList();
+    }
+
     public static Optional<Rule> forSource(EntityType<?> type) {
         return Optional.ofNullable(INSTANCE.bySource.get(type));
     }

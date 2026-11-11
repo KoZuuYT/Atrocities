@@ -41,6 +41,22 @@ public final class EntitiesClient {
                     context -> new BossRenderer<>(context, "weaver_spider", 1.4f));
             event.registerEntityRenderer(ModEntities.PHANTOM_RAY.get(),
                     context -> new BossRenderer<>(context, "phantom_ray", 1.8f));
+            event.registerEntityRenderer(ModEntities.RIFT_ENDERMAN.get(),
+                    context -> new BossRenderer<>(context, "rift_enderman", 0.6f));
+            event.registerEntityRenderer(ModEntities.DEVOURER_SLIME.get(),
+                    context -> new BossRenderer<>(context, "devourer_slime", 1.6f) {
+                        // Corpo de gelatina: translucido para o nucleo e os restos aparecerem por dentro.
+                        @Override
+                        public net.minecraft.client.renderer.RenderType getRenderType(
+                                com.kmod.atrocities.entity.mutant.DevourerSlimeEntity animatable,
+                                net.minecraft.resources.ResourceLocation texture,
+                                @org.jetbrains.annotations.Nullable net.minecraft.client.renderer.MultiBufferSource bufferSource,
+                                float partialTick) {
+                            return net.minecraft.client.renderer.RenderType.entityTranslucent(texture);
+                        }
+                    });
+            event.registerEntityRenderer(ModEntities.CAULDRON_WITCH.get(),
+                    context -> new BossRenderer<>(context, "cauldron_witch", 0.8f));
             event.registerEntityRenderer(ModEntities.BIO_PROJECTILE.get(),
                     context -> new ThrownItemRenderer<>(context, 1.4f, true));
         });

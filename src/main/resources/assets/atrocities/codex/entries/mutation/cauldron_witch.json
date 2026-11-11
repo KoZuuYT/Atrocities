@@ -1,0 +1,93 @@
+{
+  "chapter": "atrocities:mutation",
+  "order": 10,
+  "icon": "atrocities:pocket_cauldron",
+  "title": "entity.atrocities.cauldron_witch",
+  "unlock": {
+    "type": "encounter",
+    "target": "atrocities:cauldron_witch"
+  },
+  "boss": {
+    "entity": "atrocities:cauldron_witch",
+    "epithet": "codex.atrocities.mutant.cauldron_witch.epithet",
+    "color": "#FFA530",
+    "view_scale": 1.0,
+    "lore": [
+      "codex.atrocities.mutant.cauldron_witch.lore1",
+      "codex.atrocities.mutant.cauldron_witch.lore2"
+    ],
+    "dissection": "codex.atrocities.mutant.cauldron_witch.dissection",
+    "phases": [
+      {
+        "name": "codex.atrocities.mutant.cauldron_witch.phase1",
+        "description": "codex.atrocities.mutant.cauldron_witch.phase1.desc"
+      },
+      {
+        "name": "codex.atrocities.mutant.cauldron_witch.phase2",
+        "description": "codex.atrocities.mutant.cauldron_witch.phase2.desc"
+      }
+    ],
+    "attacks": [
+      {
+        "name": "codex.atrocities.mutant.cauldron_witch.attack.ladle",
+        "description": "codex.atrocities.mutant.cauldron_witch.attack.ladle.desc",
+        "animation": "ladle",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.cauldron_witch.attack.potions",
+        "description": "codex.atrocities.mutant.cauldron_witch.attack.potions.desc",
+        "animation": "potions",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.cauldron_witch.attack.brew_cloud",
+        "description": "codex.atrocities.mutant.cauldron_witch.attack.brew_cloud.desc",
+        "animation": "brew_cloud",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.cauldron_witch.attack.hex",
+        "description": "codex.atrocities.mutant.cauldron_witch.attack.hex.desc",
+        "animation": "hex",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.cauldron_witch.attack.drink",
+        "description": "codex.atrocities.mutant.cauldron_witch.attack.drink.desc",
+        "animation": "drink",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.cauldron_witch.attack.overflow",
+        "description": "codex.atrocities.mutant.cauldron_witch.attack.overflow.desc",
+        "animation": "overflow",
+        "phase": 2
+      }
+    ],
+    "drops": [
+      {
+        "item": "atrocities:pocket_cauldron",
+        "amount": "1",
+        "note": "codex.atrocities.drop.relic"
+      },
+      {
+        "item": "atrocities:biomass",
+        "amount": "4–8"
+      },
+      {
+        "item": "atrocities:mutant_scale",
+        "amount": "2–4"
+      },
+      {
+        "item": "atrocities:mutagen_serum",
+        "amount": "0–1"
+      },
+      {
+        "item": "atrocities:aberrant_heart",
+        "amount": "1",
+        "note": "codex.atrocities.drop.alpha"
+      }
+    ]
+  }
+}

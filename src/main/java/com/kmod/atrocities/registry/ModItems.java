@@ -176,6 +176,58 @@ public final class ModItems {
     public static final DeferredItem<Item> ETHER_ORB =
             ModRegistries.ITEMS.registerSimpleItem("ether_orb", new Item.Properties());
 
+    // ------------------------------------------------------------------ Fase 11: novos mutantes, armadura e surtos
+
+    /** Reliquias: Olho da Fenda (Enderman Fendedor), Gel Elastico (Slime Devorador), Caldeirao de Bolso (Bruxa). */
+    public static final DeferredItem<com.kmod.atrocities.item.MutantRelicItem> RIFT_EYE =
+            ModRegistries.ITEMS.registerItem("rift_eye",
+                    props -> new com.kmod.atrocities.item.MutantRelicItem(props,
+                            com.kmod.atrocities.item.MutantRelicItem.Kind.RIFT_EYE),
+                    new Item.Properties().rarity(Rarity.EPIC).durability(300));
+
+    public static final DeferredItem<com.kmod.atrocities.item.MutantRelicItem> ELASTIC_GEL =
+            ModRegistries.ITEMS.registerItem("elastic_gel",
+                    props -> new com.kmod.atrocities.item.MutantRelicItem(props,
+                            com.kmod.atrocities.item.MutantRelicItem.Kind.ELASTIC_GEL),
+                    new Item.Properties().rarity(Rarity.EPIC).durability(300));
+
+    public static final DeferredItem<com.kmod.atrocities.item.MutantRelicItem> POCKET_CAULDRON =
+            ModRegistries.ITEMS.registerItem("pocket_cauldron",
+                    props -> new com.kmod.atrocities.item.MutantRelicItem(props,
+                            com.kmod.atrocities.item.MutantRelicItem.Kind.POCKET_CAULDRON),
+                    new Item.Properties().rarity(Rarity.EPIC).durability(120));
+
+    /** Escama Mutante: cai de todo mutante e dos surtos; base da Carapaca Mutante. */
+    public static final DeferredItem<Item> MUTANT_SCALE =
+            ModRegistries.ITEMS.registerSimpleItem("mutant_scale", new Item.Properties().rarity(Rarity.UNCOMMON));
+
+    /** Carapaca Mutante. */
+    public static final DeferredItem<com.kmod.atrocities.item.MutantArmorItem> MUTANT_HELMET =
+            ModRegistries.ITEMS.registerItem("mutant_helmet",
+                    props -> new com.kmod.atrocities.item.MutantArmorItem(net.minecraft.world.item.ArmorItem.Type.HELMET, props),
+                    new Item.Properties().rarity(Rarity.RARE));
+
+    public static final DeferredItem<com.kmod.atrocities.item.MutantArmorItem> MUTANT_CHESTPLATE =
+            ModRegistries.ITEMS.registerItem("mutant_chestplate",
+                    props -> new com.kmod.atrocities.item.MutantArmorItem(net.minecraft.world.item.ArmorItem.Type.CHESTPLATE, props),
+                    new Item.Properties().rarity(Rarity.RARE));
+
+    public static final DeferredItem<com.kmod.atrocities.item.MutantArmorItem> MUTANT_LEGGINGS =
+            ModRegistries.ITEMS.registerItem("mutant_leggings",
+                    props -> new com.kmod.atrocities.item.MutantArmorItem(net.minecraft.world.item.ArmorItem.Type.LEGGINGS, props),
+                    new Item.Properties().rarity(Rarity.RARE));
+
+    public static final DeferredItem<com.kmod.atrocities.item.MutantArmorItem> MUTANT_BOOTS =
+            ModRegistries.ITEMS.registerItem("mutant_boots",
+                    props -> new com.kmod.atrocities.item.MutantArmorItem(net.minecraft.world.item.ArmorItem.Type.BOOTS, props),
+                    new Item.Properties().rarity(Rarity.RARE));
+
+    /** Projeteis dos novos mutantes (so para exibicao). */
+    public static final DeferredItem<Item> RIFT_SHARD =
+            ModRegistries.ITEMS.registerSimpleItem("rift_shard", new Item.Properties());
+    public static final DeferredItem<Item> GOO_GLOB =
+            ModRegistries.ITEMS.registerSimpleItem("goo_glob", new Item.Properties());
+
     public static ItemStack geneSample(GeneSample sample) {
         ItemStack stack = new ItemStack(GENE_SAMPLE.get());
         stack.set(ModDataComponents.GENE_SAMPLE.get(), sample);

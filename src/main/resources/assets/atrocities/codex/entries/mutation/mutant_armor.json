@@ -1,0 +1,46 @@
+{
+  "chapter": "atrocities:mutation",
+  "order": 12,
+  "icon": "atrocities:mutant_chestplate",
+  "title": "codex.atrocities.entry.mutant_armor",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.mutant_armor.p1"
+    },
+    {
+      "type": "items",
+      "items": [
+        "atrocities:mutant_scale",
+        "atrocities:mutant_helmet",
+        "atrocities:mutant_chestplate",
+        "atrocities:mutant_leggings",
+        "atrocities:mutant_boots"
+      ]
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:mutant_helmet"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:mutant_chestplate"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:mutant_leggings"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:mutant_boots"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.mutant_armor.h1"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.mutant_armor.p2"
+    }
+  ]
+}

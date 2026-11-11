@@ -1,0 +1,28 @@
+{
+  "chapter": "atrocities:mutation",
+  "order": 11,
+  "icon": "atrocities:volatile_serum",
+  "title": "codex.atrocities.entry.outbreaks",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.outbreaks.p1"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.outbreaks.h1"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.outbreaks.p2"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.outbreaks.h2"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.outbreaks.p3"
+    }
+  ]
+}

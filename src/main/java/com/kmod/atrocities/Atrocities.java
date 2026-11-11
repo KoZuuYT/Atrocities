@@ -39,6 +39,9 @@ public class Atrocities {
         com.kmod.atrocities.mutation.Mutation.register();
         com.kmod.atrocities.mutation.MutationCommand.register();
         com.kmod.atrocities.imbue.ImbueEffects.register();
+        com.kmod.atrocities.mutation.Outbreak.register();
+        com.kmod.atrocities.item.MutantRelicItem.registerEvents();
+        com.kmod.atrocities.item.MutantArmorItem.register(modBus);
 
         modBus.addListener(Atrocities::onCommonSetup);
     }
