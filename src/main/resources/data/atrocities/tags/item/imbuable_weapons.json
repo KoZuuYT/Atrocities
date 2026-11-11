@@ -1,0 +1,30 @@
+{
+  "replace": false,
+  "values": [
+    "atrocities:carapace_maul",
+    "atrocities:sanguine_cleaver",
+    "atrocities:bile_launcher",
+    "atrocities:titan_fist",
+    "atrocities:ballista_bow",
+    {
+      "id": "#minecraft:enchantable/weapon",
+      "required": false
+    },
+    {
+      "id": "#minecraft:enchantable/bow",
+      "required": false
+    },
+    {
+      "id": "#minecraft:enchantable/crossbow",
+      "required": false
+    },
+    {
+      "id": "#minecraft:enchantable/trident",
+      "required": false
+    },
+    {
+      "id": "#minecraft:enchantable/mace",
+      "required": false
+    }
+  ]
+}

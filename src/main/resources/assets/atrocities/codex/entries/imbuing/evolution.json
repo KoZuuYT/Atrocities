@@ -1,0 +1,16 @@
+{
+  "chapter": "atrocities:imbuing",
+  "order": 2,
+  "icon": "minecraft:experience_bottle",
+  "title": "codex.atrocities.entry.imbue_evolution",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.imbue_evolution.p1"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.imbue_evolution.p2"
+    }
+  ]
+}

@@ -36,6 +36,21 @@ O mod precisa estar **no servidor e em todos os clientes**. Quem entrar sem ele 
 Todo mutante entra em **Fúria** na metade da vida. Alfas têm +50% de vida e +30% de dano.
 Operadores podem usar `/atrocities mutate <alvos> [volátil]`.
 
+## Imbuição genética
+
+O **Terminal de Imbuição** grava traços de uma Amostra Genética numa arma ou peça de armadura.
+Receita: fragmento de ametista, diamante, Frasco de Amostra, mesa de ferraria, lingote de ferro e comparador.
+
+1. Coloque a arma ou armadura, a Amostra Genética e um catalisador (Soro Mutagênico ou Soro Volátil). O terminal consome biomassa.
+2. Cada item tem **3 tanques genéticos**. O nível inicial de cada gene depende da potência do traço e da pureza da amostra.
+3. **Soro Volátil** dá +1 nível, mas tem 20% de chance de falhar. Se falhar, o item volta intacto.
+4. Traços incompatíveis não se misturam. Um gene repetido vira experiência.
+5. **Evolução:** armas ganham experiência ao matar e armaduras ganham ao receber golpes. Chefes dão muito mais. Ao encher a barra, um gene sobe de nível.
+6. **Purga:** um Frasco de Amostra vazio no lugar da amostra remove o último gene. O item perde metade da experiência.
+
+Os 14 traços têm efeito próprio em armas (veneno, roubo de vida, enxame, teleporte…) e em armaduras (espinhos, regeneração, explosão reativa…). Segure Shift sobre o item para ver cada um.
+Datapacks podem liberar outros itens pelas tags `atrocities:imbuable_weapons` e `atrocities:imbuable_armor`.
+
 ## Aberrações Primordiais (fim de jogo)
 
 1. **Caça e captura:** rastreie espécies-base em biomas específicos, enfraqueça-as e use a Seringa de Extração ou a Cápsula de Estase.
@@ -66,7 +81,7 @@ O conteúdo vem de resource packs: `assets/<ns>/codex/chapters/*.json` e `assets
 | 7. Chefes cinematográficos: cutscenes de entrada, fases com transição e mecânicas únicas | 1.2.0 | ✅ |
 | 8. Códex Atrocitas: livro-guia ilustrado com páginas secretas dos chefes | 1.3.0 | ✅ |
 | 9. Mutantes: soros, mutação em estágios, cinco mutantes e relíquias | 1.4.0 | ✅ |
-| 10. Imbuição genética de armas: terminal, tanques e traços evoluíveis | 1.5.0 | ⏳ |
+| 10. Imbuição genética de armas: terminal, tanques e traços evoluíveis | 1.5.0 | ✅ |
 | 11. Mais mutantes (Enderman, Slime, Bruxa...), armaduras mutantes e surtos | 1.6.0 | ⏳ |
 
 Veja o [CHANGELOG](CHANGELOG.md) para o histórico completo.

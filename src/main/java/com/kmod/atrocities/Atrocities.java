@@ -38,6 +38,7 @@ public class Atrocities {
         com.kmod.atrocities.codex.Codex.register();
         com.kmod.atrocities.mutation.Mutation.register();
         com.kmod.atrocities.mutation.MutationCommand.register();
+        com.kmod.atrocities.imbue.ImbueEffects.register();
 
         modBus.addListener(Atrocities::onCommonSetup);
     }

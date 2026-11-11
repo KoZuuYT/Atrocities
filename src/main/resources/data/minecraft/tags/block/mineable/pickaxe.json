@@ -4,6 +4,7 @@
     "atrocities:biomass_extractor",
     "atrocities:genetic_centrifuge",
     "atrocities:gene_sequencer",
-    "atrocities:biological_incubator"
+    "atrocities:biological_incubator",
+    "atrocities:imbuing_terminal"
   ]
 }

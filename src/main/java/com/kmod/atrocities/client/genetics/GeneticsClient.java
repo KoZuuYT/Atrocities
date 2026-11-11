@@ -33,6 +33,7 @@ public final class GeneticsClient {
         modBus.addListener(GeneticsClient::onClientSetup);
         modBus.addListener(GeneticsClient::onItemColors);
         NeoForge.EVENT_BUS.addListener(GeneticsTooltips::onTooltip);
+        NeoForge.EVENT_BUS.addListener(ImbueTooltips::onTooltip);
     }
 
     private static void onClientSetup(FMLClientSetupEvent event) {

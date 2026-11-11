@@ -1,0 +1,24 @@
+{
+  "chapter": "atrocities:imbuing",
+  "order": 0,
+  "icon": "atrocities:imbuing_terminal",
+  "title": "codex.atrocities.entry.imbue_terminal",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.imbue_terminal.p1"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:imbuing_terminal"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.imbue_terminal.p2"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.imbue_terminal.p3"
+    }
+  ]
+}

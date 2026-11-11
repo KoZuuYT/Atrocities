@@ -1,0 +1,28 @@
+{
+  "chapter": "atrocities:imbuing",
+  "order": 1,
+  "icon": "atrocities:gene_sample",
+  "title": "codex.atrocities.entry.imbue_genes",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.imbue_genes.p1"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.imbue_genes.weapons"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.imbue_genes.p2"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.imbue_genes.armor"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.imbue_genes.p3"
+    }
+  ]
+}

@@ -6,6 +6,32 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 
 ## [Não lançado]
 
+## [1.5.0] - 2026-11-11 — Fase 10: Imbuição Genética
+
+### Adicionado
+- **Terminal de Imbuição:** máquina que grava genes de uma Amostra Genética em armas e armaduras. Consome biomassa e um catalisador (Soro Mutagênico ou Soro Volátil). Devolve o Frasco de Amostra.
+  - Receita: fragmento de ametista, diamante, Frasco de Amostra, mesa de ferraria, lingote de ferro e comparador.
+  - A tela mostra uma prévia do resultado, o risco do Soro Volátil e os conflitos antes de processar.
+- **Tanques genéticos:** cada arma ou armadura guarda até 3 genes, e o item imbuído brilha.
+  - O nível inicial depende da potência do traço e da pureza da amostra.
+  - Soro Volátil dá +1 nível, mas tem 20% de chance de falhar. Se falhar, o item volta intacto.
+  - Traços incompatíveis bloqueiam a imbuição. Um gene repetido vira experiência de evolução.
+  - **Purga:** um Frasco de Amostra vazio remove o último gene, e o item perde metade da experiência.
+- **Evolução:** armas ganham experiência ao matar (chefes dão 100) e armaduras ganham a cada golpe recebido. Barra cheia: um gene sobe de nível, com som, partículas e aviso na tela.
+- **Efeitos de gene em armas:**
+  - Venenos, wither, náusea, fogo, cegueira noturna e lentidão.
+  - Roubo de vida, crítico de espinhos e dano extra (Hipertrofia, e Noturno à noite).
+  - Teleporte do alvo e enxame de abelhas.
+  - Ao matar: explosão volátil sem quebrar blocos, nuvem de esporos e adrenalina.
+- **Efeitos de gene em armaduras:**
+  - Armadura, resistência e vida extra.
+  - Velocidade, regeneração, visão noturna e resistência a fogo.
+  - Espinhos e efeitos reativos ao ser atingido: veneno, explosão, esporos, abelhas e teleporte de fuga.
+  - Surto de adrenalina com pouca vida.
+- Tooltips com tanques, genes em algarismos romanos, barra de evolução e efeitos detalhados com Shift.
+- Capítulo **Imbuição** no Códex (Terminal, Genes e Evolução).
+- Tags `atrocities:imbuable_weapons` e `atrocities:imbuable_armor` para datapacks liberarem outros itens.
+
 ## [1.4.0] - 2026-11-11 — Fase 9: Mutantes
 
 O mod muda de tom: sai a bioengenharia sombria, entra a mutação de mobs no estilo dos mods de mutantes, com criaturas grandes, coloridas e muito animadas. Os chefes de embrião continuam como desafio de fim de jogo.

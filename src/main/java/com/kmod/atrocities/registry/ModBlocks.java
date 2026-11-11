@@ -28,6 +28,8 @@ public final class ModBlocks {
             machine(MachineKind.GENE_SEQUENCER, 7, false, Rarity.RARE);
     public static final DeferredBlock<MachineBlock> BIOLOGICAL_INCUBATOR =
             machine(MachineKind.BIOLOGICAL_INCUBATOR, 9, true, Rarity.RARE);
+    public static final DeferredBlock<MachineBlock> IMBUING_TERMINAL =
+            machine(MachineKind.IMBUING_TERMINAL, 8, false, Rarity.EPIC);
 
     private static DeferredBlock<MachineBlock> machine(MachineKind kind, int litLight, boolean glass, Rarity rarity) {
         BlockBehaviour.Properties base = BlockBehaviour.Properties.of()

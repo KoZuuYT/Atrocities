@@ -29,6 +29,12 @@ public final class ModDataComponents {
                     .persistent(CapturedSpecimen.CODEC)
                     .networkSynchronized(CapturedSpecimen.STREAM_CODEC));
 
+    public static final Supplier<DataComponentType<com.kmod.atrocities.imbue.ImbuedGenes>> IMBUED_GENES =
+            ModRegistries.DATA_COMPONENTS.registerComponentType("imbued_genes", builder -> builder
+                    .persistent(com.kmod.atrocities.imbue.ImbuedGenes.CODEC)
+                    .networkSynchronized(com.kmod.atrocities.imbue.ImbuedGenes.STREAM_CODEC)
+                    .cacheEncoding());
+
     static void bootstrap() {
         // Forca o carregamento da classe para que os componentes sejam registrados.
     }

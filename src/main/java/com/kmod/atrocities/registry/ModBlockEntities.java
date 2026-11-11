@@ -4,6 +4,7 @@ import com.kmod.atrocities.machine.BiologicalIncubatorBlockEntity;
 import com.kmod.atrocities.machine.BiomassExtractorBlockEntity;
 import com.kmod.atrocities.machine.GeneSequencerBlockEntity;
 import com.kmod.atrocities.machine.GeneticCentrifugeBlockEntity;
+import com.kmod.atrocities.machine.ImbuingTerminalBlockEntity;
 import com.kmod.atrocities.machine.MachineBlockEntity;
 import com.kmod.atrocities.machine.MachineKind;
 import java.util.function.Supplier;
@@ -30,6 +31,9 @@ public final class ModBlockEntities {
     public static final Supplier<BlockEntityType<BiologicalIncubatorBlockEntity>> BIOLOGICAL_INCUBATOR =
             ModRegistries.BLOCK_ENTITY_TYPES.register("biological_incubator", () -> BlockEntityType.Builder
                     .of(BiologicalIncubatorBlockEntity::new, ModBlocks.BIOLOGICAL_INCUBATOR.get()).build(null));
+    public static final Supplier<BlockEntityType<ImbuingTerminalBlockEntity>> IMBUING_TERMINAL =
+            ModRegistries.BLOCK_ENTITY_TYPES.register("imbuing_terminal", () -> BlockEntityType.Builder
+                    .of(ImbuingTerminalBlockEntity::new, ModBlocks.IMBUING_TERMINAL.get()).build(null));
 
     public static BlockEntityType<? extends MachineBlockEntity> typeFor(MachineKind kind) {
         return switch (kind) {
@@ -37,6 +41,7 @@ public final class ModBlockEntities {
             case GENETIC_CENTRIFUGE -> GENETIC_CENTRIFUGE.get();
             case GENE_SEQUENCER -> GENE_SEQUENCER.get();
             case BIOLOGICAL_INCUBATOR -> BIOLOGICAL_INCUBATOR.get();
+            case IMBUING_TERMINAL -> IMBUING_TERMINAL.get();
         };
     }
 

@@ -109,6 +109,10 @@ public final class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> MUTATION_PULSE = register("entity.mutation.pulse");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUTATION_BURST = register("entity.mutation.burst");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUTATION_RUPTURE = register("entity.mutation.rupture");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> IMBUE_PROCESS = register("block.imbuing_terminal.process");
+    public static final DeferredHolder<SoundEvent, SoundEvent> IMBUE_COMPLETE = register("block.imbuing_terminal.complete");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GENE_EVOLVE = register("item.imbued.evolve");
     public static final com.kmod.atrocities.entity.mutant.MutantSounds ZOMBIE_TITAN = voices("zombie_titan");
     public static final com.kmod.atrocities.entity.mutant.MutantSounds SKELETON_BALLISTA = voices("skeleton_ballista");
     public static final com.kmod.atrocities.entity.mutant.MutantSounds CREEPER_DETONATOR = voices("creeper_detonator");

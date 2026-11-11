@@ -25,7 +25,11 @@ public enum MachineKind {
             slot(8, 53, Role.FUEL), slot(116, 28, Role.OUTPUT)),
 
     BIOLOGICAL_INCUBATOR("biological_incubator", true, 2, new Rect(80, 34, 28, 8),
-            slot(56, 30, Role.INPUT), slot(8, 53, Role.FUEL), slot(116, 30, Role.OUTPUT));
+            slot(56, 30, Role.INPUT), slot(8, 53, Role.FUEL), slot(116, 30, Role.OUTPUT)),
+
+    IMBUING_TERMINAL("imbuing_terminal", false, 0, new Rect(84, 30, 28, 8),
+            slot(38, 26, Role.INPUT), slot(62, 17, Role.INPUT), slot(62, 35, Role.INPUT), slot(8, 53, Role.FUEL),
+            slot(120, 26, Role.OUTPUT), slot(144, 26, Role.OUTPUT));
 
     public enum Role { INPUT, FUEL, OUTPUT }
 
@@ -105,6 +109,12 @@ public enum MachineKind {
                 case GENETIC_CENTRIFUGE, GENE_SEQUENCER -> stack.has(ModDataComponents.GENE_SAMPLE.get());
                 case BIOLOGICAL_INCUBATOR -> stack.is(ModItems.UNSTABLE_EMBRYO.get())
                         && stack.has(ModDataComponents.EMBRYO_GENOME.get());
+                case IMBUING_TERMINAL -> switch (slot) {
+                    case ImbuingTerminalBlockEntity.EQUIPMENT -> com.kmod.atrocities.imbue.Imbuing.kindOf(stack) != null;
+                    case ImbuingTerminalBlockEntity.GENE -> stack.has(ModDataComponents.GENE_SAMPLE.get())
+                            || stack.is(ModItems.SAMPLE_VIAL.get());
+                    default -> ImbuingTerminalBlockEntity.isCatalyst(stack);
+                };
             };
         };
     }

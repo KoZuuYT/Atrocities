@@ -7,6 +7,13 @@ import com.kmod.atrocities.machine.BiologicalIncubatorBlockEntity;
 import com.kmod.atrocities.machine.BiomassExtractorBlockEntity;
 import com.kmod.atrocities.machine.GeneSequencerBlockEntity;
 import com.kmod.atrocities.machine.GeneticCentrifugeBlockEntity;
+import com.kmod.atrocities.machine.ImbuingTerminalBlockEntity;
+import com.kmod.atrocities.imbue.ImbuedGenes;
+import com.kmod.atrocities.imbue.Imbuing;
+import com.kmod.atrocities.genetics.Trait;
+import com.kmod.atrocities.genetics.TraitRoll;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.item.ItemStack;
 import com.kmod.atrocities.machine.MachineBlockEntity;
 import com.kmod.atrocities.machine.MachineKind;
 import com.kmod.atrocities.machine.MachineMenu;
@@ -96,6 +103,7 @@ public class MachineScreen extends AbstractContainerScreen<MachineMenu> {
             case GENETIC_CENTRIFUGE -> new int[]{0xFF6FD3F0, 0xFF2A6F8A};
             case GENE_SEQUENCER -> new int[]{0xFFC79BF0, 0xFF5B2E8A};
             case BIOLOGICAL_INCUBATOR -> new int[]{0xFFA8E060, 0xFF3F7A1E};
+            case IMBUING_TERMINAL -> new int[]{0xFF7FF0D8, 0xFFB04EE0};
         };
     }
 
@@ -107,6 +115,7 @@ public class MachineScreen extends AbstractContainerScreen<MachineMenu> {
             case GENETIC_CENTRIFUGE -> centrifugePreview(graphics);
             case GENE_SEQUENCER -> sequencerPreview(graphics);
             case BIOLOGICAL_INCUBATOR -> incubatorStatus(graphics);
+            case IMBUING_TERMINAL -> terminalPreview(graphics);
             default -> {
             }
         }
@@ -192,6 +201,63 @@ public class MachineScreen extends AbstractContainerScreen<MachineMenu> {
             return;
         }
         graphics.drawString(font, second, 30, 62, 0xFFFFFF, false);
+    }
+
+    private void terminalPreview(GuiGraphics graphics) {
+        ItemStack equipment = menu.machineItem(ImbuingTerminalBlockEntity.EQUIPMENT);
+        ItemStack gene = menu.machineItem(ImbuingTerminalBlockEntity.GENE);
+        ItemStack catalyst = menu.machineItem(ImbuingTerminalBlockEntity.CATALYST);
+        Component first;
+        Component second = null;
+        if (Imbuing.kindOf(equipment) == null) {
+            first = Component.translatable("gui.atrocities.imbue.insert").withColor(LABEL_COLOR);
+        } else {
+            ImbuedGenes genes = Imbuing.genes(equipment);
+            second = Component.translatable("gui.atrocities.imbue.tanks", genes.genes().size(), Imbuing.MAX_GENES)
+                    .withColor(LABEL_COLOR);
+            switch (ImbuingTerminalBlockEntity.mode(equipment, gene, catalyst)) {
+                case PURGE -> first = Component.translatable("gui.atrocities.imbue.purge",
+                        Trait.displayName(genes.genes().getLast().trait())).withColor(WARN);
+                case NEED_CATALYST -> first = Component.translatable("gui.atrocities.imbue.catalyst").withColor(WARN);
+                case IMBUE -> {
+                    Imbuing.Plan plan = minecraft == null || minecraft.level == null ? null
+                            : ImbuingTerminalBlockEntity.plan(equipment, gene, catalyst, minecraft.level.registryAccess());
+                    if (plan == null) {
+                        return;
+                    }
+                    if (!plan.ok()) {
+                        first = plan.error().copy().withColor(BAD);
+                    } else if (plan.added().isEmpty()) {
+                        first = Component.translatable("gui.atrocities.imbue.redundant").withColor(WARN);
+                    } else {
+                        MutableComponent line = Component.literal("+ ").withColor(GOOD);
+                        for (int i = 0; i < plan.added().size(); i++) {
+                            TraitRoll roll = plan.added().get(i);
+                            if (i > 0) {
+                                line.append(Component.literal(", ").withColor(LABEL_COLOR));
+                            }
+                            line.append(Trait.displayName(roll.trait()).withColor(GOOD))
+                                    .append(Component.literal(" " + Imbuing.roman(roll.potency())).withColor(GOOD));
+                        }
+                        first = line;
+                    }
+                    if (!plan.ok()) {
+                        second = null;
+                    } else if (catalyst.is(com.kmod.atrocities.registry.ModItems.VOLATILE_SERUM.get())) {
+                        second = Component.translatable("gui.atrocities.imbue.volatile",
+                                Math.round(Imbuing.VOLATILE_FAIL_CHANCE * 100)).withColor(BAD);
+                    } else {
+                        second = Component.translatable("gui.atrocities.imbue.tanks",
+                                plan.result().genes().size(), Imbuing.MAX_GENES).withColor(LABEL_COLOR);
+                    }
+                }
+                default -> first = Component.translatable("gui.atrocities.imbue.insert_gene").withColor(LABEL_COLOR);
+            }
+        }
+        graphics.drawString(font, first, 30, 55, 0xFFFFFF, false);
+        if (second != null) {
+            graphics.drawString(font, second, 30, 64, 0xFFFFFF, false);
+        }
     }
 
     private void renderBarTooltips(GuiGraphics graphics, int mouseX, int mouseY) {
