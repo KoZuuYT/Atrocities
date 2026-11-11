@@ -1,0 +1,34 @@
+{
+    "targets": [ "bright", "swap", "blurred", "swap2", "final" ],
+    "passes": [
+        {
+            "name": "atrocities:bloom_extract",
+            "intarget": "minecraft:main",
+            "outtarget": "bright",
+            "auxtargets": [ { "name": "DepthSampler", "id": "minecraft:main:depth" } ]
+        },
+        { "name": "box_blur", "intarget": "bright", "outtarget": "swap", "use_linear_filter": true,
+          "uniforms": [ { "name": "BlurDir", "values": [ 1.0, 0.0 ] }, { "name": "Radius", "values": [ 9.0 ] } ] },
+        { "name": "box_blur", "intarget": "swap", "outtarget": "bright", "use_linear_filter": true,
+          "uniforms": [ { "name": "BlurDir", "values": [ 0.0, 1.0 ] }, { "name": "Radius", "values": [ 9.0 ] } ] },
+        { "name": "box_blur", "intarget": "bright", "outtarget": "swap", "use_linear_filter": true,
+          "uniforms": [ { "name": "BlurDir", "values": [ 1.0, 0.0 ] }, { "name": "Radius", "values": [ 21.0 ] } ] },
+        { "name": "box_blur", "intarget": "swap", "outtarget": "bright", "use_linear_filter": true,
+          "uniforms": [ { "name": "BlurDir", "values": [ 0.0, 1.0 ] }, { "name": "Radius", "values": [ 21.0 ] } ] },
+        { "name": "box_blur", "intarget": "minecraft:main", "outtarget": "swap2", "use_linear_filter": true,
+          "uniforms": [ { "name": "BlurDir", "values": [ 1.0, 0.0 ] }, { "name": "Radius", "values": [ 7.0 ] } ] },
+        { "name": "box_blur", "intarget": "swap2", "outtarget": "blurred", "use_linear_filter": true,
+          "uniforms": [ { "name": "BlurDir", "values": [ 0.0, 1.0 ] }, { "name": "Radius", "values": [ 7.0 ] } ] },
+        {
+            "name": "atrocities:grade",
+            "intarget": "minecraft:main",
+            "outtarget": "final",
+            "auxtargets": [
+                { "name": "BloomSampler", "id": "bright" },
+                { "name": "BlurSampler", "id": "blurred" },
+                { "name": "DepthSampler", "id": "minecraft:main:depth" }
+            ]
+        },
+        { "name": "blit", "intarget": "final", "outtarget": "minecraft:main" }
+    ]
+}

@@ -40,6 +40,7 @@ public final class DamageNumbers {
 
     private static final Kind NORMAL = new Kind(0xFFFFFF, 1f, "");
     private static final Kind CRITICAL = new Kind(0xFFC940, 1.45f, "");
+    private static final Kind HEAVY = new Kind(0xFF9A3C, 1.25f, "");
     private static final Kind HEAL = new Kind(0x6EE06E, 0.9f, "+");
 
     private DamageNumbers() {
@@ -97,10 +98,18 @@ public final class DamageNumbers {
             Vec3 at = boss.position().add((RANDOM.nextDouble() - 0.5) * boss.getBbWidth() * 0.8,
                     boss.getBbHeight() * (0.65 + RANDOM.nextDouble() * 0.35),
                     (RANDOM.nextDouble() - 0.5) * boss.getBbWidth() * 0.8);
+            if (!com.kmod.atrocities.config.AtrocitiesConfig.DAMAGE_NUMBERS.get()) {
+                continue;
+            }
             if (delta <= -0.5f) {
-                Kind kind = boss.isStunned() ? CRITICAL : NORMAL;
+                Kind kind = boss.isStunned() ? CRITICAL : -delta >= 30f ? HEAVY : NORMAL;
                 String text = format(-delta) + (kind == CRITICAL ? "!" : "");
                 POPUPS.add(new Popup(at, text, kind));
+                if (kind != NORMAL) {
+                    // Estrela de impacto atras do numero nos golpes criticos e pesados.
+                    com.kmod.atrocities.client.vfx.WorldVfx.local(com.kmod.atrocities.fx.Vfx.Kind.IMPACT, at,
+                            kind == CRITICAL ? 0.9f : 0.6f, kind.color(), 7, 0f);
+                }
             } else if (delta > 0) {
                 // Curas pequenas (regeneracao) se acumulam ate valer a pena mostrar.
                 float heal = PENDING_HEAL.get(id) + delta;
@@ -117,6 +126,8 @@ public final class DamageNumbers {
             POPUPS.subList(0, POPUPS.size() - 64).clear();
         }
     }
+
+    private static final int[][] OUTLINE = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}};
 
     private static String format(float value) {
         return value >= 10f ? String.valueOf(Math.round(value)) : String.format("%.1f", value);
@@ -151,10 +162,16 @@ public final class DamageNumbers {
             pose.pushPose();
             pose.translate(at.x - cameraPos.x, at.y - cameraPos.y, at.z - cameraPos.z);
             pose.mulPose(camera.rotation());
+            // Estouro com leve inclinacao, como um carimbo.
+            float tilt = (float) Math.signum(popup.driftX) * 0.18f * Math.max(0f, 1f - age / 6f);
+            pose.mulPose(com.mojang.math.Axis.ZP.rotation(tilt));
             pose.scale(scale, -scale, scale);
             float x = -font.width(popup.text) / 2f;
-            font.drawInBatch(popup.text, x + 1, 1, shadow, false, pose.last().pose(), buffers,
-                    Font.DisplayMode.SEE_THROUGH, 0, LightTexture.FULL_BRIGHT);
+            // Contorno escuro nos quatro lados para ler em qualquer fundo.
+            for (int[] offset : OUTLINE) {
+                font.drawInBatch(popup.text, x + offset[0], offset[1], shadow, false, pose.last().pose(), buffers,
+                        Font.DisplayMode.SEE_THROUGH, 0, LightTexture.FULL_BRIGHT);
+            }
             pose.translate(0, 0, -0.01f);
             font.drawInBatch(popup.text, x, 0, color, false, pose.last().pose(), buffers,
                     Font.DisplayMode.SEE_THROUGH, 0, LightTexture.FULL_BRIGHT);

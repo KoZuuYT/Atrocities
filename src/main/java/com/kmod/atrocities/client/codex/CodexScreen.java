@@ -75,6 +75,15 @@ public class CodexScreen extends Screen {
     private int top;
     private int ticks;
     private int turnTicks;
+    /** Sentido da ultima virada: 1 = para a frente (folha da direita vai para a esquerda). */
+    private int turnDir = 1;
+    private int lastTurnDir = 1;
+    private static final int TURN_TICKS = 9;
+    /** Runas flutuando em volta do livro (posicao base, fase e velocidade). */
+    private final float[][] runes = new float[18][5];
+    private static final String RUNE_GLYPHS = "abcdefghijklmnopqrstuvwxyz";
+    private static final net.minecraft.network.chat.Style RUNE_STYLE = net.minecraft.network.chat.Style.EMPTY
+            .withFont(ResourceLocation.withDefaultNamespace("alt"));
     private CodexProgress builtFor = ClientCodex.progress();
     private List<List<CodexLayout.Block>> pages = List.of();
     private List<CodexLayout.Block> tabBlocks = List.of();
@@ -157,7 +166,9 @@ public class CodexScreen extends Screen {
         int next = Mth.clamp(spread + delta, 0, Math.max(0, (pages.size() - 1) / 2));
         if (next != spread) {
             spread = next;
+            turnDir = delta < 0 ? -1 : 1;
             turn();
+            turnDir = 1;
         }
     }
 
@@ -171,7 +182,8 @@ public class CodexScreen extends Screen {
     }
 
     private void turn() {
-        turnTicks = 5;
+        turnTicks = TURN_TICKS;
+        lastTurnDir = turnDir;
         draggingViewer = false;
         remember();
         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.BOOK_PAGE_TURN, 1f));
@@ -215,6 +227,23 @@ public class CodexScreen extends Screen {
     @Override
     public void tick() {
         ticks++;
+        // Paisagem sonora: o grimorio "respira" com um pulso grave e distante enquanto aberto.
+        if (ticks % 46 == 12) {
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(
+                    SoundEvents.WARDEN_HEARTBEAT, 0.55f + 0.05f * (ticks / 46 % 3), 0.12f));
+        }
+        if (ticks == 1) {
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(
+                    SoundEvents.ENCHANTMENT_TABLE_USE, 0.6f, 0.35f));
+            java.util.Random random = new java.util.Random();
+            for (float[] rune : runes) {
+                rune[0] = random.nextFloat();
+                rune[1] = random.nextFloat();
+                rune[2] = random.nextFloat() * Mth.TWO_PI;
+                rune[3] = 0.4f + random.nextFloat() * 0.8f;
+                rune[4] = random.nextInt(RUNE_GLYPHS.length());
+            }
+        }
         if (turnTicks > 0) {
             turnTicks--;
         }
@@ -247,6 +276,7 @@ public class CodexScreen extends Screen {
         g.pose().scale(0.94f + 0.06f * ease, 0.94f + 0.06f * ease, 1f);
         g.pose().translate(-width / 2f, -height / 2f, 0);
 
+        renderAura(g, time, ease);
         renderRibbons(ctx);
         g.blit(CodexStyle.BOOK, left, top, 0, 0, CodexStyle.BOOK_W, CodexStyle.BOOK_H, CodexStyle.TEX_W, CodexStyle.TEX_H);
 
@@ -263,14 +293,7 @@ public class CodexScreen extends Screen {
         }
 
         if (turnTicks > 0) {
-            int alpha = (int) (turnTicks / 5f * 200);
-            g.pose().pushPose();
-            g.pose().translate(0, 0, 450);
-            g.fill(left + LEFT_X - 4, top + PAGE_Y - 4, left + LEFT_X + PAGE_W + 4, top + FOOTER_Y + 10,
-                    CodexStyle.withAlpha(0xD9C9A6, alpha));
-            g.fill(left + RIGHT_X - 4, top + PAGE_Y - 4, left + RIGHT_X + PAGE_W + 4, top + FOOTER_Y + 10,
-                    CodexStyle.withAlpha(0xD9C9A6, alpha));
-            g.pose().popPose();
+            renderPageTurn(g, 1f - (turnTicks - partialTick) / TURN_TICKS);
         }
         g.pose().popPose();
 
@@ -279,6 +302,108 @@ public class CodexScreen extends Screen {
         } else if (ctx.hoverText != null) {
             g.renderComponentTooltip(font, ctx.hoverText, mouseX, mouseY);
         }
+    }
+
+    /**
+     * Folha virando: sai de uma pagina, gira sobre a lombada (estreitando como em perspectiva) e assenta na outra,
+     * com sombra projetada na pagina de baixo e um brilho na dobra.
+     */
+    private void renderPageTurn(GuiGraphics g, float progress) {
+        progress = Mth.clamp(progress, 0f, 1f);
+        float eased = progress * progress * (3f - 2f * progress);
+        int spine = left + CodexStyle.BOOK_W / 2;
+        int y0 = top + PAGE_Y - 6;
+        int y1 = top + FOOTER_Y + 12;
+        int pageWidth = spine - (left + LEFT_X - 6);
+        // Angulo da folha: 0 = deitada na pagina de origem, 1 = deitada na de destino.
+        float angle = eased * Mth.PI;
+        float reach = Mth.cos(angle) * pageWidth;
+        int dir = lastTurnDir;
+        float lift = Mth.sin(angle);
+        g.pose().pushPose();
+        g.pose().translate(0, 0, 450);
+        // Sombra que corre sobre as paginas de baixo.
+        int shadowAlpha = Math.round(90 * lift);
+        int shadowX = spine + Math.round(dir * reach);
+        if (dir * reach > 0) {
+            g.fillGradient(spine, y0, shadowX, y1, CodexStyle.withAlpha(0x1A0E08, shadowAlpha), CodexStyle.withAlpha(0x1A0E08, shadowAlpha / 3));
+        } else {
+            g.fillGradient(shadowX, y0, spine, y1, CodexStyle.withAlpha(0x1A0E08, shadowAlpha / 3), CodexStyle.withAlpha(0x1A0E08, shadowAlpha));
+        }
+        // A folha: estreita em perspectiva e arqueia (topo e base sobem com a elevacao).
+        int edge = spine + Math.round(dir * reach);
+        int bow = Math.round(6 * lift);
+        int from = Math.min(spine, edge);
+        int to = Math.max(spine, edge);
+        if (to - from >= 1) {
+            int shade = Math.round(40 + 60 * Math.abs(Mth.cos(angle)));
+            int paper = CodexStyle.withAlpha(0xE6D6B4, 235);
+            for (int x = from; x < to; x += 2) {
+                float u = (x - from) / (float) Math.max(1, to - from);
+                float distanceFromSpine = Math.abs(x - spine) / (float) Math.max(1, Math.abs(edge - spine));
+                int arch = Math.round(bow * Mth.sin(distanceFromSpine * Mth.PI));
+                g.fill(x, y0 - arch, Math.min(to, x + 2), y1 - arch, paper);
+                // Sombreado da curva: mais escuro perto da lombada e na face de tras.
+                int dark = Math.round(shade * (1f - distanceFromSpine) * 0.6f + (angle > Mth.HALF_PI ? 25 : 0));
+                g.fill(x, y0 - arch, Math.min(to, x + 2), y1 - arch, CodexStyle.withAlpha(0x2A1A10, dark));
+            }
+            // Brilho na borda da folha.
+            int glowAlpha = Math.round(160 * lift);
+            g.fill(edge - 1, y0 - bow, edge + 1, y1 - bow, CodexStyle.withAlpha(0xFFF4D8, glowAlpha));
+        }
+        g.pose().popPose();
+    }
+
+    /**
+     * Aura do grimorio vivo: brilho pulsante atras do livro e runas que flutuam, piscam e somem em volta dele.
+     */
+    private void renderAura(GuiGraphics g, float time, float open) {
+        int accent = auraColor();
+        float pulse = 0.5f + 0.5f * Mth.sin(time * 0.09f);
+        float beat = (float) Math.pow(Math.max(0f, Mth.sin(time * 0.136f)), 12);
+        int cx = left + CodexStyle.BOOK_W / 2;
+        int cy = top + CodexStyle.BOOK_H / 2;
+        // Halo suave: aneis de 1 px cujo alfa cai com o quadrado da distancia.
+        for (int ring = 1; ring <= 28; ring++) {
+            float falloff = 1f - ring / 29f;
+            int alpha = Math.round(falloff * falloff * (34 + 40 * beat) * (0.6f + 0.4f * pulse) * open);
+            if (alpha > 0) {
+                g.renderOutline(left - ring, top - ring, CodexStyle.BOOK_W + ring * 2, CodexStyle.BOOK_H + ring * 2,
+                        CodexStyle.withAlpha(accent, alpha));
+            }
+        }
+        // Runas.
+        for (float[] rune : runes) {
+            float life = (time * 0.006f * rune[3] + rune[2]) % 1f;
+            float fade = Mth.sin(life * Mth.PI);
+            double angle = rune[0] * Mth.TWO_PI + time * 0.004f * (rune[3] - 0.8f);
+            double rx = (CodexStyle.BOOK_W * 0.5 + 28 + rune[1] * 60) * Math.cos(angle);
+            double ry = (CodexStyle.BOOK_H * 0.5 + 18 + rune[1] * 40) * Math.sin(angle) - life * 26;
+            int x = cx + (int) rx;
+            int y = cy + (int) ry;
+            int alpha = Math.round(255 * fade * open * (0.55f + 0.45f * pulse));
+            if (alpha < 8) {
+                continue;
+            }
+            Component glyph = Component.literal(String.valueOf(RUNE_GLYPHS.charAt((int) rune[4] % RUNE_GLYPHS.length())))
+                    .withStyle(RUNE_STYLE);
+            g.pose().pushPose();
+            g.pose().translate(x, y, 0);
+            float scale = 1f + 0.6f * rune[1];
+            g.pose().scale(scale, scale, 1f);
+            g.drawString(font, glyph, 0, 0, CodexStyle.withAlpha(accent, alpha), false);
+            g.drawString(font, glyph, 1, 0, CodexStyle.withAlpha(accent, alpha / 3), false);
+            g.drawString(font, glyph, 0, 1, CodexStyle.withAlpha(0xFFF2D0, alpha / 3), false);
+            g.pose().popPose();
+        }
+    }
+
+    /** Cor da aura: a do chefe aberto, senao um ambar vivo. */
+    private int auraColor() {
+        if (view == View.ENTRY && entry != null && entry.boss() != null) {
+            return entry.boss().color();
+        }
+        return 0xFF9A3C;
     }
 
     /** Marcadores de capítulo presos na borda direita do livro. */

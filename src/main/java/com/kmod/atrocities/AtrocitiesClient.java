@@ -34,6 +34,11 @@ public class AtrocitiesClient {
         ModTooltips.register(modBus);
         CameraShake.register();
         DamageNumbers.register();
+        com.kmod.atrocities.client.vfx.WorldVfx.register();
+        com.kmod.atrocities.client.vfx.PostFx.register();
+        modBus.addListener(net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent.class,
+                event -> event.registerReloadListener((net.minecraft.server.packs.resources.ResourceManagerReloadListener)
+                        manager -> com.kmod.atrocities.client.vfx.PostFx.invalidate()));
         com.kmod.atrocities.client.cinematic.CinematicDirector.register();
         com.kmod.atrocities.client.codex.CodexClient.register(modBus);
     }

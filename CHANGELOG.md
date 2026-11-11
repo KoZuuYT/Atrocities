@@ -6,6 +6,55 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 
 ## [Não lançado]
 
+## [1.7.0] - 2026-11-11 — Fase 12: Rework Visual
+
+### Adicionado
+- **Efeitos renderizados no mundo:** os golpes agora têm geometria própria com brilho aditivo, e as partículas só complementam.
+  - Ondas de choque: anel rente ao chão com parede de energia, que também **distorce a tela** de quem está perto.
+  - Explosões em esfera com raios de luz, colunas de luz verticais, fendas de teleporte e estrelas de impacto.
+  - **Telegrafos desenhados:** a área de perigo se preenche até o golpe, e as investidas mostram uma faixa com setas correndo até o alvo.
+  - **Aura de carga:** fios de energia espiralando para dentro do chefe enquanto ele prepara um golpe.
+  - Auréola girando sobre chefes atordoados.
+  - Rastros em fita para todos os projéteis biológicos.
+  - Cortes de energia ao atacar com o Cutelo Sanguíneo, a Marreta de Carapaça e o Punho do Titã.
+- **Pós-processamento cinematográfico** perto de chefes e nas cutscenes:
+  - Bloom nas máscaras emissivas e na energia (o céu fica de fora).
+  - Aberração cromática ao tomar dano, nas trocas de fase e nas explosões.
+  - Profundidade de campo real nas cutscenes, com foco no chefe.
+  - Gradação de cor tingida pela linhagem do chefe, vinheta e granulado de filme.
+  - Borda vermelha pulsando na Fúria e com a vida baixa.
+  - Clarões de tela no rugido, na ruptura de fase e na morte.
+- **Chefes e mutantes vivos:**
+  - Respiração procedural (peito, abdômen, bolsas, núcleos), mais rápida nas fases altas.
+  - Espasmos orgânicos na cabeça, nas mandíbulas e nas presas.
+  - Máscara emissiva pulsando em batimento duplo. Ela acende durante a carga e falha quando o chefe está atordoado.
+  - Um segundo passe aditivo faz o brilho estourar no bloom.
+  - O amassado de impacto ganhou rebote elástico, e a carga ganhou um quadro de antecipação.
+- **Máquinas ligadas:** luzes biológicas pulsando na frente e animações próprias:
+  - Bolhas no Extrator e no Incubador.
+  - Rotor na Centrífuga.
+  - Leitura de DNA no Sequenciador.
+  - Órbitas no Terminal de Imbuição.
+- **Códex vivo:**
+  - Folha virando de verdade, com perspectiva, sombra e brilho na borda.
+  - Aura pulsante e runas flutuando em volta do livro.
+  - Paisagem sonora com batimento grave.
+  - Tanque do visualizador 3D com contraluz, pedestal giratório e linha de varredura.
+- Opções de cliente `visuals.renderedVfx`, `visuals.postProcessing` e `visuals.damageNumbers`.
+
+### Alterado
+- **Cutscenes:**
+  - O trilho da câmera virou uma spline Catmull-Rom contínua, sem paradas nos quadros-chave.
+  - A lente dá um soco de zoom e a câmera um tranco no clímax.
+  - Os títulos aparecem letra a letra, com rastro de aberração e uma falha no clarão, sobre uma faixa de luz.
+  - As faixas de cinema ganharam um filete de cor.
+- **Números de dano:** contorno escuro e inclinação de carimbo. Golpes pesados (30+) aparecem em laranja, e golpes críticos e pesados soltam uma estrela de impacto.
+- **Texturas:** todas as dos chefes, mutantes e órgãos foram refinadas.
+  - Volume com luz de cima, oclusão nas bordas das peças e variação orgânica.
+  - Saturação mais viva e brilhos úmidos.
+  - Máscaras emissivas mais intensas.
+- Os telegrafos de partículas ficaram mais leves, já que a geometria renderizada faz o trabalho principal.
+
 ## [1.6.0] - 2026-11-11 — Fase 11: Novos Mutantes, Carapaça e Surtos
 
 ### Adicionado

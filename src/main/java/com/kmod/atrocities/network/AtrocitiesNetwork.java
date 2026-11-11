@@ -36,6 +36,8 @@ public final class AtrocitiesNetwork {
                 (payload, context) -> com.kmod.atrocities.client.fx.CameraShake.add(payload.intensity(), payload.duration()));
         effects.playToClient(CutscenePayload.TYPE, CutscenePayload.STREAM_CODEC,
                 (payload, context) -> com.kmod.atrocities.client.cinematic.CinematicDirector.play(payload));
+        effects.playToClient(VfxPayload.TYPE, VfxPayload.STREAM_CODEC,
+                (payload, context) -> com.kmod.atrocities.client.vfx.WorldVfx.play(payload));
         effects.playToClient(CodexSyncPayload.TYPE, CodexSyncPayload.STREAM_CODEC,
                 (payload, context) -> com.kmod.atrocities.client.codex.ClientCodex.onSync(payload));
     }

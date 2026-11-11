@@ -1,0 +1,43 @@
+{
+    "blend": { "func": "add", "srcrgb": "one", "dstrgb": "zero" },
+    "vertex": "screenquad",
+    "fragment": "atrocities:grade",
+    "attributes": [ "Position" ],
+    "samplers": [
+        { "name": "DiffuseSampler" },
+        { "name": "BloomSampler" },
+        { "name": "BlurSampler" },
+        { "name": "DepthSampler" }
+    ],
+    "uniforms": [
+        { "name": "ProjMat",       "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+        { "name": "OutSize",       "type": "float", "count": 2, "values": [ 1.0, 1.0 ] },
+        { "name": "Time",          "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "Bloom",         "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "Aberration",    "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "Vignette",      "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "Saturation",    "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "Contrast",      "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "TintR",         "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "TintG",         "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "TintB",         "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "TintAmount",    "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "EdgeR",         "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "EdgeG",         "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "EdgeB",         "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "EdgeAmount",    "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "FlashR",        "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "FlashG",        "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "FlashB",        "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "Flash",         "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "Dof",           "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "FocusDepth",    "type": "float", "count": 1, "values": [ 10.0 ] },
+        { "name": "Near",          "type": "float", "count": 1, "values": [ 0.05 ] },
+        { "name": "Far",           "type": "float", "count": 1, "values": [ 256.0 ] },
+        { "name": "ShockX",        "type": "float", "count": 1, "values": [ 0.5 ] },
+        { "name": "ShockY",        "type": "float", "count": 1, "values": [ 0.5 ] },
+        { "name": "ShockRadius",   "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "ShockStrength", "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "Grain",         "type": "float", "count": 1, "values": [ 0.0 ] }
+    ]
+}

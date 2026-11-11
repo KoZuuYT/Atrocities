@@ -145,6 +145,8 @@ public class MutantRelicItem extends Item {
             return;
         }
         player.fallDistance = 0;
+        com.kmod.atrocities.fx.Vfx.rift(level, from.add(0, 1, 0), 1.2f, 0xFF4FD8, 12);
+        com.kmod.atrocities.fx.Vfx.rift(level, player.position().add(0, 1, 0), 1.2f, 0xFF4FD8, 12);
         GeneticsFx.burst(level, net.minecraft.core.particles.ParticleTypes.REVERSE_PORTAL, from.add(0, 1, 0), 40, 0.4, 0.2);
         GeneticsFx.burst(level, net.minecraft.core.particles.ParticleTypes.PORTAL, player.position().add(0, 1, 0), 60, 0.5, 0.6);
         GeneticsFx.burst(level, GeneticsFx.dust(0xFF4FD8, 1.8f), player.position().add(0, 1, 0), 24, 0.6, 0.1);

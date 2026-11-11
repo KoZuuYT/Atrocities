@@ -32,6 +32,7 @@ public class IncubatorRenderer implements BlockEntityRenderer<BiologicalIncubato
     @Override
     public void render(BiologicalIncubatorBlockEntity incubator, float partialTick, PoseStack pose,
                        MultiBufferSource buffers, int packedLight, int packedOverlay) {
+        MachineGlowRenderer.draw(incubator, 0xFFA530, MachineGlowRenderer.Pattern.BUBBLES, partialTick, pose, buffers);
         ItemStack stack = incubator.displayStack();
         Level level = incubator.getLevel();
         if (stack.isEmpty() || level == null) {

@@ -840,5 +840,9 @@
   "codex.atrocities.entry.mutant_armor": "Carapaça Mutante",
   "codex.atrocities.entry.mutant_armor.p1": "Todo mutante solta Escamas Mutantes. Costure-as sobre uma peça de diamante para criar a Carapaça Mutante: quase tão resistente quanto netherite, colorida e imbuível no Terminal de Imbuição.",
   "codex.atrocities.entry.mutant_armor.h1": "Bônus do conjunto",
-  "codex.atrocities.entry.mutant_armor.p2": "Com as quatro peças: 20% menos dano de mutantes e Aberrações Primordiais, e imunidade a veneno e náusea."
+  "codex.atrocities.entry.mutant_armor.p2": "Com as quatro peças: 20% menos dano de mutantes e Aberrações Primordiais, e imunidade a veneno e náusea.",
+  "atrocities.configuration.visuals": "Visual",
+  "atrocities.configuration.renderedVfx": "Efeitos renderizados",
+  "atrocities.configuration.postProcessing": "Pós-processamento cinematográfico",
+  "atrocities.configuration.damageNumbers": "Números de dano"
 }

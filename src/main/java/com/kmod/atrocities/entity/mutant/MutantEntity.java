@@ -192,6 +192,10 @@ public abstract class MutantEntity extends AtrocityBoss {
         level.playSound(null, at.x, at.y, at.z, ModSounds.MUTANT_BLAST.get(), getSoundSource(), 3f,
                 0.8f + random.nextFloat() * 0.2f);
         com.kmod.atrocities.fx.BossFx.shake(level, at, radius * 4, 1.2f, 16);
+        com.kmod.atrocities.fx.Vfx.burst(level, at, (float) radius * 0.9f, mutantColor(), 12);
+        com.kmod.atrocities.fx.Vfx.shockwave(level, at.subtract(0, 0.5, 0), (float) radius * 1.5f, 0xFFB060, 14);
+        com.kmod.atrocities.fx.Vfx.flash(level, at, (float) radius * 5, 0xFFC080, 0.3f);
+        com.kmod.atrocities.fx.Vfx.aberration(level, at, (float) radius * 5, 0.9f);
         return strike(at, radius, multiplier, push, 0.6, null);
     }
 

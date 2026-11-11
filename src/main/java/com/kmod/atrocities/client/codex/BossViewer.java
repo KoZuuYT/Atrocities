@@ -281,6 +281,41 @@ public final class BossViewer {
             g.fill(x, gy, x + w, gy + 1, 0x0FFFFFFF);
         }
 
+        if (!locked) {
+            // Contraluz do tanque: brilho em camadas atras do especime, pulsando como um coracao.
+            float beat = (float) Math.pow(Math.max(0f, Mth.sin(time * 0.14f)), 10);
+            int cx = x + w / 2;
+            int cy = y + h / 2 + 6;
+            for (int layer = 0; layer < 7; layer++) {
+                int rx = (int) (w * (0.48f - layer * 0.06f));
+                int ry = (int) (h * (0.42f - layer * 0.05f));
+                int alpha = (int) ((10 + layer * 4) * (0.75f + 0.5f * beat));
+                g.fill(cx - rx, cy - ry, cx + rx, cy + ry, CodexStyle.withAlpha(color, alpha));
+            }
+            // Pedestal: aneis elipticos de luz sob o modelo, girando.
+            int baseY = y + h - 14;
+            for (int ring = 0; ring < 3; ring++) {
+                float radius = w * (0.18f + ring * 0.09f);
+                int segments = 40;
+                for (int i = 0; i < segments; i++) {
+                    float angle = i / (float) segments * Mth.TWO_PI + time * 0.03f * (ring % 2 == 0 ? 1 : -1);
+                    if ((i + ring) % 4 == 0) {
+                        continue;
+                    }
+                    int px = cx + (int) (Mth.cos(angle) * radius);
+                    int py = baseY + (int) (Mth.sin(angle) * radius * 0.22f);
+                    int alpha = (int) ((Mth.sin(angle) * 0.5f + 0.5f) * (150 - ring * 40) + 30);
+                    g.fill(px, py, px + 2, py + 1, CodexStyle.withAlpha(CodexStyle.lighten(color, 0.3f), alpha));
+                }
+            }
+            // Linha de varredura subindo pelo tanque.
+            int scan = y + h - (int) ((time * 1.4f) % (h + 30));
+            if (scan > y && scan < y + h) {
+                g.fillGradient(x, scan - 10, x + w, scan, 0, CodexStyle.withAlpha(CodexStyle.lighten(color, 0.5f), 38));
+                g.fill(x, scan, x + w, scan + 1, CodexStyle.withAlpha(CodexStyle.lighten(color, 0.6f), 90));
+            }
+        }
+
         float rise = 0f;
         if (revealTick >= 0 && revealTick < REVEAL_EMERGE_AT) {
             rise = 1f;

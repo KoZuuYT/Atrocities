@@ -116,7 +116,11 @@ public final class CinematicDirector {
         NeoForge.EVENT_BUS.addListener(ViewportEvent.ComputeFov.class, event -> {
             if (active) {
                 float weight = weight((float) event.getPartialTick());
-                event.setFOV(Mth.lerp(weight, event.getFOV(), Math.min(event.getFOV(), 55.0)));
+                float since = sinceClimax(time((float) event.getPartialTick()));
+                // Soco de lente: fecha rapido no clarao e abre devagar.
+                double punch = since >= 0 && since < 16 ? Math.sin(Math.min(1, since / 3.0) * Math.PI * 0.5)
+                        * (1 - since / 16.0) * 9.0 : 0;
+                event.setFOV(Mth.lerp(weight, event.getFOV(), Math.min(event.getFOV(), 55.0) - punch));
             }
         });
         NeoForge.EVENT_BUS.addListener(EntityTickEvent.Pre.class, CinematicDirector::onEntityTick);
@@ -191,6 +195,18 @@ public final class CinematicDirector {
         return x * x * (3f - 2f * x);
     }
 
+    /** Catmull-Rom: curva que passa pelos quadros-chave sem parar neles. */
+    private static float spline(float p0, float p1, float p2, float p3, float t) {
+        float t2 = t * t;
+        float t3 = t2 * t;
+        return 0.5f * (2 * p1 + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t2 + (-p0 + 3 * p1 - 3 * p2 + p3) * t3);
+    }
+
+    /** Ticks desde o clarao (rugido ou ruptura); negativo antes dele. */
+    private static float sinceClimax(float t) {
+        return t - (duration - (kind == CutscenePayload.INTRO ? INTRO_ROAR_BEFORE_END : PHASE_CLIMAX_BEFORE_END));
+    }
+
     /**
      * Pose da camera neste quadro, misturada com a camera normal do jogador nas pontas.
      *
@@ -207,7 +223,9 @@ public final class CinematicDirector {
             return null;
         }
         float t = time(partialTick);
-        float progress = t / Math.max(1, duration);
+        // Progresso com aceleracao e frenagem suaves nas pontas; no meio a camera nunca para.
+        float raw = Mth.clamp(t / Math.max(1, duration), 0f, 1f);
+        float progress = raw * 0.65f + 0.35f * (0.5f - 0.5f * Mth.cos(raw * Mth.PI));
         Key[] track = kind == CutscenePayload.INTRO ? INTRO : PHASE;
         int index = 0;
         while (index < track.length - 2 && progress > track[index + 1].time()) {
@@ -215,11 +233,13 @@ public final class CinematicDirector {
         }
         Key a = track[index];
         Key b = track[index + 1];
-        float local = smooth(Mth.clamp((progress - a.time()) / Math.max(1.0E-4f, b.time() - a.time()), 0f, 1f));
-        float yawOffset = Mth.lerp(local, a.yaw(), b.yaw()) * mirror;
-        float distance = Mth.lerp(local, a.distance(), b.distance());
-        float height = Mth.lerp(local, a.height(), b.height());
-        float look = Mth.lerp(local, a.look(), b.look());
+        Key before = track[Math.max(0, index - 1)];
+        Key after = track[Math.min(track.length - 1, index + 2)];
+        float local = Mth.clamp((progress - a.time()) / Math.max(1.0E-4f, b.time() - a.time()), 0f, 1f);
+        float yawOffset = spline(before.yaw(), a.yaw(), b.yaw(), after.yaw(), local) * mirror;
+        float distance = spline(before.distance(), a.distance(), b.distance(), after.distance(), local);
+        float height = spline(before.height(), a.height(), b.height(), after.height(), local);
+        float look = spline(before.look(), a.look(), b.look(), after.look(), local);
 
         double size = Math.max(boss.getBbWidth(), boss.getBbHeight()) + 1.5;
         Vec3 base = new Vec3(Mth.lerp(partialTick, boss.xo, boss.getX()), Mth.lerp(partialTick, boss.yo, boss.getY()),
@@ -227,7 +247,11 @@ public final class CinematicDirector {
         float yaw = (frontYaw + yawOffset) * Mth.DEG_TO_RAD;
         Vec3 direction = new Vec3(-Mth.sin(yaw), 0, Mth.cos(yaw));
         // Leve balanco de "camera na mao".
-        Vec3 sway = new Vec3(Mth.sin(t * 0.07f) * 0.12, Mth.sin(t * 0.05f + 1f) * 0.08, Mth.cos(t * 0.06f) * 0.12);
+        float since = sinceClimax(t);
+        float jolt = since >= 0 && since < 12 ? (1 - since / 12f) * 0.35f : 0f;
+        Vec3 sway = new Vec3(Mth.sin(t * 0.07f) * 0.12 + Mth.sin(t * 0.23f) * 0.03 + Mth.sin(t * 2.1f) * jolt,
+                Mth.sin(t * 0.05f + 1f) * 0.08 + Mth.sin(t * 1.7f + 2f) * jolt,
+                Mth.cos(t * 0.06f) * 0.12 + Mth.cos(t * 0.19f) * 0.03);
         Vec3 target = base.add(0, boss.getBbHeight() * look, 0);
         Vec3 desired = base.add(direction.scale(distance * size)).add(0, height * size, 0).add(sway);
 
@@ -283,6 +307,12 @@ public final class CinematicDirector {
         graphics.fill(0, height - barHeight, width, height, 0xFF000000);
 
         int accent = boss != null ? boss.archetype().color() : 0xB01020;
+        if (barHeight > 2) {
+            // Filete de luz na borda das faixas, pulsando de leve.
+            float rim = (0.35f + 0.25f * Mth.sin(t * 0.2f)) * bars;
+            graphics.fillGradient(0, barHeight - 1, width, barHeight + 3, argb(accent, rim), 0);
+            graphics.fillGradient(0, height - barHeight - 3, width, height - barHeight + 1, 0, argb(accent, rim));
+        }
         String path = boss != null ? BuiltInRegistries.ENTITY_TYPE.getKey(boss.getType()).getPath() : "boss";
 
         // Clarao no rugido (entrada) ou na ruptura (troca de fase).
@@ -290,7 +320,7 @@ public final class CinematicDirector {
         float sinceFlash = t - flashAt;
         if (sinceFlash >= 0 && sinceFlash < 10) {
             float strength = 1f - sinceFlash / 10f;
-            graphics.fill(0, 0, width, height, (alpha(0.45f * strength) << 24) | (accent & 0xFFFFFF));
+            graphics.fill(0, 0, width, height, (alpha(0.22f * strength) << 24) | (accent & 0xFFFFFF));
         }
 
         float fadeOut = Mth.clamp((duration - t) / 10f, 0f, 1f);
@@ -305,9 +335,11 @@ public final class CinematicDirector {
                 drawTracked(graphics, font, Component.translatable("cutscene.atrocities.tier", tier).getString()
                                 .toUpperCase(), cx, (int) (height * 0.56f), 1.0f, 3, 0xF2A51A, labelAlpha,
                         Integer.MAX_VALUE);
-                int letters = (int) (local / 1.1f);
-                drawTracked(graphics, font, name.getString().toUpperCase(), cx, (int) (height * 0.60f), 3.0f, 2,
-                        accent, fadeOut, letters);
+                float reveal = local / 1.1f;
+                drawGlowBand(graphics, cx, (int) (height * 0.60f) + 12, Math.min(width, 520), accent,
+                        Mth.clamp(local / 10f, 0f, 1f) * fadeOut);
+                drawRevealed(graphics, font, name.getString().toUpperCase(), cx, (int) (height * 0.60f), 3.0f, 2,
+                        accent, fadeOut, reveal, t);
                 drawLine(graphics, cx, (int) (height * 0.60f) + 30, Mth.clamp((local - 6) / 14f, 0f, 1f),
                         Math.min(width - 40, 260), accent, fadeOut);
                 float epithetAlpha = Mth.clamp((local - 14) / 10f, 0f, 1f) * fadeOut;
@@ -324,9 +356,11 @@ public final class CinematicDirector {
                 drawTracked(graphics, font, Component.translatable("cutscene.atrocities.phase", roman(phase))
                                 .getString().toUpperCase(), cx, (int) (height * 0.30f), 1.4f, 4, 0xE3262F, labelAlpha,
                         Integer.MAX_VALUE);
-                int letters = (int) Math.max(0, (local - 6) / 1.0f);
-                drawTracked(graphics, font, Component.translatable("cutscene.atrocities." + path + ".phase" + phase)
-                        .getString().toUpperCase(), cx, (int) (height * 0.30f) + 16, 2.4f, 2, accent, fadeOut, letters);
+                float reveal = Math.max(0, (local - 6) / 1.0f);
+                drawGlowBand(graphics, cx, (int) (height * 0.30f) + 26, Math.min(width, 460), accent,
+                        Mth.clamp((local - 4) / 10f, 0f, 1f) * fadeOut);
+                drawRevealed(graphics, font, Component.translatable("cutscene.atrocities." + path + ".phase" + phase)
+                        .getString().toUpperCase(), cx, (int) (height * 0.30f) + 16, 2.4f, 2, accent, fadeOut, reveal, t);
                 drawLine(graphics, cx, (int) (height * 0.30f) + 42, Mth.clamp((local - 10) / 12f, 0f, 1f),
                         Math.min(width - 40, 220), accent, fadeOut);
                 float hintAlpha = Mth.clamp((local - 18) / 10f, 0f, 1f) * fadeOut;
@@ -369,6 +403,72 @@ public final class CinematicDirector {
             x += font.width(ch) + spacing;
         }
         graphics.pose().popPose();
+    }
+
+    /**
+     * Titulo animado: cada letra cai no lugar encolhendo de um tamanho maior, com um rastro de aberracao
+     * cromatica (vermelho/ciano) que se fecha ao assentar, e o conjunto "falha" de leve no clarao.
+     */
+    private static void drawRevealed(GuiGraphics graphics, Font font, String text, int cx, int y, float scale,
+                                     int spacing, int color, float alpha, float reveal, float t) {
+        if (alpha <= 0.02f || reveal <= 0) {
+            return;
+        }
+        int total = 0;
+        for (int i = 0; i < text.length(); i++) {
+            total += font.width(String.valueOf(text.charAt(i))) + spacing;
+        }
+        total -= spacing;
+        float since = sinceClimax(t);
+        float glitch = since >= 0 && since < 8 ? 1 - since / 8f : 0f;
+        graphics.pose().pushPose();
+        graphics.pose().translate(cx, y, 0);
+        graphics.pose().scale(scale, scale, 1f);
+        int x = -total / 2;
+        for (int i = 0; i < text.length(); i++) {
+            String ch = String.valueOf(text.charAt(i));
+            int w = font.width(ch);
+            float appear = Mth.clamp(reveal - i, 0f, 1f);
+            if (appear > 0f) {
+                float settle = 1f - appear;
+                float letterScale = 1f + 0.9f * settle * settle;
+                float drop = -7f * settle * settle;
+                float jitter = glitch > 0 ? Mth.sin(t * 7.3f + i * 2.1f) * 1.6f * glitch : 0f;
+                float a = alpha * Math.min(1f, appear * 1.6f);
+                graphics.pose().pushPose();
+                graphics.pose().translate(x + w / 2f + jitter, drop + 4, 0);
+                graphics.pose().scale(letterScale, letterScale, 1f);
+                float split = 0.6f + 2.4f * settle + 2f * glitch;
+                graphics.drawString(font, ch, Math.round(-w / 2f - split), -4, argb(0xFF2A4A, a * 0.45f), false);
+                graphics.drawString(font, ch, Math.round(-w / 2f + split), -4, argb(0x2AE8FF, a * 0.45f), false);
+                int c = settle > 0.35f ? argb(0xFFFFFF, a) : argb(color, a);
+                graphics.drawString(font, ch, Math.round(-w / 2f), -4, c, true);
+                graphics.pose().popPose();
+            }
+            x += w + spacing;
+        }
+        graphics.pose().popPose();
+    }
+
+    /** Faixa de luz suave atras dos titulos (escurece o fundo e tinge com a cor do chefe). */
+    private static void drawGlowBand(GuiGraphics graphics, int cx, int cy, int width, int color, float alpha) {
+        if (alpha <= 0.02f) {
+            return;
+        }
+        int half = width / 2;
+        int bandHeight = 34;
+        for (int x = 0; x < half; x += 4) {
+            float fade = 1f - x / (float) half;
+            fade = fade * fade;
+            int dark = argb(0x000000, 0.45f * alpha * fade);
+            int tint = argb(color, 0.16f * alpha * fade);
+            graphics.fillGradient(cx + x, cy - bandHeight / 2, cx + x + 4, cy, 0, dark);
+            graphics.fillGradient(cx + x, cy, cx + x + 4, cy + bandHeight / 2, dark, 0);
+            graphics.fillGradient(cx - x - 4, cy - bandHeight / 2, cx - x, cy, 0, dark);
+            graphics.fillGradient(cx - x - 4, cy, cx - x, cy + bandHeight / 2, dark, 0);
+            graphics.fill(cx + x, cy - 1, cx + x + 4, cy + 1, tint);
+            graphics.fill(cx - x - 4, cy - 1, cx - x, cy + 1, tint);
+        }
     }
 
     private static void drawCentered(GuiGraphics graphics, Font font, Component text, int cx, int y, float scale,

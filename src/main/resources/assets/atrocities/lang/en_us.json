@@ -840,5 +840,9 @@
   "codex.atrocities.entry.mutant_armor": "Mutant Carapace",
   "codex.atrocities.entry.mutant_armor.p1": "Every mutant drops Mutant Scales. Stitch them over a diamond piece to make the Mutant Carapace: nearly as tough as netherite, colorful and imbuable at the Imbuing Terminal.",
   "codex.atrocities.entry.mutant_armor.h1": "Set bonus",
-  "codex.atrocities.entry.mutant_armor.p2": "With all four pieces: 20% less damage from mutants and Primordial Aberrations, and immunity to poison and nausea."
+  "codex.atrocities.entry.mutant_armor.p2": "With all four pieces: 20% less damage from mutants and Primordial Aberrations, and immunity to poison and nausea.",
+  "atrocities.configuration.visuals": "Visuals",
+  "atrocities.configuration.renderedVfx": "Rendered effects",
+  "atrocities.configuration.postProcessing": "Cinematic post-processing",
+  "atrocities.configuration.damageNumbers": "Damage numbers"
 }

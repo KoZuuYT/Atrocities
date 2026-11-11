@@ -105,6 +105,12 @@ public final class AtrocitiesConfig {
     public static final ModConfigSpec.BooleanValue CHECK_FOR_UPDATES;
     /** Mostra o botao de atualizacao no menu principal. */
     public static final ModConfigSpec.BooleanValue TITLE_SCREEN_NOTICE;
+    /** Efeitos renderizados no mundo (ondas, colunas, telegrafos, rastros). */
+    public static final ModConfigSpec.BooleanValue RENDERED_VFX;
+    /** Pos-processamento cinematografico (bloom, aberracao, profundidade de campo, gradacao). */
+    public static final ModConfigSpec.BooleanValue POST_PROCESSING;
+    /** Numeros de dano flutuantes. */
+    public static final ModConfigSpec.BooleanValue DAMAGE_NUMBERS;
 
     static {
         CLIENT.comment("Atualizacoes").push("updates");
@@ -114,6 +120,18 @@ public final class AtrocitiesConfig {
         TITLE_SCREEN_NOTICE = CLIENT
                 .comment("Mostra um botao no menu principal quando existe uma versao nova.")
                 .define("titleScreenNotice", true);
+        CLIENT.pop();
+
+        CLIENT.comment("Visual").push("visuals");
+        RENDERED_VFX = CLIENT
+                .comment("Efeitos renderizados: ondas de choque, colunas de luz, telegrafos, auras e rastros.")
+                .define("renderedVfx", true);
+        POST_PROCESSING = CLIENT
+                .comment("Pos-processamento nas lutas e cutscenes: bloom, aberracao cromatica, profundidade de campo e cor.")
+                .define("postProcessing", true);
+        DAMAGE_NUMBERS = CLIENT
+                .comment("Numeros de dano flutuantes nos chefes e mutantes.")
+                .define("damageNumbers", true);
         CLIENT.pop();
     }
 

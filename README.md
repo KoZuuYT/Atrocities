@@ -74,6 +74,21 @@ Datapacks podem liberar outros itens pelas tags `atrocities:imbuable_weapons` e 
 5. **Despertar e combate:** use o Embrião Maduro no chão e enfrente o chefe: Colosso Quitinoso, Matriarca Hemófaga ou Legião Coalescida, conforme o arquétipo. A entrada e cada troca de fase (a 66% e a 33% de vida) são cutscenes que congelam a arena. Cada uma das três fases tem uma mecânica própria para derrotar o chefe. As Aberrações Primordiais têm de 900 a 3.000 de vida, conforme o tier e os traços. Cada golpe é avisado por um telegrafo no chão; quando o chefe fica atordoado, ele está vulnerável.
 6. **Loot:** cada chefe deixa Corações Aberrantes (um por tier) e seu troféu. Com eles você faz a Marreta de Carapaça, o Cutelo Sanguíneo ou o Lança-Bile.
 
+## Visual
+
+A partir da 1.7.0, os golpes têm efeitos renderizados:
+- Ondas de choque que distorcem a tela, colunas de luz e explosões com raios.
+- Telegrafos que se preenchem até o impacto e auras de carga.
+- Rastros de projéteis e cortes de energia das armas.
+
+Perto de um chefe e nas cutscenes, entra um pós-processamento próprio: bloom, aberração cromática, profundidade de campo, gradação de cor e clarões. Chefes respiram, têm espasmos e pulsam como um coração. Tudo pode ser desligado no `config/atrocities-client.toml`:
+
+| Opção | Padrão | Descrição |
+|---|---|---|
+| `visuals.renderedVfx` | true | Efeitos renderizados no mundo |
+| `visuals.postProcessing` | true | Bloom, aberração, profundidade de campo e cor nas lutas e cutscenes |
+| `visuals.damageNumbers` | true | Números de dano flutuantes |
+
 ## Códex Atrocitas
 
 Todo jogador recebe o **Códex Atrocitas** ao entrar no mundo pela primeira vez. É um livro-guia com receitas, espécies, máquinas, genética e armas.
@@ -97,6 +112,7 @@ O conteúdo vem de resource packs: `assets/<ns>/codex/chapters/*.json` e `assets
 | 9. Mutantes: soros, mutação em estágios, cinco mutantes e relíquias | 1.4.0 | ✅ |
 | 10. Imbuição genética de armas: terminal, tanques e traços evoluíveis | 1.5.0 | ✅ |
 | 11. Mais mutantes (Enderman, Slime, Bruxa), Carapaça Mutante e surtos | 1.6.0 | ✅ |
+| 12. Rework visual: VFX renderizados, pós-processamento, chefes vivos, Códex animado | 1.7.0 | ✅ |
 
 Veja o [CHANGELOG](CHANGELOG.md) para o histórico completo.
 

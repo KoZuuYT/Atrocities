@@ -246,6 +246,8 @@ public class RiftEndermanEntity extends MutantEntity {
         if (!randomTeleport(ground.x, ground.y, ground.z, false)) {
             blinkNear(level, to, 2.5);
         }
+        com.kmod.atrocities.fx.Vfx.rift(level, from.add(0, getBbHeight() * 0.5, 0), getBbHeight() * 0.55f, COLOR, 14);
+        com.kmod.atrocities.fx.Vfx.rift(level, position().add(0, getBbHeight() * 0.5, 0), getBbHeight() * 0.55f, COLOR, 14);
         GeneticsFx.burst(level, ParticleTypes.REVERSE_PORTAL, from.add(0, getBbHeight() * 0.5, 0), 50, 0.5, 0.1);
         GeneticsFx.burst(level, ParticleTypes.PORTAL, position().add(0, getBbHeight() * 0.5, 0), 60, 0.5, 0.6);
         GeneticsFx.burst(level, GeneticsFx.dust(COLOR, 2f), position().add(0, getBbHeight() * 0.5, 0), 20, 0.5, 0.1);
