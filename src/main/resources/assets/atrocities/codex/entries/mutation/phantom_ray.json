@@ -1,0 +1,77 @@
+{
+  "chapter": "atrocities:mutation",
+  "order": 7,
+  "icon": "atrocities:ethereal_membrane",
+  "title": "entity.atrocities.phantom_ray",
+  "unlock": {
+    "type": "encounter",
+    "target": "atrocities:phantom_ray"
+  },
+  "boss": {
+    "entity": "atrocities:phantom_ray",
+    "epithet": "codex.atrocities.mutant.phantom_ray.epithet",
+    "color": "#5AF0FF",
+    "view_scale": 1.0,
+    "lore": [
+      "codex.atrocities.mutant.phantom_ray.lore1",
+      "codex.atrocities.mutant.phantom_ray.lore2"
+    ],
+    "dissection": "codex.atrocities.mutant.phantom_ray.dissection",
+    "phases": [
+      {
+        "name": "codex.atrocities.mutant.phantom_ray.phase1",
+        "description": "codex.atrocities.mutant.phantom_ray.phase1.desc"
+      },
+      {
+        "name": "codex.atrocities.mutant.phantom_ray.phase2",
+        "description": "codex.atrocities.mutant.phantom_ray.phase2.desc"
+      }
+    ],
+    "attacks": [
+      {
+        "name": "codex.atrocities.mutant.phantom_ray.attack.swoop",
+        "description": "codex.atrocities.mutant.phantom_ray.attack.swoop.desc",
+        "animation": "swoop",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.phantom_ray.attack.shriek",
+        "description": "codex.atrocities.mutant.phantom_ray.attack.shriek.desc",
+        "animation": "shriek",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.phantom_ray.attack.gust",
+        "description": "codex.atrocities.mutant.phantom_ray.attack.gust.desc",
+        "animation": "gust",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.phantom_ray.attack.barrage",
+        "description": "codex.atrocities.mutant.phantom_ray.attack.barrage.desc",
+        "animation": "barrage",
+        "phase": 2
+      }
+    ],
+    "drops": [
+      {
+        "item": "atrocities:ethereal_membrane",
+        "amount": "1",
+        "note": "codex.atrocities.drop.relic"
+      },
+      {
+        "item": "atrocities:biomass",
+        "amount": "4–8"
+      },
+      {
+        "item": "atrocities:mutagen_serum",
+        "amount": "0–1"
+      },
+      {
+        "item": "atrocities:aberrant_heart",
+        "amount": "1",
+        "note": "codex.atrocities.drop.alpha"
+      }
+    ]
+  }
+}

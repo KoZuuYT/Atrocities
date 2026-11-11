@@ -1,0 +1,10 @@
+{
+  "sources": [
+    "minecraft:zombie",
+    "minecraft:husk",
+    "minecraft:drowned",
+    "minecraft:zombie_villager"
+  ],
+  "result": "atrocities:zombie_titan",
+  "color": "#7CD64B"
+}

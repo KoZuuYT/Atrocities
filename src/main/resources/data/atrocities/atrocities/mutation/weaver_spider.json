@@ -1,0 +1,8 @@
+{
+  "sources": [
+    "minecraft:spider",
+    "minecraft:cave_spider"
+  ],
+  "result": "atrocities:weaver_spider",
+  "color": "#B04BFF"
+}

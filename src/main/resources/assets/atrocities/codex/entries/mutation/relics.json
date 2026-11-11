@@ -1,0 +1,26 @@
+{
+  "chapter": "atrocities:mutation",
+  "order": 2,
+  "icon": "atrocities:titan_fist",
+  "title": "codex.atrocities.entry.relics",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.relics.p1"
+    },
+    {
+      "type": "items",
+      "items": [
+        "atrocities:titan_fist",
+        "atrocities:ballista_bow",
+        "atrocities:detonator_core",
+        "atrocities:weaver_gland",
+        "atrocities:ethereal_membrane"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.relics.p2"
+    }
+  ]
+}

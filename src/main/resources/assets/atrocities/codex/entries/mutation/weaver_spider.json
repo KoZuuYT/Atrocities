@@ -1,0 +1,83 @@
+{
+  "chapter": "atrocities:mutation",
+  "order": 6,
+  "icon": "atrocities:weaver_gland",
+  "title": "entity.atrocities.weaver_spider",
+  "unlock": {
+    "type": "encounter",
+    "target": "atrocities:weaver_spider"
+  },
+  "boss": {
+    "entity": "atrocities:weaver_spider",
+    "epithet": "codex.atrocities.mutant.weaver_spider.epithet",
+    "color": "#B04BFF",
+    "view_scale": 1.0,
+    "lore": [
+      "codex.atrocities.mutant.weaver_spider.lore1",
+      "codex.atrocities.mutant.weaver_spider.lore2"
+    ],
+    "dissection": "codex.atrocities.mutant.weaver_spider.dissection",
+    "phases": [
+      {
+        "name": "codex.atrocities.mutant.weaver_spider.phase1",
+        "description": "codex.atrocities.mutant.weaver_spider.phase1.desc"
+      },
+      {
+        "name": "codex.atrocities.mutant.weaver_spider.phase2",
+        "description": "codex.atrocities.mutant.weaver_spider.phase2.desc"
+      }
+    ],
+    "attacks": [
+      {
+        "name": "codex.atrocities.mutant.weaver_spider.attack.bite",
+        "description": "codex.atrocities.mutant.weaver_spider.attack.bite.desc",
+        "animation": "bite",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.weaver_spider.attack.web_shot",
+        "description": "codex.atrocities.mutant.weaver_spider.attack.web_shot.desc",
+        "animation": "web_shot",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.weaver_spider.attack.pounce",
+        "description": "codex.atrocities.mutant.weaver_spider.attack.pounce.desc",
+        "animation": "pounce",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.weaver_spider.attack.brood",
+        "description": "codex.atrocities.mutant.weaver_spider.attack.brood.desc",
+        "animation": "brood",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.weaver_spider.attack.venom_spray",
+        "description": "codex.atrocities.mutant.weaver_spider.attack.venom_spray.desc",
+        "animation": "venom_spray",
+        "phase": 2
+      }
+    ],
+    "drops": [
+      {
+        "item": "atrocities:weaver_gland",
+        "amount": "1",
+        "note": "codex.atrocities.drop.relic"
+      },
+      {
+        "item": "atrocities:biomass",
+        "amount": "4–8"
+      },
+      {
+        "item": "atrocities:mutagen_serum",
+        "amount": "0–1"
+      },
+      {
+        "item": "atrocities:aberrant_heart",
+        "amount": "1",
+        "note": "codex.atrocities.drop.alpha"
+      }
+    ]
+  }
+}

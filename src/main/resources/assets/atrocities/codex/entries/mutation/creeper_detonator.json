@@ -1,0 +1,77 @@
+{
+  "chapter": "atrocities:mutation",
+  "order": 5,
+  "icon": "atrocities:detonator_core",
+  "title": "entity.atrocities.creeper_detonator",
+  "unlock": {
+    "type": "encounter",
+    "target": "atrocities:creeper_detonator"
+  },
+  "boss": {
+    "entity": "atrocities:creeper_detonator",
+    "epithet": "codex.atrocities.mutant.creeper_detonator.epithet",
+    "color": "#6BFF3A",
+    "view_scale": 1.0,
+    "lore": [
+      "codex.atrocities.mutant.creeper_detonator.lore1",
+      "codex.atrocities.mutant.creeper_detonator.lore2"
+    ],
+    "dissection": "codex.atrocities.mutant.creeper_detonator.dissection",
+    "phases": [
+      {
+        "name": "codex.atrocities.mutant.creeper_detonator.phase1",
+        "description": "codex.atrocities.mutant.creeper_detonator.phase1.desc"
+      },
+      {
+        "name": "codex.atrocities.mutant.creeper_detonator.phase2",
+        "description": "codex.atrocities.mutant.creeper_detonator.phase2.desc"
+      }
+    ],
+    "attacks": [
+      {
+        "name": "codex.atrocities.mutant.creeper_detonator.attack.headbutt",
+        "description": "codex.atrocities.mutant.creeper_detonator.attack.headbutt.desc",
+        "animation": "headbutt",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.creeper_detonator.attack.pounce",
+        "description": "codex.atrocities.mutant.creeper_detonator.attack.pounce.desc",
+        "animation": "pounce",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.creeper_detonator.attack.charges",
+        "description": "codex.atrocities.mutant.creeper_detonator.attack.charges.desc",
+        "animation": "charges",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.creeper_detonator.attack.supernova",
+        "description": "codex.atrocities.mutant.creeper_detonator.attack.supernova.desc",
+        "animation": "supernova",
+        "phase": 1
+      }
+    ],
+    "drops": [
+      {
+        "item": "atrocities:detonator_core",
+        "amount": "1",
+        "note": "codex.atrocities.drop.relic"
+      },
+      {
+        "item": "atrocities:biomass",
+        "amount": "4–8"
+      },
+      {
+        "item": "atrocities:mutagen_serum",
+        "amount": "0–1"
+      },
+      {
+        "item": "atrocities:aberrant_heart",
+        "amount": "1",
+        "note": "codex.atrocities.drop.alpha"
+      }
+    ]
+  }
+}

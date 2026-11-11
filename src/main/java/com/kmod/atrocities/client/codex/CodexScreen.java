@@ -573,7 +573,7 @@ public class CodexScreen extends Screen {
         switch (tab) {
             case PROFILE -> {
                 CodexLayout.text(out, font, Component.translatable("codex.atrocities.boss.archetype", archetypeName(boss)), w, CodexStyle.INK);
-                CodexLayout.text(out, font, Component.translatable("codex.atrocities.boss.health"), w, CodexStyle.INK);
+                CodexLayout.text(out, font, healthLine(boss), w, CodexStyle.INK);
                 int kills = builtFor.killCount(id);
                 CodexLayout.text(out, font, Component.translatable("codex.atrocities.boss.kills", kills), w, CodexStyle.INK);
                 int best = builtFor.bestTier(id);
@@ -759,10 +759,20 @@ public class CodexScreen extends Screen {
         return BuiltInRegistries.ENTITY_TYPE.getKey(entry.boss().entity());
     }
 
+    private static Component healthLine(CodexData.Boss boss) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level != null && boss.entity().create(mc.level) instanceof AtrocityBoss sample) {
+            Component line = sample.codexHealth();
+            sample.discard();
+            return line;
+        }
+        return Component.translatable("codex.atrocities.boss.health");
+    }
+
     private static Component archetypeName(CodexData.Boss boss) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null && boss.entity().create(mc.level) instanceof AtrocityBoss sample) {
-            Component name = sample.archetype().displayName();
+            Component name = sample.codexSubtitle();
             sample.discard();
             return name;
         }

@@ -1,0 +1,83 @@
+{
+  "chapter": "atrocities:mutation",
+  "order": 4,
+  "icon": "atrocities:ballista_bow",
+  "title": "entity.atrocities.skeleton_ballista",
+  "unlock": {
+    "type": "encounter",
+    "target": "atrocities:skeleton_ballista"
+  },
+  "boss": {
+    "entity": "atrocities:skeleton_ballista",
+    "epithet": "codex.atrocities.mutant.skeleton_ballista.epithet",
+    "color": "#59D8FF",
+    "view_scale": 1.0,
+    "lore": [
+      "codex.atrocities.mutant.skeleton_ballista.lore1",
+      "codex.atrocities.mutant.skeleton_ballista.lore2"
+    ],
+    "dissection": "codex.atrocities.mutant.skeleton_ballista.dissection",
+    "phases": [
+      {
+        "name": "codex.atrocities.mutant.skeleton_ballista.phase1",
+        "description": "codex.atrocities.mutant.skeleton_ballista.phase1.desc"
+      },
+      {
+        "name": "codex.atrocities.mutant.skeleton_ballista.phase2",
+        "description": "codex.atrocities.mutant.skeleton_ballista.phase2.desc"
+      }
+    ],
+    "attacks": [
+      {
+        "name": "codex.atrocities.mutant.skeleton_ballista.attack.volley",
+        "description": "codex.atrocities.mutant.skeleton_ballista.attack.volley.desc",
+        "animation": "volley",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.skeleton_ballista.attack.ballista",
+        "description": "codex.atrocities.mutant.skeleton_ballista.attack.ballista.desc",
+        "animation": "ballista",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.skeleton_ballista.attack.rib_spin",
+        "description": "codex.atrocities.mutant.skeleton_ballista.attack.rib_spin.desc",
+        "animation": "rib_spin",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.skeleton_ballista.attack.backflip",
+        "description": "codex.atrocities.mutant.skeleton_ballista.attack.backflip.desc",
+        "animation": "backflip",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.skeleton_ballista.attack.bone_rain",
+        "description": "codex.atrocities.mutant.skeleton_ballista.attack.bone_rain.desc",
+        "animation": "bone_rain",
+        "phase": 2
+      }
+    ],
+    "drops": [
+      {
+        "item": "atrocities:ballista_bow",
+        "amount": "1",
+        "note": "codex.atrocities.drop.relic"
+      },
+      {
+        "item": "atrocities:biomass",
+        "amount": "4–8"
+      },
+      {
+        "item": "atrocities:mutagen_serum",
+        "amount": "0–1"
+      },
+      {
+        "item": "atrocities:aberrant_heart",
+        "amount": "1",
+        "note": "codex.atrocities.drop.alpha"
+      }
+    ]
+  }
+}

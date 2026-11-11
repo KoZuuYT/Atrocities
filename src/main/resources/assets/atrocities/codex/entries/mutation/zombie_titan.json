@@ -1,0 +1,83 @@
+{
+  "chapter": "atrocities:mutation",
+  "order": 3,
+  "icon": "atrocities:titan_fist",
+  "title": "entity.atrocities.zombie_titan",
+  "unlock": {
+    "type": "encounter",
+    "target": "atrocities:zombie_titan"
+  },
+  "boss": {
+    "entity": "atrocities:zombie_titan",
+    "epithet": "codex.atrocities.mutant.zombie_titan.epithet",
+    "color": "#7CD64B",
+    "view_scale": 1.0,
+    "lore": [
+      "codex.atrocities.mutant.zombie_titan.lore1",
+      "codex.atrocities.mutant.zombie_titan.lore2"
+    ],
+    "dissection": "codex.atrocities.mutant.zombie_titan.dissection",
+    "phases": [
+      {
+        "name": "codex.atrocities.mutant.zombie_titan.phase1",
+        "description": "codex.atrocities.mutant.zombie_titan.phase1.desc"
+      },
+      {
+        "name": "codex.atrocities.mutant.zombie_titan.phase2",
+        "description": "codex.atrocities.mutant.zombie_titan.phase2.desc"
+      }
+    ],
+    "attacks": [
+      {
+        "name": "codex.atrocities.mutant.zombie_titan.attack.smash",
+        "description": "codex.atrocities.mutant.zombie_titan.attack.smash.desc",
+        "animation": "smash",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.zombie_titan.attack.rift",
+        "description": "codex.atrocities.mutant.zombie_titan.attack.rift.desc",
+        "animation": "rift",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.zombie_titan.attack.leap",
+        "description": "codex.atrocities.mutant.zombie_titan.attack.leap.desc",
+        "animation": "leap",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.zombie_titan.attack.grab",
+        "description": "codex.atrocities.mutant.zombie_titan.attack.grab.desc",
+        "animation": "grab",
+        "phase": 1
+      },
+      {
+        "name": "codex.atrocities.mutant.zombie_titan.attack.horde",
+        "description": "codex.atrocities.mutant.zombie_titan.attack.horde.desc",
+        "animation": "horde",
+        "phase": 1
+      }
+    ],
+    "drops": [
+      {
+        "item": "atrocities:titan_fist",
+        "amount": "1",
+        "note": "codex.atrocities.drop.relic"
+      },
+      {
+        "item": "atrocities:biomass",
+        "amount": "4–8"
+      },
+      {
+        "item": "atrocities:mutagen_serum",
+        "amount": "0–1"
+      },
+      {
+        "item": "atrocities:aberrant_heart",
+        "amount": "1",
+        "note": "codex.atrocities.drop.alpha"
+      }
+    ]
+  }
+}

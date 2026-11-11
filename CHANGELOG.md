@@ -6,6 +6,39 @@ Cada versão tem o `.jar` correspondente nas [Releases do GitHub](https://github
 
 ## [Não lançado]
 
+## [1.4.0] - 2026-11-11 — Fase 9: Mutantes
+
+O mod muda de tom: sai a bioengenharia sombria, entra a mutação de mobs no estilo dos mods de mutantes, com criaturas grandes, coloridas e muito animadas. Os chefes de embrião continuam como desafio de fim de jogo.
+
+### Adicionado
+- **Soro Mutagênico:** injete num mob (clique direito) ou arremesse o frasco (clique direito no ar).
+  - Receita: Frasco de Amostra, qualquer Amostra Genética, Biomassa, olho de aranha fermentado e pó de pedra luminosa. Rende 2.
+  - **Doses 1 e 2:** o mob cresce 15% por dose e ganha vida, dano, velocidade, armadura e veias brilhantes. Ele sara e vai atrás de quem aplicou.
+  - **Dose 3:** metamorfose. O mob trava num casulo pulsante por 3,5 s, invulnerável, e explode no mutante.
+- **Soro Volátil:** Soro Mutagênico com pólvora, pó de blaze e redstone. Cada dose tem 15% de chance de estourar o mob, mas, se for a última, nasce um mutante **Alfa** (+50% de vida, +30% de dano, 15% maior, sempre deixa um Coração Aberrante e um Soro Volátil).
+- **Cinco mutantes**, com modelo GeckoLib próprio, de 7 a 9 animações cada e telegrafos em todos os golpes:
+  - **Titã Zumbi** (700 de vida): Esmagamento, Rasgo Sísmico, Salto Brutal, Agarrão e Chamado da Horda.
+  - **Esqueleto Balista** (560): Rajada, Disparo de Balista com mira travada, Giro de Costelas, Salto Mortal e Chuva de Ossos.
+  - **Creeper Detonador** (520): Cabeçada, Bote Explosivo, Cargas Voláteis e Supernova. Cause 12% da vida dele durante a carga para desarmá-lo. Explode ao morrer. Nenhuma explosão quebra blocos.
+  - **Aranha Tecelã** (600): escala paredes. Mordida venenosa, Disparo de Teia, Bote, Ninhada e Spray de Veneno.
+  - **Arraia-Fantasma** (480): voa o tempo todo. Mergulho, Guincho Sônico, Rajada de Asas e Orbes Etéreas teleguiadas.
+  - Todos entram em **Fúria** na metade da vida: rugem, ficam mais rápidos e liberam golpes novos.
+- **Relíquias mutantes**, uma por mutante:
+  - **Punho do Titã:** manopla; botão direito abre um Rasgo Sísmico em linha.
+  - **Arco Balista:** flechas 2,2x mais fortes; puxado ao máximo, dispara três de uma vez.
+  - **Núcleo Detonador:** explosão ao redor de quem usa, sem ferir o dono.
+  - **Glândula Tecelã:** dispara teia que prende o alvo.
+  - **Membrana Etérea:** impulso aéreo com queda lenta.
+- **Capítulo Mutação no Códex:** soros, estágios, relíquias e fichas secretas dos cinco mutantes, com modelo 3D, golpes e drops.
+- **Comando `/atrocities mutate <alvos> [volátil]`** para operadores aplicarem doses (eventos e testes).
+- **Mutação por datapack:** `data/<ns>/atrocities/mutation/<id>.json` define quais mobs viram qual mutante (`sources`, `result`, `color`). Funciona com mobs de outros mods.
+- Espécie **Esqueleto** para a Seringa de Extração.
+
+### Alterado
+- Tom do mod: textos do Códex, descrições e capítulos reescritos com um clima mais leve.
+- Os três chefes de embrião viram as **Aberrações Primordiais**, o desafio de fim de jogo, com texturas mais vivas e coloridas.
+- O motor dos chefes ganhou ganchos (número de fases, cutscenes opcionais, vida e escala por tier) para servir também aos mutantes.
+
 ## [1.3.0] - 2026-11-10 — Fase 8: Códex Atrocitas
 
 ### Adicionado

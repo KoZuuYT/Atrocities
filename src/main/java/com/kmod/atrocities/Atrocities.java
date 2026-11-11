@@ -36,13 +36,15 @@ public class Atrocities {
         com.kmod.atrocities.cinematic.ArenaCinematics.register();
         com.kmod.atrocities.item.SanguineCleaverItem.registerEvents();
         com.kmod.atrocities.codex.Codex.register();
+        com.kmod.atrocities.mutation.Mutation.register();
+        com.kmod.atrocities.mutation.MutationCommand.register();
 
         modBus.addListener(Atrocities::onCommonSetup);
     }
 
     private static void onCommonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(Atrocities::raiseAttributeCaps);
-        LOGGER.info("Atrocities {} carregado. A carne aguarda.", ModVersion.current());
+        LOGGER.info("Atrocities {} carregado. Hora de mutar!", ModVersion.current());
     }
 
     /** Eleva o teto de max_health para permitir chefes com milhares de pontos de vida. */

@@ -83,6 +83,43 @@ public final class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> LEGION_PULL = register("entity.coalesced_legion.pull");
     public static final DeferredHolder<SoundEvent, SoundEvent> LEGION_SPIT = register("entity.coalesced_legion.spit");
 
+    // ------------------------------------------------------------------ mutantes (Fase 9)
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUTANT_BLAST = register("entity.mutant.blast");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUTANT_LEAP = register("entity.mutant.leap");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUTANT_LAND = register("entity.mutant.land");
+    public static final DeferredHolder<SoundEvent, SoundEvent> TITAN_GRAB = register("entity.zombie_titan.grab");
+    public static final DeferredHolder<SoundEvent, SoundEvent> TITAN_THROW = register("entity.zombie_titan.throw");
+    public static final DeferredHolder<SoundEvent, SoundEvent> TITAN_ERUPT = register("entity.zombie_titan.erupt");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BALLISTA_VOLLEY = register("entity.skeleton_ballista.volley");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BALLISTA_SHOT = register("entity.skeleton_ballista.ballista");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BALLISTA_DRAW = register("entity.skeleton_ballista.draw");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BALLISTA_RATTLE = register("entity.skeleton_ballista.rattle");
+    public static final DeferredHolder<SoundEvent, SoundEvent> DETONATOR_FUSE = register("entity.creeper_detonator.fuse");
+    public static final DeferredHolder<SoundEvent, SoundEvent> DETONATOR_DEFUSED = register("entity.creeper_detonator.defused");
+    public static final DeferredHolder<SoundEvent, SoundEvent> WEAVER_WEB = register("entity.weaver_spider.web");
+    public static final DeferredHolder<SoundEvent, SoundEvent> WEAVER_SPRAY = register("entity.weaver_spider.spray");
+    public static final DeferredHolder<SoundEvent, SoundEvent> RAY_SHRIEK = register("entity.phantom_ray.shriek");
+    public static final DeferredHolder<SoundEvent, SoundEvent> RAY_GUST = register("entity.phantom_ray.gust");
+    public static final DeferredHolder<SoundEvent, SoundEvent> RAY_SWOOP = register("entity.phantom_ray.swoop");
+    public static final DeferredHolder<SoundEvent, SoundEvent> RAY_ORB = register("entity.phantom_ray.orb");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUTAGEN_INJECT = register("item.mutagen.inject");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUTAGEN_THROW = register("item.mutagen.throw");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUTAGEN_SHATTER = register("item.mutagen.shatter");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUTATION_STAGE = register("entity.mutation.stage");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUTATION_PULSE = register("entity.mutation.pulse");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUTATION_BURST = register("entity.mutation.burst");
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUTATION_RUPTURE = register("entity.mutation.rupture");
+    public static final com.kmod.atrocities.entity.mutant.MutantSounds ZOMBIE_TITAN = voices("zombie_titan");
+    public static final com.kmod.atrocities.entity.mutant.MutantSounds SKELETON_BALLISTA = voices("skeleton_ballista");
+    public static final com.kmod.atrocities.entity.mutant.MutantSounds CREEPER_DETONATOR = voices("creeper_detonator");
+    public static final com.kmod.atrocities.entity.mutant.MutantSounds WEAVER_SPIDER = voices("weaver_spider");
+    public static final com.kmod.atrocities.entity.mutant.MutantSounds PHANTOM_RAY = voices("phantom_ray");
+
+    private static com.kmod.atrocities.entity.mutant.MutantSounds voices(String mob) {
+        return new com.kmod.atrocities.entity.mutant.MutantSounds(register("entity." + mob + ".ambient"),
+                register("entity." + mob + ".hurt"), register("entity." + mob + ".death"), register("entity." + mob + ".roar"));
+    }
+
     private static DeferredHolder<SoundEvent, SoundEvent> register(String name) {
         return ModRegistries.SOUND_EVENTS.register(name, () ->
                 SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(Atrocities.MODID, name)));

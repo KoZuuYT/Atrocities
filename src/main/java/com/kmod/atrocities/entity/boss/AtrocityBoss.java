@@ -178,6 +178,64 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
     /** Linhagem que este chefe representa. */
     public abstract Archetype archetype();
 
+    // ------------------------------------------------------------------ ganchos (chefes x mutantes)
+
+    /** Entrada e trocas de fase viram cutscenes que congelam a arena (os mutantes lutam sem pausa). */
+    protected boolean cinematic() {
+        return true;
+    }
+
+    /** Numero de fases (os chefes tem 3; os mutantes, 2: a segunda e a furia). */
+    public int maxPhase() {
+        return MAX_PHASE;
+    }
+
+    /** Fracao da vida em que a fase {@code phase + 1} comeca. */
+    protected float phaseRatio(int phase) {
+        return PHASE_RATIOS[Mth.clamp(phase, 1, PHASE_RATIOS.length) - 1];
+    }
+
+    /** Duracao da entrada; os ultimos {@link #EMERGE_ROAR_AT} ticks sao o rugido. */
+    public int introTicks() {
+        return EMERGE_TICKS;
+    }
+
+    /** Vida base antes dos tracos. */
+    protected double baseHealth(EmbryoGenome genome) {
+        return genome.bossBaseHealth();
+    }
+
+    /** Dano base por tier. */
+    protected double baseDamage(int tier) {
+        return TIER_DAMAGE[Mth.clamp(tier, 1, TIER_DAMAGE.length) - 1];
+    }
+
+    /** Escala do modelo por tier. */
+    protected float tierScale(int tier) {
+        return TIER_SCALE[Mth.clamp(tier, 1, TIER_SCALE.length) - 1];
+    }
+
+    /** Sufixo da barra de chefe (por padrao, o tier em romanos). */
+    protected Component bossBarSuffix() {
+        return Component.literal(" · " + roman(tier())).withStyle(ChatFormatting.GRAY);
+    }
+
+    /** Linha de vida da ficha no Codex. */
+    public Component codexHealth() {
+        return Component.translatable("codex.atrocities.boss.health");
+    }
+
+    /** Subtitulo da ficha no Codex. */
+    public Component codexSubtitle() {
+        return archetype().displayName();
+    }
+
+    /** Mensagem mostrada a quem luta quando o chefe entra na fase {@code phase}. */
+    protected Component phaseMessage(int phase) {
+        String key = phase >= MAX_PHASE ? "message.atrocities.boss.phase_three" : "message.atrocities.boss.phase_two";
+        return Component.translatable(key, getDisplayName()).withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD);
+    }
+
     /** Repertorio de golpes. Deve ser uma lista constante. */
     protected abstract List<BossAttack> attacks();
 
@@ -317,7 +375,7 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
 
     /** Chamado pelo Embriao Maduro: o chefe sai do chao nos proximos 3 s. */
     public void startEmerging() {
-        entityData.set(DATA_EMERGE, EMERGE_TICKS);
+        entityData.set(DATA_EMERGE, introTicks());
     }
 
     private void applyGenome(boolean resetHealth) {
@@ -332,9 +390,9 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
         entityData.set(DATA_TIER, tier);
         xpReward = 250 * tier;
 
-        setBase(Attributes.MAX_HEALTH, genome.bossBaseHealth() * AtrocitiesConfig.BOSS_HEALTH_MULTIPLIER.get());
-        setBase(Attributes.ATTACK_DAMAGE, TIER_DAMAGE[tier - 1] * AtrocitiesConfig.BOSS_DAMAGE_MULTIPLIER.get());
-        setBase(Attributes.SCALE, TIER_SCALE[tier - 1]);
+        setBase(Attributes.MAX_HEALTH, baseHealth(genome) * AtrocitiesConfig.BOSS_HEALTH_MULTIPLIER.get());
+        setBase(Attributes.ATTACK_DAMAGE, baseDamage(tier) * AtrocitiesConfig.BOSS_DAMAGE_MULTIPLIER.get());
+        setBase(Attributes.SCALE, tierScale(tier));
 
         potencies.forEach((key, potency) -> GeneticsRegistries.trait(registryAccess(), key).ifPresent(trait -> {
             List<Trait.BossAttribute> modifiers = trait.bossAttributes();
@@ -382,8 +440,7 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
     }
 
     private void updateBossBarName() {
-        bossEvent.setName(getDisplayName().copy().append(Component.literal(" · " + roman(tier()))
-                .withStyle(ChatFormatting.GRAY)));
+        bossEvent.setName(getDisplayName().copy().append(bossBarSuffix()));
     }
 
     private static String roman(int value) {
@@ -457,7 +514,7 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
             }
             return;
         }
-        if (phase() < MAX_PHASE && getHealth() <= getMaxHealth() * PHASE_RATIOS[phase() - 1]) {
+        if (phase() < maxPhase() && getHealth() <= getMaxHealth() * phaseRatio(phase())) {
             enterPhase(level, phase() + 1);
             return;
         }
@@ -690,13 +747,15 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
         if (!introStarted) {
             // Cutscene de entrada: congela a arena e assume a camera de quem esta perto.
             introStarted = true;
-            ArenaCinematics.start(this, CutscenePayload.INTRO, 1, emergeTicks());
-            playSound(ModSounds.CUTSCENE_STING.get(), 4f, 0.8f);
+            if (cinematic()) {
+                ArenaCinematics.start(this, CutscenePayload.INTRO, 1, emergeTicks());
+                playSound(ModSounds.CUTSCENE_STING.get(), 4f, 0.8f);
+            }
         }
         int left = emergeTicks() - 1;
         entityData.set(DATA_EMERGE, left);
         getNavigation().stop();
-        onIntroTick(level, EMERGE_TICKS - 1 - left);
+        onIntroTick(level, introTicks() - 1 - left);
         if (left == EMERGE_ROAR_AT) {
             triggerAnim("action", ROAR);
             playSound(roarSound(), 4f, 0.8f);
@@ -718,11 +777,13 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
         }
         if (left > EMERGE_ROAR_AT && left % 12 == 0) {
             playSound(ModSounds.BOSS_EMERGE.get(), 2.5f, 0.6f + random.nextFloat() * 0.2f);
-            BossFx.shake(level, position(), 28, 0.35f + (EMERGE_TICKS - left) / (float) EMERGE_TICKS * 0.6f, 12);
+            BossFx.shake(level, position(), 28, 0.35f + (introTicks() - left) / (float) introTicks() * 0.6f, 12);
         }
         if (left <= 0) {
             // Fim da cena: libera os jogadores e os empurra com a onda do rugido.
-            ArenaCinematics.end(this);
+            if (cinematic()) {
+                ArenaCinematics.end(this);
+            }
             bossEvent.setVisible(true);
             shockwave(level, 10, 0f, 1.2, 0.5);
             BossFx.shake(level, position(), 40, 1.2f, 20);
@@ -734,18 +795,21 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
         entityData.set(DATA_PHASE, phase);
         transitionTicks = TRANSITION_TICKS;
         triggerAnim("action", ROAR);
-        playSound(roarSound(), 5f, phase == MAX_PHASE ? 0.5f : 0.6f);
-        playSound(ModSounds.CUTSCENE_STING.get(), 4f, phase == MAX_PHASE ? 0.6f : 0.75f);
-        bossEvent.setDarkenScreen(true);
-        bossEvent.setCreateWorldFog(phase >= MAX_PHASE);
+        playSound(roarSound(), 5f, phase == maxPhase() ? 0.5f : 0.6f);
+        if (cinematic()) {
+            playSound(ModSounds.CUTSCENE_STING.get(), 4f, phase == MAX_PHASE ? 0.6f : 0.75f);
+            bossEvent.setDarkenScreen(true);
+            bossEvent.setCreateWorldFog(phase >= MAX_PHASE);
+        }
         BossFx.shake(level, position(), 48, 0.8f, 20);
         applyPhaseSpeed();
-        String key = phase >= MAX_PHASE ? "message.atrocities.boss.phase_three" : "message.atrocities.boss.phase_two";
+        Component message = phaseMessage(phase);
         for (ServerPlayer player : level.getEntitiesOfClass(ServerPlayer.class, getBoundingBox().inflate(48))) {
-            player.displayClientMessage(Component.translatable(key, getDisplayName())
-                    .withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD), true);
+            player.displayClientMessage(message, true);
         }
-        ArenaCinematics.start(this, CutscenePayload.PHASE, phase, TRANSITION_TICKS);
+        if (cinematic()) {
+            ArenaCinematics.start(this, CutscenePayload.PHASE, phase, TRANSITION_TICKS);
+        }
         onPhaseStart(level, phase);
     }
 
@@ -772,12 +836,14 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
             Vec3 core = position().add(0, getBbHeight() * 0.6, 0);
             level.sendParticles(ParticleTypes.FLASH, core.x, core.y, core.z, 2, 0.2, 0.2, 0.2, 0);
             GeneticsFx.burst(level, GeneticsFx.dust(fluidColor(), 3f), core, 100, getBbWidth() * 0.8, 0.3);
-            playSound(ModSounds.PHASE_SHIFT.get(), 4f, phase() >= MAX_PHASE ? 0.6f : 0.8f);
+            playSound(ModSounds.PHASE_SHIFT.get(), 4f, phase() >= maxPhase() ? 0.6f : 0.8f);
             BossFx.shake(level, position(), 48, 1.5f, 24);
             onPhaseClimax(level, phase());
         }
         if (transitionTicks <= 0) {
-            ArenaCinematics.end(this);
+            if (cinematic()) {
+                ArenaCinematics.end(this);
+            }
             shockwave(level, 14, 0.25f, 2.2, 0.7);
         }
     }
@@ -1367,10 +1433,10 @@ public abstract class AtrocityBoss extends Monster implements GeoEntity {
                 applyGenome(!tag.contains("Health"));
             });
         }
-        entityData.set(DATA_PHASE, Mth.clamp(tag.getInt("phase"), 1, MAX_PHASE));
+        entityData.set(DATA_PHASE, Mth.clamp(tag.getInt("phase"), 1, maxPhase()));
         entityData.set(DATA_EMERGE, Math.max(0, tag.getInt("emerge")));
-        bossEvent.setDarkenScreen(phase() >= 2);
-        bossEvent.setCreateWorldFog(phase() >= MAX_PHASE);
+        bossEvent.setDarkenScreen(cinematic() && phase() >= 2);
+        bossEvent.setCreateWorldFog(cinematic() && phase() >= MAX_PHASE);
         applyPhaseSpeed();
         updateBossBarName();
     }

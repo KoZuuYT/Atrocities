@@ -46,8 +46,8 @@ authors="kozzy"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Bioengenharia sombria: cace especies, extraia material genetico, sequencie embrioes instaveis e incube chefes atrozes para enfrenta-los.
-Nenhum chefe nasce naturalmente: todos sao criados pelos jogadores.
+Bioengenharia de mutantes: injete Soro Mutagenico em zumbis, esqueletos, creepers, aranhas e phantoms e transforme-os em mutantes gigantes, cheios de golpes animados.
+No fim de jogo, incube embrioes e desperte as Aberracoes Primordiais.
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.

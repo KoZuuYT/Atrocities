@@ -1,0 +1,7 @@
+{
+  "sources": [
+    "minecraft:creeper"
+  ],
+  "result": "atrocities:creeper_detonator",
+  "color": "#6BFF3A"
+}

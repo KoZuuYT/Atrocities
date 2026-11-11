@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "atrocities:sample_vial"
+    },
+    {
+      "item": "atrocities:gene_sample"
+    },
+    {
+      "item": "atrocities:biomass"
+    },
+    {
+      "item": "minecraft:fermented_spider_eye"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    }
+  ],
+  "result": {
+    "id": "atrocities:mutagen_serum",
+    "count": 2
+  }
+}

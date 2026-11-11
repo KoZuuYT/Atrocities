@@ -1,0 +1,28 @@
+{
+  "chapter": "atrocities:mutation",
+  "order": 0,
+  "icon": "atrocities:mutagen_serum",
+  "title": "codex.atrocities.entry.serums",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.serums.p1"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:mutagen_serum"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.serums.p2"
+    },
+    {
+      "type": "recipe",
+      "recipe": "atrocities:volatile_serum"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.serums.p3"
+    }
+  ]
+}

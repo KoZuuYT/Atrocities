@@ -123,6 +123,59 @@ public final class ModItems {
             ModRegistries.ITEMS.registerItem("codex_atrocitas", CodexItem::new,
                     new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
 
+    // ------------------------------------------------------------------ mutacao (Fase 9)
+
+    /** Soro Mutagenico: tres doses transformam um mob no seu mutante. */
+    public static final DeferredItem<com.kmod.atrocities.item.MutagenSerumItem> MUTAGEN_SERUM =
+            ModRegistries.ITEMS.registerItem("mutagen_serum",
+                    props -> new com.kmod.atrocities.item.MutagenSerumItem(props, false),
+                    new Item.Properties().stacksTo(16).rarity(Rarity.UNCOMMON));
+
+    /** Soro Volatil: risco de romper o mob, mas a ultima dose gera um mutante Alfa. */
+    public static final DeferredItem<com.kmod.atrocities.item.MutagenSerumItem> VOLATILE_SERUM =
+            ModRegistries.ITEMS.registerItem("volatile_serum",
+                    props -> new com.kmod.atrocities.item.MutagenSerumItem(props, true),
+                    new Item.Properties().stacksTo(16).rarity(Rarity.RARE));
+
+    /** Punho do Tita (Tita Zumbi). */
+    public static final DeferredItem<com.kmod.atrocities.item.TitanFistItem> TITAN_FIST =
+            ModRegistries.ITEMS.registerItem("titan_fist", com.kmod.atrocities.item.TitanFistItem::new,
+                    new Item.Properties().rarity(Rarity.EPIC).fireResistant());
+
+    /** Arco Balista (Esqueleto Balista). */
+    public static final DeferredItem<com.kmod.atrocities.item.BallistaBowItem> BALLISTA_BOW =
+            ModRegistries.ITEMS.registerItem("ballista_bow", com.kmod.atrocities.item.BallistaBowItem::new,
+                    new Item.Properties().rarity(Rarity.EPIC).durability(900));
+
+    /** Nucleo Detonador (Creeper Detonador). */
+    public static final DeferredItem<com.kmod.atrocities.item.MutantRelicItem> DETONATOR_CORE =
+            ModRegistries.ITEMS.registerItem("detonator_core",
+                    props -> new com.kmod.atrocities.item.MutantRelicItem(props,
+                            com.kmod.atrocities.item.MutantRelicItem.Kind.DETONATOR_CORE),
+                    new Item.Properties().rarity(Rarity.EPIC).durability(250));
+
+    /** Glandula Tecela (Aranha Tecela). */
+    public static final DeferredItem<com.kmod.atrocities.item.MutantRelicItem> WEAVER_GLAND =
+            ModRegistries.ITEMS.registerItem("weaver_gland",
+                    props -> new com.kmod.atrocities.item.MutantRelicItem(props,
+                            com.kmod.atrocities.item.MutantRelicItem.Kind.WEAVER_GLAND),
+                    new Item.Properties().rarity(Rarity.EPIC).durability(400));
+
+    /** Membrana Eterea (Arraia-Fantasma). */
+    public static final DeferredItem<com.kmod.atrocities.item.MutantRelicItem> ETHEREAL_MEMBRANE =
+            ModRegistries.ITEMS.registerItem("ethereal_membrane",
+                    props -> new com.kmod.atrocities.item.MutantRelicItem(props,
+                            com.kmod.atrocities.item.MutantRelicItem.Kind.ETHEREAL_MEMBRANE),
+                    new Item.Properties().rarity(Rarity.EPIC).durability(300));
+
+    /** Projeteis dos mutantes (so para exibicao; fora da aba criativa). */
+    public static final DeferredItem<Item> WEB_GLOB =
+            ModRegistries.ITEMS.registerSimpleItem("web_glob", new Item.Properties());
+    public static final DeferredItem<Item> VOLATILE_CHARGE =
+            ModRegistries.ITEMS.registerSimpleItem("volatile_charge", new Item.Properties());
+    public static final DeferredItem<Item> ETHER_ORB =
+            ModRegistries.ITEMS.registerSimpleItem("ether_orb", new Item.Properties());
+
     public static ItemStack geneSample(GeneSample sample) {
         ItemStack stack = new ItemStack(GENE_SAMPLE.get());
         stack.set(ModDataComponents.GENE_SAMPLE.get(), sample);

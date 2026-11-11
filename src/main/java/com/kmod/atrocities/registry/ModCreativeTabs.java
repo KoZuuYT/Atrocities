@@ -29,7 +29,8 @@ public final class ModCreativeTabs {
                     .icon(() -> ModItems.SAMPLE_VIAL.get().getDefaultInstance())
                     .displayItems((parameters, output) -> {
                         Set<Item> dataDriven = Set.of(ModItems.GENE_SAMPLE.get(), ModItems.UNSTABLE_EMBRYO.get(),
-                                ModItems.MATURED_EMBRYO.get());
+                                ModItems.MATURED_EMBRYO.get(), ModItems.WEB_GLOB.get(), ModItems.VOLATILE_CHARGE.get(),
+                                ModItems.ETHER_ORB.get());
                         ModRegistries.ITEMS.getEntries().stream()
                                 .map(DeferredHolder::get)
                                 .filter(item -> !dataDriven.contains(item))

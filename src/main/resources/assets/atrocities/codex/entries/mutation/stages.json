@@ -1,0 +1,36 @@
+{
+  "chapter": "atrocities:mutation",
+  "order": 1,
+  "icon": "atrocities:volatile_serum",
+  "title": "codex.atrocities.entry.stages",
+  "pages": [
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.stages.p1"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.stages.h1"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.stages.p2"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.stages.h2"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.stages.p3"
+    },
+    {
+      "type": "heading",
+      "text": "codex.atrocities.entry.stages.h3"
+    },
+    {
+      "type": "text",
+      "text": "codex.atrocities.entry.stages.p4"
+    }
+  ]
+}

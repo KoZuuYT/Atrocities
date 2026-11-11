@@ -1112,5 +1112,710 @@
         "volume": 0.8
       }
     ]
+  },
+  "entity.zombie_titan.ambient": {
+    "subtitle": "subtitles.atrocities.entity.zombie_titan.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.zombie.ambient",
+        "type": "event",
+        "pitch": 0.5,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.ravager.ambient",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.zombie_titan.hurt": {
+    "subtitle": "subtitles.atrocities.entity.zombie_titan.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.zombie.hurt",
+        "type": "event",
+        "pitch": 0.55,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.ravager.hurt",
+        "type": "event",
+        "pitch": 0.9,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.zombie_titan.death": {
+    "subtitle": "subtitles.atrocities.entity.zombie_titan.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.zombie.death",
+        "type": "event",
+        "pitch": 0.45,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.ravager.death",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.zombie_titan.roar": {
+    "subtitle": "subtitles.atrocities.entity.zombie_titan.roar",
+    "sounds": [
+      {
+        "name": "minecraft:entity.ravager.roar",
+        "type": "event",
+        "pitch": 0.7,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.zombie.ambient",
+        "type": "event",
+        "pitch": 0.4,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.skeleton_ballista.ambient": {
+    "subtitle": "subtitles.atrocities.entity.skeleton_ballista.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.skeleton.ambient",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.stray.ambient",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.skeleton_ballista.hurt": {
+    "subtitle": "subtitles.atrocities.entity.skeleton_ballista.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.skeleton.hurt",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.stray.hurt",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.skeleton_ballista.death": {
+    "subtitle": "subtitles.atrocities.entity.skeleton_ballista.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.skeleton.death",
+        "type": "event",
+        "pitch": 0.5,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.wither_skeleton.death",
+        "type": "event",
+        "pitch": 0.7,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.skeleton_ballista.roar": {
+    "subtitle": "subtitles.atrocities.entity.skeleton_ballista.roar",
+    "sounds": [
+      {
+        "name": "minecraft:entity.wither_skeleton.ambient",
+        "type": "event",
+        "pitch": 0.5,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.skeleton_horse.ambient",
+        "type": "event",
+        "pitch": 0.5,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.creeper_detonator.ambient": {
+    "subtitle": "subtitles.atrocities.entity.creeper_detonator.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.creeper.primed",
+        "type": "event",
+        "pitch": 0.45,
+        "volume": 0.5
+      },
+      {
+        "name": "minecraft:entity.hoglin.ambient",
+        "type": "event",
+        "pitch": 1.4,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.creeper_detonator.hurt": {
+    "subtitle": "subtitles.atrocities.entity.creeper_detonator.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.creeper.hurt",
+        "type": "event",
+        "pitch": 0.55,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.hoglin.hurt",
+        "type": "event",
+        "pitch": 1.3,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.creeper_detonator.death": {
+    "subtitle": "subtitles.atrocities.entity.creeper_detonator.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.creeper.death",
+        "type": "event",
+        "pitch": 0.45,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.generic.explode",
+        "type": "event",
+        "pitch": 1.3,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.creeper_detonator.roar": {
+    "subtitle": "subtitles.atrocities.entity.creeper_detonator.roar",
+    "sounds": [
+      {
+        "name": "minecraft:entity.hoglin.angry",
+        "type": "event",
+        "pitch": 0.9,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.creeper.primed",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.weaver_spider.ambient": {
+    "subtitle": "subtitles.atrocities.entity.weaver_spider.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.spider.ambient",
+        "type": "event",
+        "pitch": 0.55,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.spider.ambient",
+        "type": "event",
+        "pitch": 0.7,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.weaver_spider.hurt": {
+    "subtitle": "subtitles.atrocities.entity.weaver_spider.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.spider.hurt",
+        "type": "event",
+        "pitch": 0.55,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.weaver_spider.death": {
+    "subtitle": "subtitles.atrocities.entity.weaver_spider.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.spider.death",
+        "type": "event",
+        "pitch": 0.45,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.weaver_spider.roar": {
+    "subtitle": "subtitles.atrocities.entity.weaver_spider.roar",
+    "sounds": [
+      {
+        "name": "minecraft:entity.ravager.roar",
+        "type": "event",
+        "pitch": 1.3,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.spider.ambient",
+        "type": "event",
+        "pitch": 0.4,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.phantom_ray.ambient": {
+    "subtitle": "subtitles.atrocities.entity.phantom_ray.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.phantom.ambient",
+        "type": "event",
+        "pitch": 0.55,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.phantom.ambient",
+        "type": "event",
+        "pitch": 0.7,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.phantom_ray.hurt": {
+    "subtitle": "subtitles.atrocities.entity.phantom_ray.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.phantom.hurt",
+        "type": "event",
+        "pitch": 0.55,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.phantom_ray.death": {
+    "subtitle": "subtitles.atrocities.entity.phantom_ray.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.phantom.death",
+        "type": "event",
+        "pitch": 0.45,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.phantom_ray.roar": {
+    "subtitle": "subtitles.atrocities.entity.phantom_ray.roar",
+    "sounds": [
+      {
+        "name": "minecraft:entity.phantom.swoop",
+        "type": "event",
+        "pitch": 0.5,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.ender_dragon.growl",
+        "type": "event",
+        "pitch": 1.4,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.mutant.blast": {
+    "subtitle": "subtitles.atrocities.entity.mutant.blast",
+    "sounds": [
+      {
+        "name": "minecraft:entity.generic.explode",
+        "type": "event",
+        "pitch": 0.9,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.firework_rocket.blast",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.mutant.leap": {
+    "subtitle": "subtitles.atrocities.entity.mutant.leap",
+    "sounds": [
+      {
+        "name": "minecraft:entity.ravager.step",
+        "type": "event",
+        "pitch": 0.7,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.horse.jump",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.mutant.land": {
+    "subtitle": "subtitles.atrocities.entity.mutant.land",
+    "sounds": [
+      {
+        "name": "minecraft:entity.iron_golem.damage",
+        "type": "event",
+        "pitch": 0.5,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block.anvil.land",
+        "type": "event",
+        "pitch": 0.5,
+        "volume": 0.6
+      }
+    ]
+  },
+  "entity.zombie_titan.grab": {
+    "subtitle": "subtitles.atrocities.entity.zombie_titan.grab",
+    "sounds": [
+      {
+        "name": "minecraft:entity.zombie.attack_wooden_door",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.zombie_titan.throw": {
+    "subtitle": "subtitles.atrocities.entity.zombie_titan.throw",
+    "sounds": [
+      {
+        "name": "minecraft:entity.player.attack.knockback",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.ravager.attack",
+        "type": "event",
+        "pitch": 0.7,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.zombie_titan.erupt": {
+    "subtitle": "subtitles.atrocities.entity.zombie_titan.erupt",
+    "sounds": [
+      {
+        "name": "minecraft:block.pointed_dripstone.land",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block.basalt.break",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.skeleton_ballista.volley": {
+    "subtitle": "subtitles.atrocities.entity.skeleton_ballista.volley",
+    "sounds": [
+      {
+        "name": "minecraft:entity.arrow.shoot",
+        "type": "event",
+        "pitch": 0.7,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:item.crossbow.shoot",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.skeleton_ballista.ballista": {
+    "subtitle": "subtitles.atrocities.entity.skeleton_ballista.ballista",
+    "sounds": [
+      {
+        "name": "minecraft:item.crossbow.shoot",
+        "type": "event",
+        "pitch": 0.5,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:item.trident.thunder",
+        "type": "event",
+        "pitch": 1.6,
+        "volume": 0.6
+      }
+    ]
+  },
+  "entity.skeleton_ballista.draw": {
+    "subtitle": "subtitles.atrocities.entity.skeleton_ballista.draw",
+    "sounds": [
+      {
+        "name": "minecraft:item.crossbow.loading_middle",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.skeleton_ballista.rattle": {
+    "subtitle": "subtitles.atrocities.entity.skeleton_ballista.rattle",
+    "sounds": [
+      {
+        "name": "minecraft:entity.skeleton.step",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.skeleton.step",
+        "type": "event",
+        "pitch": 0.7,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.creeper_detonator.fuse": {
+    "subtitle": "subtitles.atrocities.entity.creeper_detonator.fuse",
+    "sounds": [
+      {
+        "name": "minecraft:entity.creeper.primed",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.tnt.primed",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.creeper_detonator.defused": {
+    "subtitle": "subtitles.atrocities.entity.creeper_detonator.defused",
+    "sounds": [
+      {
+        "name": "minecraft:block.fire.extinguish",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.creeper.hurt",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.weaver_spider.web": {
+    "subtitle": "subtitles.atrocities.entity.weaver_spider.web",
+    "sounds": [
+      {
+        "name": "minecraft:entity.llama.spit",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block.cobweb.place",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.weaver_spider.spray": {
+    "subtitle": "subtitles.atrocities.entity.weaver_spider.spray",
+    "sounds": [
+      {
+        "name": "minecraft:entity.llama.spit",
+        "type": "event",
+        "pitch": 0.4,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block.bubble_column.whirlpool_inside",
+        "type": "event",
+        "pitch": 1.4,
+        "volume": 0.6
+      }
+    ]
+  },
+  "entity.phantom_ray.shriek": {
+    "subtitle": "subtitles.atrocities.entity.phantom_ray.shriek",
+    "sounds": [
+      {
+        "name": "minecraft:entity.phantom.bite",
+        "type": "event",
+        "pitch": 0.4,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.warden.sonic_boom",
+        "type": "event",
+        "pitch": 1.6,
+        "volume": 0.6
+      }
+    ]
+  },
+  "entity.phantom_ray.gust": {
+    "subtitle": "subtitles.atrocities.entity.phantom_ray.gust",
+    "sounds": [
+      {
+        "name": "minecraft:entity.ender_dragon.flap",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.breeze.wind_burst",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.phantom_ray.swoop": {
+    "subtitle": "subtitles.atrocities.entity.phantom_ray.swoop",
+    "sounds": [
+      {
+        "name": "minecraft:entity.phantom.swoop",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.phantom_ray.orb": {
+    "subtitle": "subtitles.atrocities.entity.phantom_ray.orb",
+    "sounds": [
+      {
+        "name": "minecraft:entity.shulker.shoot",
+        "type": "event",
+        "pitch": 0.7,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.evoker.cast_spell",
+        "type": "event",
+        "pitch": 1.4,
+        "volume": 1.0
+      }
+    ]
+  },
+  "item.mutagen.inject": {
+    "subtitle": "subtitles.atrocities.item.mutagen.inject",
+    "sounds": [
+      {
+        "name": "minecraft:item.honey_bottle.drink",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.slime.squish_small",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "item.mutagen.throw": {
+    "subtitle": "subtitles.atrocities.item.mutagen.throw",
+    "sounds": [
+      {
+        "name": "minecraft:entity.splash_potion.throw",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "item.mutagen.shatter": {
+    "subtitle": "subtitles.atrocities.item.mutagen.shatter",
+    "sounds": [
+      {
+        "name": "minecraft:entity.splash_potion.break",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.mutation.stage": {
+    "subtitle": "subtitles.atrocities.entity.mutation.stage",
+    "sounds": [
+      {
+        "name": "minecraft:entity.zombie_villager.converted",
+        "type": "event",
+        "pitch": 1.2,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block.beacon.power_select",
+        "type": "event",
+        "pitch": 1.6,
+        "volume": 0.6
+      }
+    ]
+  },
+  "entity.mutation.pulse": {
+    "subtitle": "subtitles.atrocities.entity.mutation.pulse",
+    "sounds": [
+      {
+        "name": "minecraft:entity.warden.heartbeat",
+        "type": "event",
+        "pitch": 1.2,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.mutation.burst": {
+    "subtitle": "subtitles.atrocities.entity.mutation.burst",
+    "sounds": [
+      {
+        "name": "minecraft:entity.generic.explode",
+        "type": "event",
+        "pitch": 0.7,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.zombie_villager.cure",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.0
+      }
+    ]
+  },
+  "entity.mutation.rupture": {
+    "subtitle": "subtitles.atrocities.entity.mutation.rupture",
+    "sounds": [
+      {
+        "name": "minecraft:entity.slime.death",
+        "type": "event",
+        "pitch": 0.5,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity.generic.explode",
+        "type": "event",
+        "pitch": 1.5,
+        "volume": 0.6
+      }
+    ]
   }
 }

@@ -1,9 +1,9 @@
 # ☣ Atrocities
 
-**Bioengenharia sombria para Minecraft 1.21.1 (NeoForge).**
-Cace espécies, extraia material genético, sequencie embriões instáveis e incube chefes atrozes. **Nenhum chefe nasce naturalmente:** todos são criados pelos jogadores.
+**Mutantes de bioengenharia para Minecraft 1.21.1 (NeoForge).**
+Injete Soro Mutagênico em zumbis, esqueletos, creepers, aranhas e phantoms e veja cada um virar um mutante gigante, cheio de golpes animados. No fim de jogo, incube embriões e desperte as Aberrações Primordiais.
 
-Feito para servidores PvP/Guerra com armamento pesado (~50 de dano por hit): chefes com milhares de HP, mitigação inteligente, ataques telegrafados e recompensas que justificam o risco.
+Feito para servidores PvP/Guerra com armamento pesado (~50 de dano por hit): mutantes e chefes com centenas a milhares de HP, ataques telegrafados e relíquias que valem o risco.
 
 ## Download
 
@@ -18,13 +18,31 @@ Baixe o `.jar` mais recente em **[Releases](https://github.com/KoZuuYT/Atrocitie
 
 O mod precisa estar **no servidor e em todos os clientes**. Quem entrar sem ele recebe uma mensagem com o link de download. Quem estiver com outra versão pode baixar e instalar a versão certa direto pela tela do jogo.
 
-## Ciclo de gameplay
+## Mutação
+
+1. **Colete uma amostra** de qualquer criatura com a Seringa de Extração.
+2. **Prepare o Soro Mutagênico:** Frasco de Amostra + Amostra Genética + Biomassa + olho de aranha fermentado + pó de pedra luminosa (rende 2).
+3. **Injete três doses** num mob (ou arremesse o frasco). Cada dose deixa o mob maior e mais forte. Na terceira, ele entra em metamorfose e explode no mutante.
+4. **Soro Volátil** na última dose gera um mutante **Alfa**, mas cada dose volátil tem 15% de chance de estourar o mob.
+
+| Mob | Mutante | Vida | Relíquia |
+|---|---|---|---|
+| Zumbi, afogado, zumbi do deserto, aldeão zumbi | Titã Zumbi | 700 | Punho do Titã |
+| Esqueleto, errante, pantanoso | Esqueleto Balista | 560 | Arco Balista |
+| Creeper | Creeper Detonador | 520 | Núcleo Detonador |
+| Aranha, aranha-das-cavernas | Aranha Tecelã | 600 | Glândula Tecelã |
+| Phantom | Arraia-Fantasma | 480 | Membrana Etérea |
+
+Todo mutante entra em **Fúria** na metade da vida. Alfas têm +50% de vida e +30% de dano.
+Operadores podem usar `/atrocities mutate <alvos> [volátil]`.
+
+## Aberrações Primordiais (fim de jogo)
 
 1. **Caça e captura:** rastreie espécies-base em biomas específicos, enfraqueça-as e use a Seringa de Extração ou a Cápsula de Estase.
 2. **Biomassa e refino:** triture carne no Extrator de Biomassa para alimentar as máquinas e purifique amostras na Centrífuga Genética.
 3. **Sequenciamento:** combine amostras para formar um Embrião Instável, que define arquétipo, traços e tier do chefe.
 4. **Incubação:** mantenha a Incubadora Biológica alimentada com biomassa enquanto o embrião cresce no vidro. Embriões instáveis podem mutar ou abortar.
-5. **Despertar e combate:** use o Embrião Maduro no chão e enfrente o chefe: Colosso Quitinoso, Matriarca Hemófaga ou Legião Coalescida, conforme o arquétipo. A entrada e cada troca de fase (a 66% e a 33% de vida) são cutscenes que congelam a arena. Cada uma das três fases tem uma mecânica própria para derrotar o chefe. Chefes têm de 900 a 3.000 de vida, conforme o tier e os traços. Cada golpe é avisado por um telegrafo no chão; quando o chefe fica atordoado, ele está vulnerável.
+5. **Despertar e combate:** use o Embrião Maduro no chão e enfrente o chefe: Colosso Quitinoso, Matriarca Hemófaga ou Legião Coalescida, conforme o arquétipo. A entrada e cada troca de fase (a 66% e a 33% de vida) são cutscenes que congelam a arena. Cada uma das três fases tem uma mecânica própria para derrotar o chefe. As Aberrações Primordiais têm de 900 a 3.000 de vida, conforme o tier e os traços. Cada golpe é avisado por um telegrafo no chão; quando o chefe fica atordoado, ele está vulnerável.
 6. **Loot:** cada chefe deixa Corações Aberrantes (um por tier) e seu troféu. Com eles você faz a Marreta de Carapaça, o Cutelo Sanguíneo ou o Lança-Bile.
 
 ## Códex Atrocitas
@@ -47,12 +65,15 @@ O conteúdo vem de resource packs: `assets/<ns>/codex/chapters/*.json` e `assets
 | 6. Feedback de combate, tooltips customizadas e rebalanceamento | 1.1.0 | ✅ |
 | 7. Chefes cinematográficos: cutscenes de entrada, fases com transição e mecânicas únicas | 1.2.0 | ✅ |
 | 8. Códex Atrocitas: livro-guia ilustrado com páginas secretas dos chefes | 1.3.0 | ✅ |
-| 9. Imbuição genética de armas: terminal, tanques e traços evoluíveis | 1.4.0 | ⏳ |
-| 10. Conteúdo extra: armaduras bioforjadas, surtos de aberrações e simbionte | 1.5.0 | ⏳ |
+| 9. Mutantes: soros, mutação em estágios, cinco mutantes e relíquias | 1.4.0 | ✅ |
+| 10. Imbuição genética de armas: terminal, tanques e traços evoluíveis | 1.5.0 | ⏳ |
+| 11. Mais mutantes (Enderman, Slime, Bruxa...), armaduras mutantes e surtos | 1.6.0 | ⏳ |
 
 Veja o [CHANGELOG](CHANGELOG.md) para o histórico completo.
 
 ## Genética por datapack
+
+- `data/<ns>/atrocities/mutation/<id>.json`: quais mobs (`sources`) viram qual mutante (`result`), e a cor das partículas (`color`). Funciona com mobs de outros mods.
 
 Espécies e traços são JSON e podem ser alterados ou ampliados por datapack, inclusive com criaturas de outros mods:
 

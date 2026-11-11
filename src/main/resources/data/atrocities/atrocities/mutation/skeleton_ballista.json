@@ -1,0 +1,9 @@
+{
+  "sources": [
+    "minecraft:skeleton",
+    "minecraft:stray",
+    "minecraft:bogged"
+  ],
+  "result": "atrocities:skeleton_ballista",
+  "color": "#59D8FF"
+}
